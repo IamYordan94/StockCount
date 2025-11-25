@@ -20,11 +20,11 @@ function Router() {
     <Switch>
       <Route path="/" component={LandingPage} />
       <Route path="/auth" component={AuthPage} />
-      <ProtectedRoute path="/admin" component={AdminDashboard} />
+      <ProtectedRoute path="/admin" component={AdminDashboard} allowedRoles={['OWNER', 'SUPERVISOR']} />
       <ProtectedRoute path="/shops" component={ShopSelection} />
-      <ProtectedRoute path="/approvals" component={Approvals} />
-      <ProtectedRoute path="/reports" component={Reports} />
-      <ProtectedRoute path="/costs" component={CostManagement} />
+      <ProtectedRoute path="/approvals" component={Approvals} allowedRoles={['OWNER', 'SUPERVISOR']} />
+      <ProtectedRoute path="/reports" component={Reports} allowedRoles={['OWNER', 'SUPERVISOR']} />
+      <ProtectedRoute path="/costs" component={CostManagement} allowedRoles={['OWNER']} />
       <ProtectedRoute path="/count/:shopId" component={InventoryCounting} />
       <Route component={NotFound} />
     </Switch>
