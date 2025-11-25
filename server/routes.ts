@@ -493,7 +493,37 @@ export async function registerRoutes(app: Express): Promise<void> {
   app.get("/api/me/shops", requireAuth, async (req, res) => {
     try {
       const shops = await storage.getUserShops(req.user!.id);
-      res.json(shops);
+      const activeSession = await storage.getActiveSession();
+      
+      if (activeSession) {
+        const progress = await storage.getShopProgress(activeSession.id);
+        const progressMap = new Map(progress.map(p => [p.shopId, p]));
+        
+        const shopsWithProgress = shops.map(shop => {
+          const shopProgress = progressMap.get(shop.id);
+          return {
+            ...shop,
+            progress: shopProgress?.progress || 0,
+            status: shopProgress?.status || 'NOT_STARTED',
+            countedItems: shopProgress?.countedItems || 0,
+            totalItems: shopProgress?.totalItems || 0,
+            lastUpdated: shopProgress?.lastUpdated || null,
+            submittedAt: shopProgress?.submittedAt || null,
+          };
+        });
+        
+        res.json(shopsWithProgress);
+      } else {
+        res.json(shops.map(shop => ({
+          ...shop,
+          progress: 0,
+          status: 'NOT_STARTED',
+          countedItems: 0,
+          totalItems: 0,
+          lastUpdated: null,
+          submittedAt: null,
+        })));
+      }
     } catch (error) {
       res.status(500).json({ message: "Failed to fetch assigned shops" });
     }
@@ -565,6 +595,145 @@ export async function registerRoutes(app: Express): Promise<void> {
       res.json({ message: "Item deleted successfully" });
     } catch (error) {
       res.status(400).json({ message: "Failed to delete item" });
+    }
+  });
+
+  // CSV Export for items catalog
+  app.get("/api/exports/items.csv", requireAuth, requireRole(['OWNER', 'SUPERVISOR']), async (req, res) => {
+    try {
+      const items = await storage.getAllItems();
+      
+      // Create CSV header
+      const csvHeader = 'ID,SKU,Name,Category,Units Per Box,UOM,Pack Size,Active\n';
+      
+      // Create CSV rows
+      const csvRows = items.map(item => {
+        return [
+          item.id,
+          item.sku || '',
+          `"${(item.defaultName || '').replace(/"/g, '""')}"`,
+          item.category,
+          item.unitsPerBox,
+          item.uom || 'unit',
+          item.packSize || '1',
+          item.isActive ? 'Yes' : 'No'
+        ].join(',');
+      }).join('\n');
+      
+      const csv = csvHeader + csvRows;
+      
+      res.setHeader('Content-Type', 'text/csv');
+      res.setHeader('Content-Disposition', 'attachment; filename="items-catalog.csv"');
+      res.send(csv);
+      
+      await storage.logEvent({
+        userId: req.user!.id,
+        action: 'EXPORT_ITEMS_CSV',
+        payload: JSON.stringify({ itemCount: items.length })
+      });
+    } catch (error) {
+      res.status(500).json({ message: "Failed to export items" });
+    }
+  });
+
+  // CSV Import for items catalog
+  app.post("/api/imports/items.csv", requireAuth, requireRole(['OWNER']), async (req, res) => {
+    try {
+      const csvText = req.body.csv;
+      
+      if (!csvText || typeof csvText !== 'string') {
+        return res.status(400).json({ message: "CSV data is required" });
+      }
+      
+      const lines = csvText.split('\n').filter(line => line.trim());
+      if (lines.length < 2) {
+        return res.status(400).json({ message: "CSV must have at least a header and one data row" });
+      }
+      
+      // Parse CSV (simple parser - assumes no commas in quoted fields for now)
+      const header = lines[0].split(',').map(h => h.trim().toLowerCase());
+      const dataLines = lines.slice(1);
+      
+      const requiredFields = ['id', 'name', 'category', 'units per box'];
+      const missingFields = requiredFields.filter(field => !header.includes(field));
+      
+      if (missingFields.length > 0) {
+        return res.status(400).json({ 
+          message: `Missing required fields: ${missingFields.join(', ')}` 
+        });
+      }
+      
+      const results = {
+        created: 0,
+        updated: 0,
+        errors: [] as string[]
+      };
+      
+      for (let i = 0; i < dataLines.length; i++) {
+        const line = dataLines[i];
+        const values = line.split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+        
+        if (values.length !== header.length) {
+          results.errors.push(`Row ${i + 2}: Column count mismatch`);
+          continue;
+        }
+        
+        const row: Record<string, string> = {};
+        header.forEach((h, idx) => {
+          row[h] = values[idx];
+        });
+        
+        try {
+          const itemId = parseInt(row.id);
+          if (isNaN(itemId)) {
+            results.errors.push(`Row ${i + 2}: Invalid ID`);
+            continue;
+          }
+          
+          const category = row.category?.toUpperCase();
+          if (!['FOOD', 'DRINK', 'ICECREAM', 'STROMMA'].includes(category)) {
+            results.errors.push(`Row ${i + 2}: Invalid category`);
+            continue;
+          }
+          
+          const itemData = {
+            id: itemId,
+            sku: row.sku || null,
+            defaultName: row.name || `Item ${itemId}`,
+            category: category as 'FOOD' | 'DRINK' | 'ICECREAM' | 'STROMMA',
+            unitsPerBox: parseInt(row['units per box']) || 1,
+            uom: row.uom || 'unit',
+            packSize: row['pack size'] || '1',
+            isActive: row.active?.toLowerCase() !== 'no'
+          };
+          
+          // Check if item exists
+          const existing = await storage.getItem(itemId);
+          
+          if (existing) {
+            await storage.updateItem(itemId, itemData);
+            results.updated++;
+          } else {
+            await storage.createItem(itemData);
+            results.created++;
+          }
+        } catch (error) {
+          results.errors.push(`Row ${i + 2}: ${error instanceof Error ? error.message : 'Unknown error'}`);
+        }
+      }
+      
+      await storage.logEvent({
+        userId: req.user!.id,
+        action: 'IMPORT_ITEMS_CSV',
+        payload: JSON.stringify({ created: results.created, updated: results.updated, errors: results.errors.length })
+      });
+      
+      res.json({
+        message: `Import completed: ${results.created} created, ${results.updated} updated`,
+        ...results
+      });
+    } catch (error) {
+      res.status(400).json({ message: "Failed to import items" });
     }
   });
 
@@ -700,7 +869,7 @@ export async function registerRoutes(app: Express): Promise<void> {
         .where(
           and(
             shopIdsToQuery.length > 0 ? inArray(counts.shopId, shopIdsToQuery) : sql`1=0`,
-            status ? eq(counts.status, status as string) : undefined
+            status ? eq(counts.status, status as 'DRAFT' | 'SUBMITTED' | 'APPROVED' | 'REJECTED') : undefined
           )
         )
         .orderBy(desc(counts.submittedAt));
@@ -751,7 +920,7 @@ export async function registerRoutes(app: Express): Promise<void> {
             submittedAt: count.submittedAt,
             approvedAt: count.approvedAt,
             approvedBy: count.approvedBy,
-            rejectedReason: count.rejectedReason,
+            rejectedReason: count.rejectionReason,
             lines: enrichedLines
           };
         })
@@ -1681,30 +1850,38 @@ export async function registerRoutes(app: Express): Promise<void> {
             .where(
               and(
                 inArray(movements.shopId, shopIdsToQuery),
-                eq(movements.movementType, 'WASTAGE'),
-                gte(movements.movementDate, start),
-                lte(movements.movementDate, end)
+                eq(movements.type, 'WASTAGE'),
+                gte(movements.occurredAt, start),
+                lte(movements.occurredAt, end)
               )
             )
-            .orderBy(desc(movements.movementDate))
+            .orderBy(desc(movements.occurredAt))
         : [];
 
-      const wastageData = wastageMovements.map(movement => {
+      // Get effective costs for wastage items to calculate cost
+      const wastageData = await Promise.all(wastageMovements.map(async (movement) => {
         const item = itemsMap.get(movement.itemId);
         const shop = shopsMap.get(movement.shopId);
+        
+        // Get effective cost for this item at the time of movement
+        const costRecords = await storage.getCosts(movement.itemId);
+        const effectiveCost = costRecords.find(c => new Date(c.effectiveFrom) <= movement.occurredAt) || costRecords[0];
+        const costPerUom = effectiveCost ? parseFloat(effectiveCost.costPerUom) : 0;
+        const quantity = parseFloat(movement.quantity);
+        const totalCost = quantity * costPerUom;
 
         return {
-          'Date': new Date(movement.movementDate).toISOString().split('T')[0],
+          'Date': new Date(movement.occurredAt).toISOString().split('T')[0],
           'Shop': shop?.name || '',
           'Item SKU': item?.sku || '',
           'Item Name': item?.defaultName || '',
-          'Quantity': movement.quantity,
-          'Cost': movement.cost || 0,
-          'Total Cost': movement.quantity * (movement.cost || 0),
-          'Reference': movement.reference || '',
-          'Notes': movement.notes || ''
+          'Quantity': quantity,
+          'Cost': costPerUom,
+          'Total Cost': totalCost,
+          'Reference': movement.sourceRef || '',
+          'Notes': ''
         };
-      });
+      }));
 
       // Sheet 4: Audit Trail - Event logs for counts and movements
       const auditLogs = await db.query.eventLogs.findMany({

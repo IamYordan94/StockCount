@@ -123,6 +123,7 @@ Stock Intake Platform is a phone-friendly multi-location inventory management sy
 |----------|-------------|---------|----------|
 | `PORT` | Server port number | `5000` | ❌ No |
 | `NODE_ENV` | Environment mode | `development` | ❌ No |
+| `SEED_ON_START` | Auto-seed database on startup | `false` | ❌ No |
 | `SEED_ON_START` | Run the high-volume seed on boot (dev only) | `false` | ❌ No |
 
 ### Security Notes
@@ -274,6 +275,9 @@ requireRole(['OWNER'])
 ### Reporting & Exports
 - `GET /api/reports/variance?start=X&end=Y&shopId=Z` - Variance report (supervisor+)
 - `GET /api/exports/consolidated.xlsx?start=X&end=Y` - Excel export (supervisor+)
+- `GET /api/exports/shops/:shopId?sessionId=X` - Export shop inventory (supervisor+)
+- `GET /api/exports/items.csv` - Export items catalog as CSV (owner only)
+- `POST /api/imports/items.csv` - Import items catalog from CSV (owner only)
 
 ### Period Locking
 - `POST /api/periods/lock` - Lock period (admin only)
