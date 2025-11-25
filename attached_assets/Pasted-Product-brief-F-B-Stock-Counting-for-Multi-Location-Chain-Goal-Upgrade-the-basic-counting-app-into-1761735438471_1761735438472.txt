@@ -1,0 +1,188 @@
+Product brief: F&B Stock Counting for Multi-Location Chain
+Goal
+
+Upgrade the basic counting app into a standardized, auditable, multi-location system that supports role-based access, offline counts, variance detection, consolidated exports, and approval workflows.
+
+Non-goals
+
+Fancy forecasting, ML, or vendor EDI.
+
+Full POS or accounting. We only integrate, we don’t replace.
+
+Roles & Permissions
+
+Counter: view assigned locations/items, create/edit draft counts, submit.
+
+Supervisor: view all counts in their store, request recount, approve/reject.
+
+Admin (HQ): manage catalog/costs/locations/users/permissions, lock periods, export, integrations.
+
+Core Workflows
+
+Catalog management (Admin)
+
+CRUD: Items, SKUs, pack sizes, unit of measure, cost price, active/inactive.
+
+Per-location item enablement.
+
+Counting (Counter)
+
+Start count: choose Location + Area (bar/kitchen/storage) + Count Period.
+
+Enter quantities for each item: whole units + open amounts (e.g., 0.4 of a 700 ml bottle).
+
+Offline mode: local cache, queue sync.
+
+Variance engine (System)
+
+On submit, compute: Expected = Opening + Purchases − Sales − Transfers − Wastage.
+
+Variance = Counted − Expected; flag outliers using configurable thresholds.
+
+Approval (Supervisor)
+
+Review variances, comment, request recount line-level, approve or reject whole count.
+
+Period lock (Admin)
+
+Lock after approval; edits require Admin override and are audit-logged.
+
+Reporting & export (Admin)
+
+Store snapshot, consolidated chain report, variance leaderboard, wastage summary.
+
+Export CSV/XLSX and JSON; optional API push.
+
+Data model (minimum viable, relational)
+
+locations: id, name, timezone, is_active
+
+areas: id, location_id, name
+
+items: id, sku, name, category, uom, pack_size, is_active
+
+location_items: id, location_id, item_id, enabled, min_stock
+
+costs: id, item_id, effective_from, cost_per_uom, currency
+
+counts: id, location_id, started_by, status [draft, submitted, approved, rejected], period_start, period_end, created_at, approved_by, approved_at, lock_version
+
+count_lines: id, count_id, item_id, area_id, qty_whole, qty_open, qty_open_uom, note
+
+movements: id, location_id, item_id, type [purchase, sale, transfer_in, transfer_out, wastage], qty, source_ref, occurred_at
+
+users: id, name, email, role, is_active, password_hash
+
+permissions: id, user_id, location_id, role_override
+
+audits: id, entity, entity_id, action, actor_id, before_json, after_json, created_at
+
+integrations: id, kind [POS, accounting], auth_json, status
+
+API surface (REST, versioned)
+
+POST /v1/auth/login
+
+GET /v1/catalog/items?location_id=...
+
+POST /v1/counts create; PATCH /v1/counts/{id} save draft; POST /v1/counts/{id}/submit
+
+GET /v1/counts/{id} with computed expected/variance lines
+
+POST /v1/counts/{id}/approve | /reject | /recount
+
+POST /v1/periods/lock with period + location
+
+GET /v1/reports/variance?from=...&to=...&location_id=...
+
+GET /v1/exports/consolidated.xlsx
+
+POST /v1/integrations/pos/sync batched movements upsert
+
+GET /v1/audits?entity=counts&entity_id=...
+
+UI pages
+
+Login
+
+Dashboard (role-aware): pending approvals, counts in progress, variance alerts
+
+Count screen: list by area, fast search/scan, whole + open input, offline banner, submit
+
+Approvals: diff view, variance heatmap, line comments, approve/reject
+
+Catalog: items CRUD, per-location enable toggle
+
+Users & permissions: create accounts, assign store access
+
+Reports: store snapshot, consolidated chain, exports
+
+Offline strategy
+
+Local IndexedDB cache for catalog + active count.
+
+Sync queue with conflict resolution: last-writer-wins on draft; locked counts reject with explicit error.
+
+Security and control
+
+JWT with short expiry + refresh; role checks server-side.
+
+Row-level authorization by location.
+
+Every state transition hits audits table.
+
+Period locking enforced server-side.
+
+Variance thresholds
+
+Global default ±3% or ±0.5 UOM, whichever is larger; per-item overrides allowed.
+
+Outliers get severity: info | warn | critical for UI highlighting.
+
+Exports
+
+Consolidated XLSX workbook with sheets:
+
+InventorySnapshot_{YYYYMMDD}
+
+Variances_{YYYYMMDD}
+
+Wastage_{YYYYMMDD}
+
+AuditTrail_{YYYYMMDD}
+
+CSV option for each table.
+
+Sample CSV headers (handy for testing)
+
+items.csv: sku,name,category,uom,pack_size,is_active,cost_per_uom,currency
+
+locations.csv: name,timezone,is_active
+
+location_items.csv: location,sku,enabled,min_stock
+
+Acceptance tests (the stuff you insist on before calling it “done”)
+
+Counter can complete a draft count offline, reconnect, and submit with zero data loss.
+
+Supervisor sees auto-computed expected stock lines; any line with variance severity=critical requires a comment before approval.
+
+Recount requested on 1 line does not reset the entire count.
+
+Admin locks September 2025 period; attempts to modify approved counts return 409 with helpful message.
+
+Export produces a single XLSX with the four sheets above, formulas pre-calculated (values only).
+
+Audit shows who changed cost of SKU X and when; before/after values visible.
+
+User with access to Location A cannot fetch Location B items via API or UI.
+
+Tech notes the agent should follow
+
+Database migrations with idempotent seeds.
+
+Background job for POS sync and expected usage calculations.
+
+Decimal math, not float, for quantities and costs.
+
+Feature flags for integrations and offline mode.

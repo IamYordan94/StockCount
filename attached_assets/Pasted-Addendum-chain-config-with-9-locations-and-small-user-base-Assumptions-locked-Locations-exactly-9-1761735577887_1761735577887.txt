@@ -1,0 +1,150 @@
+Addendum: chain config with 9 locations and small user base
+Assumptions locked
+
+Locations: exactly 9 active shops.
+
+Accounts: 3–4 active counters total. You are a Supervisor with approval rights.
+
+Segregation of duties: a supervisor should not approve their own submitted count. Yes, I’m ruining the party on purpose.
+
+Role matrix (tightened)
+
+Counter: can view assigned locations, create/edit drafts, submit.
+
+Supervisor: all Counter rights + approve/reject for assigned locations, but cannot approve their own submission.
+
+Admin (HQ): global. Manages catalog, costs, locations, exports, period locks.
+
+Permissions model tweaks
+
+Keep the same tables, but enforce these rules server-side:
+
+users.role ∈ {counter, supervisor, admin}
+
+permissions grants per-location access. For small teams, assign each user to all 9 locations or a subset.
+
+On approve endpoint:
+
+Reject with 403 if counts.started_by == current_user and role is supervisor.
+
+Allow if role is admin, regardless of starter.
+
+Minimal SQL migration (conceptual)
+
+Add to counts: submitted_by (nullable), set on submit.
+
+Add to counts: approved_by (nullable).
+
+Add index: (location_id, status, period_end) to speed up approvals and reporting.
+
+Seed data you can drop in now
+locations.csv
+name,timezone,is_active
+Shop 1,Europe/Amsterdam,true
+Shop 2,Europe/Amsterdam,true
+Shop 3,Europe/Amsterdam,true
+Shop 4,Europe/Amsterdam,true
+Shop 5,Europe/Amsterdam,true
+Shop 6,Europe/Amsterdam,true
+Shop 7,Europe/Amsterdam,true
+Shop 8,Europe/Amsterdam,true
+Shop 9,Europe/Amsterdam,true
+
+users.csv
+name,email,role,is_active
+Your Name,you@company.com,supervisor,true
+Counter A,counter.a@company.com,counter,true
+Counter B,counter.b@company.com,counter,true
+Counter C,counter.c@company.com,counter,true
+Admin HQ,admin@company.com,admin,true
+
+permissions.csv (grant all 9 to each user; trim if needed)
+user_email,location_name,role_override
+you@company.com,Shop 1,supervisor
+you@company.com,Shop 2,supervisor
+...
+you@company.com,Shop 9,supervisor
+counter.a@company.com,Shop 1,counter
+...
+counter.a@company.com,Shop 9,counter
+counter.b@company.com,Shop 1,counter
+...
+counter.c@company.com,Shop 9,counter
+admin@company.com,Shop 1,admin
+...
+admin@company.com,Shop 9,admin
+
+
+Fill the ellipses like a grown-up. Your agent can generate the Cartesian product in two lines.
+
+Workflow guardrails tuned for small team
+
+Concurrent counts allowed per location but block duplicate “same period” approvals:
+
+On POST /v1/counts/{id}/approve, reject if another approved count exists for the same location_id and overlapping period_start..period_end.
+
+Auto-assignment: when a Counter creates a draft, set counts.started_by = user_id and auto-scope items to that location’s enabled catalog.
+
+Approval cooldown: optional feature flag to require a second supervisor or admin for variances over critical threshold. With a tiny team, make this an admin-only override.
+
+Variance thresholds per location (optional)
+
+If one bar is chaos and another is Swiss, allow per-location overrides:
+
+New table location_thresholds: location_id, default_pct, default_abs_uom, effective_from.
+
+Lookup order: item override > location override > global default.
+
+Acceptance tests adjusted to your setup
+
+Nine-location visibility: Admin sees all 9 in Catalog and Reports. Supervisor sees only assigned ones.
+
+Self-approval blocked: When you submit a count you started, the Approve button is disabled and API returns 403 if forced.
+
+Small-team concurrency: Two counters submit for Shop 3 same week; only one approval allowed for that period.
+
+End-to-end with 3 counters: Each counter completes a draft in offline mode for a different shop, syncs, and submits; supervisor approves two, admin approves the third.
+
+Consolidated export includes all 9 shops in one workbook with separate variance lines by location.
+
+Audit trail shows who started vs who approved for at least one count you submitted.
+
+Row-level security sanity: Counter B cannot fetch Shop 7 items if not assigned.
+
+API enforcement snippets (pseudo)
+
+On submit:
+
+PATCH /v1/counts/{id} → set submitted_by = current_user.id, status → submitted
+
+On approve:
+
+if current_user.role == 'supervisor' and count.submitted_by == current_user.id: 403
+
+if overlapping_approved_count_exists(location_id, period): 409
+
+else set approved_by, approved_at, status → approved
+
+On list counts:
+
+filter by permissions.location_id IN user.assigned_locations
+
+UI nips and tucks
+
+Dashboard: 9-location filter chip row at the top; default to “My locations.”
+
+Count list: show a small badge “Started by me” and hide Approve action on those.
+
+Approvals: add conflict banner if a same-period approval exists.
+
+Rollout steps that won’t implode your week
+
+Take a backup. Obviously.
+
+Apply migrations for new fields and indexes.
+
+Import locations.csv, users.csv, generate permissions.csv.
+
+Assign all 9 locations to your user as supervisor.
+
+Smoke test: create a draft in Shop 1 as you, submit, confirm you cannot approve it; flip to Admin, approve it; export workbook; archive audit.
