@@ -1,6 +1,6 @@
 import { db } from "./db";
 import { movements, costs, varianceThresholds, items, countLines, counts } from "@shared/schema";
-import { eq, and, lte, gte, sql, desc, or, isNull, lt } from "drizzle-orm";
+import { eq, and, lte, gte, sql, desc, or, isNull, isNotNull, lt } from "drizzle-orm";
 
 export interface VarianceResult {
   itemId: number;
@@ -46,17 +46,18 @@ async function computeExpectedStock(
     const lastApprovedCount = await db
       .select({
         countId: counts.id,
-        countedAt: counts.countedAt
+        approvedAt: counts.approvedAt
       })
       .from(counts)
       .where(
         and(
           eq(counts.shopId, shopId),
           eq(counts.status, 'APPROVED'),
-          lt(counts.countedAt, periodStart)
+          isNotNull(counts.approvedAt),
+          sql`${counts.approvedAt} < ${periodStart}`
         )
       )
-      .orderBy(desc(counts.countedAt))
+      .orderBy(desc(counts.approvedAt))
       .limit(1);
     
     if (lastApprovedCount.length > 0) {
@@ -73,7 +74,17 @@ async function computeExpectedStock(
         .limit(1);
       
       if (line.length > 0) {
-        opening = parseFloat(line[0].actualQty);
+        // Calculate actual quantity from boxes and singles
+        const item = await db
+          .select()
+          .from(items)
+          .where(eq(items.id, itemId))
+          .limit(1);
+        
+        if (item.length > 0) {
+          const unitsPerBox = item[0].unitsPerBox;
+          opening = line[0].boxes + (line[0].singles / unitsPerBox);
+        }
       }
     }
   }
