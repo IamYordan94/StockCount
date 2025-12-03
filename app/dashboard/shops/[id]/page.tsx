@@ -83,7 +83,7 @@ export default async function ShopDetailPage({
       </div>
 
       {stockItems.length > 0 ? (
-        <StockTableClient items={stockItems} />
+        <StockTableClient items={stockItems} shopId={params.id} />
       ) : (
         <div className="text-center py-12 bg-white rounded-lg shadow">
           <p className="text-gray-500">No stock items found for this shop.</p>

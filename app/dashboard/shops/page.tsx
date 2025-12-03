@@ -1,5 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
-import { getUserRole, getUserShopId } from '@/lib/utils/roles'
+import { getUserRole, getUserAssignedShops } from '@/lib/utils/roles'
 import Link from 'next/link'
 import { Store } from 'lucide-react'
 
@@ -12,23 +12,41 @@ export default async function ShopsPage() {
   }
 
   const role = await getUserRole(user.id)
-  const userShopId = await getUserShopId(user.id)
+  let shops
 
-  // Admins see all shops, others see only their shop
-  let query = supabase.from('shops').select('*').order('name')
-
-  if (role !== 'admin' && userShopId) {
-    query = query.eq('id', userShopId)
-  }
-
-  const { data: shops, error } = await query
-
-  if (error) {
-    return (
-      <div className="text-red-600">
-        Error loading shops: {error.message}
-      </div>
-    )
+  if (role === 'admin') {
+    // Admins see all shops
+    const { data, error } = await supabase.from('shops').select('*').order('name')
+    if (error) {
+      return (
+        <div className="text-red-600">
+          Error loading shops: {error.message}
+        </div>
+      )
+    }
+    shops = data
+  } else {
+    // Get assigned shops
+    const assignedShopIds = await getUserAssignedShops(user.id)
+    
+    if (assignedShopIds.length === 0) {
+      shops = []
+    } else {
+      const { data, error } = await supabase
+        .from('shops')
+        .select('*')
+        .in('id', assignedShopIds)
+        .order('name')
+      
+      if (error) {
+        return (
+          <div className="text-red-600">
+            Error loading shops: {error.message}
+          </div>
+        )
+      }
+      shops = data
+    }
   }
 
   return (

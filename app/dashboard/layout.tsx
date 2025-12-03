@@ -1,7 +1,8 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
+import { getUserRole } from '@/lib/utils/roles'
 import Navbar from '@/components/layout/Navbar'
-import Sidebar from '@/components/layout/Sidebar'
+import SidebarClient from '@/components/layout/SidebarClient'
 
 export default async function DashboardLayout({
   children,
@@ -15,9 +16,12 @@ export default async function DashboardLayout({
     redirect('/login')
   }
 
+  const role = await getUserRole(user.id)
+  const isAdmin = role === 'admin'
+
   return (
     <div className="flex h-screen bg-gray-100">
-      <Sidebar />
+      <SidebarClient isAdmin={isAdmin} />
       <div className="flex-1 flex flex-col overflow-hidden">
         <Navbar />
         <main className="flex-1 overflow-y-auto p-6">
