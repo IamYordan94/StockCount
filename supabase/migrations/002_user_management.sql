@@ -27,7 +27,8 @@ CREATE INDEX IF NOT EXISTS idx_shop_assignments_active ON shop_assignments(activ
 ALTER TABLE shop_assignments ENABLE ROW LEVEL SECURITY;
 
 -- RLS Policies for shop_assignments
--- Admins can view all assignments
+-- Drop existing policies if they exist, then create new ones
+DROP POLICY IF EXISTS "Admins can view all shop assignments" ON shop_assignments;
 CREATE POLICY "Admins can view all shop assignments" ON shop_assignments
   FOR SELECT USING (
     EXISTS (
@@ -36,11 +37,11 @@ CREATE POLICY "Admins can view all shop assignments" ON shop_assignments
     )
   );
 
--- Users can view their own assignments
+DROP POLICY IF EXISTS "Users can view their own assignments" ON shop_assignments;
 CREATE POLICY "Users can view their own assignments" ON shop_assignments
   FOR SELECT USING (auth.uid() = user_id);
 
--- Admins can insert assignments
+DROP POLICY IF EXISTS "Admins can create shop assignments" ON shop_assignments;
 CREATE POLICY "Admins can create shop assignments" ON shop_assignments
   FOR INSERT WITH CHECK (
     EXISTS (
@@ -49,7 +50,7 @@ CREATE POLICY "Admins can create shop assignments" ON shop_assignments
     )
   );
 
--- Admins can update assignments
+DROP POLICY IF EXISTS "Admins can update shop assignments" ON shop_assignments;
 CREATE POLICY "Admins can update shop assignments" ON shop_assignments
   FOR UPDATE USING (
     EXISTS (
@@ -58,7 +59,7 @@ CREATE POLICY "Admins can update shop assignments" ON shop_assignments
     )
   );
 
--- Admins can delete assignments
+DROP POLICY IF EXISTS "Admins can delete shop assignments" ON shop_assignments;
 CREATE POLICY "Admins can delete shop assignments" ON shop_assignments
   FOR DELETE USING (
     EXISTS (
@@ -98,4 +99,10 @@ CREATE POLICY "Admins can delete roles" ON user_roles
   );
 
 -- Enable real-time for shop_stock table (prevents data loss)
-ALTER PUBLICATION supabase_realtime ADD TABLE shop_stock;
+-- This might fail if already added, but that's okay
+DO $$
+BEGIN
+  ALTER PUBLICATION supabase_realtime ADD TABLE shop_stock;
+EXCEPTION
+  WHEN duplicate_object THEN NULL;
+END $$;
