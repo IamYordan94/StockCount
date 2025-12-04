@@ -70,21 +70,8 @@ export async function POST(
       return NextResponse.json({ error: 'assignments must be an array' }, { status: 400 })
     }
 
-    // Deactivate all current assignments for this period
-    const { error: deactivateError } = await supabase
-      .from('shop_assignments')
-      .update({ active: false })
-      .eq('period_id', params.id)
-
-    if (deactivateError) {
-      console.error('Error deactivating assignments:', deactivateError)
-      return NextResponse.json({ 
-        error: `Failed to deactivate existing assignments: ${deactivateError.message}` 
-      }, { status: 500 })
-    }
-
-    // Create new assignments
-    const newAssignments: any[] = []
+    // First, collect all user-shop pairs we're about to assign
+    const userShopPairs: Array<{ user_id: string; shop_id: string }> = []
     
     for (const assignment of assignments) {
       const { user_id, shop_ids } = assignment
@@ -97,6 +84,47 @@ export async function POST(
       for (const shop_id of shop_ids) {
         if (!shop_id) {
           console.warn('Invalid shop_id in assignment:', assignment)
+          continue
+        }
+        userShopPairs.push({ user_id, shop_id })
+      }
+    }
+
+    // Deactivate all existing active assignments for these user-shop pairs
+    // This prevents unique constraint violations when inserting new assignments
+    for (const { user_id, shop_id } of userShopPairs) {
+      const { error: deactivateError } = await supabase
+        .from('shop_assignments')
+        .update({ active: false })
+        .eq('user_id', user_id)
+        .eq('shop_id', shop_id)
+        .eq('active', true)
+
+      if (deactivateError) {
+        console.error(`Error deactivating assignment for user ${user_id}, shop ${shop_id}:`, deactivateError)
+        // Continue anyway - we'll try to insert and handle conflicts
+      }
+    }
+
+    // Also deactivate all current assignments for this period (cleanup)
+    await supabase
+      .from('shop_assignments')
+      .update({ active: false })
+      .eq('period_id', params.id)
+      .eq('active', true)
+
+    // Create new assignments
+    const newAssignments: any[] = []
+    
+    for (const assignment of assignments) {
+      const { user_id, shop_ids } = assignment
+      
+      if (!user_id || !Array.isArray(shop_ids)) {
+        continue
+      }
+
+      for (const shop_id of shop_ids) {
+        if (!shop_id) {
           continue
         }
         newAssignments.push({
