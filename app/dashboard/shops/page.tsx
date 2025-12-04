@@ -28,7 +28,7 @@ export default async function ShopsPage() {
           <p className="text-red-600 text-sm mt-2">Hint: {error.hint || 'No hint'}</p>
           <p className="text-gray-600 text-xs mt-4">
             This might be an RLS (Row Level Security) issue. Check:
-            <br />1. Your user_roles entry exists and role = 'admin'
+            <br />1. Your user_roles entry exists and role = &apos;admin&apos;
             <br />2. RLS policies are correctly set up
             <br />3. Visit <Link href="/dashboard/debug" className="text-blue-600 underline">/dashboard/debug</Link> to see your role status
           </p>

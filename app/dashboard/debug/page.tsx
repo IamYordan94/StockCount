@@ -91,7 +91,7 @@ export default async function DebugPage() {
         <div className="mt-6 p-4 bg-blue-50 rounded">
           <h3 className="font-semibold mb-2">To Fix Role:</h3>
           <p className="text-sm">
-            If your role is not 'admin', run this SQL in Supabase SQL Editor:
+            If your role is not &apos;admin&apos;, run this SQL in Supabase SQL Editor:
           </p>
           <pre className="bg-white p-3 rounded mt-2 text-xs overflow-auto">
 {`UPDATE user_roles 
