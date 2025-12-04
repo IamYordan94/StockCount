@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useRouter, useParams } from 'next/navigation'
 import Link from 'next/link'
 
@@ -17,11 +17,7 @@ export default function EditItemPage() {
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
-    fetchItem()
-  }, [itemId])
-
-  const fetchItem = async () => {
+  const fetchItem = useCallback(async () => {
     try {
       const response = await fetch(`/api/items/${itemId}`)
       if (!response.ok) throw new Error('Failed to fetch item')
@@ -36,7 +32,11 @@ export default function EditItemPage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [itemId])
+
+  useEffect(() => {
+    fetchItem()
+  }, [fetchItem])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()

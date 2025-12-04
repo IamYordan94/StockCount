@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { Save, Users, Store } from 'lucide-react'
@@ -41,11 +41,7 @@ export default function PeriodDetailPage() {
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
-    fetchData()
-  }, [periodId])
-
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       const [periodRes, usersRes, shopsRes, participantsRes, assignmentsRes] = await Promise.all([
         fetch(`/api/periods/${periodId}`),
@@ -85,7 +81,11 @@ export default function PeriodDetailPage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [periodId])
+
+  useEffect(() => {
+    fetchData()
+  }, [fetchData])
 
   const handleParticipantToggle = (userId: string) => {
     setParticipants((prev) =>

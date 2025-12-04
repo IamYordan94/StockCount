@@ -340,7 +340,7 @@ export default function WastagePage() {
               ) : (
                 <tr>
                   <td colSpan={6} className="px-6 py-4 text-center text-sm text-gray-500">
-                    No wastage entries found. Click "Add Wastage" to create one.
+                    No wastage entries found. Click &apos;Add Wastage&apos; to create one.
                   </td>
                 </tr>
               )}
