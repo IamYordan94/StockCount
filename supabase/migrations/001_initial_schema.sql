@@ -69,6 +69,7 @@ ALTER TABLE stock_history ENABLE ROW LEVEL SECURITY;
 ALTER TABLE user_roles ENABLE ROW LEVEL SECURITY;
 
 -- RLS Policies for shops
+DROP POLICY IF EXISTS "Admins can view all shops" ON shops;
 CREATE POLICY "Admins can view all shops" ON shops
   FOR SELECT USING (
     EXISTS (
@@ -77,6 +78,7 @@ CREATE POLICY "Admins can view all shops" ON shops
     )
   );
 
+DROP POLICY IF EXISTS "Managers and staff can view their shop" ON shops;
 CREATE POLICY "Managers and staff can view their shop" ON shops
   FOR SELECT USING (
     EXISTS (
@@ -85,6 +87,7 @@ CREATE POLICY "Managers and staff can view their shop" ON shops
     )
   );
 
+DROP POLICY IF EXISTS "Admins can insert shops" ON shops;
 CREATE POLICY "Admins can insert shops" ON shops
   FOR INSERT WITH CHECK (
     EXISTS (
@@ -93,6 +96,7 @@ CREATE POLICY "Admins can insert shops" ON shops
     )
   );
 
+DROP POLICY IF EXISTS "Admins can update shops" ON shops;
 CREATE POLICY "Admins can update shops" ON shops
   FOR UPDATE USING (
     EXISTS (
@@ -102,9 +106,11 @@ CREATE POLICY "Admins can update shops" ON shops
   );
 
 -- RLS Policies for items
+DROP POLICY IF EXISTS "Users can view all items" ON items;
 CREATE POLICY "Users can view all items" ON items
   FOR SELECT USING (auth.role() = 'authenticated');
 
+DROP POLICY IF EXISTS "Admins can insert items" ON items;
 CREATE POLICY "Admins can insert items" ON items
   FOR INSERT WITH CHECK (
     EXISTS (
@@ -113,6 +119,7 @@ CREATE POLICY "Admins can insert items" ON items
     )
   );
 
+DROP POLICY IF EXISTS "Admins can update items" ON items;
 CREATE POLICY "Admins can update items" ON items
   FOR UPDATE USING (
     EXISTS (
@@ -122,6 +129,7 @@ CREATE POLICY "Admins can update items" ON items
   );
 
 -- RLS Policies for shop_stock
+DROP POLICY IF EXISTS "Admins can view all stock" ON shop_stock;
 CREATE POLICY "Admins can view all stock" ON shop_stock
   FOR SELECT USING (
     EXISTS (
@@ -130,6 +138,7 @@ CREATE POLICY "Admins can view all stock" ON shop_stock
     )
   );
 
+DROP POLICY IF EXISTS "Users can view their shop stock" ON shop_stock;
 CREATE POLICY "Users can view their shop stock" ON shop_stock
   FOR SELECT USING (
     EXISTS (
@@ -138,6 +147,7 @@ CREATE POLICY "Users can view their shop stock" ON shop_stock
     )
   );
 
+DROP POLICY IF EXISTS "Admins can insert stock" ON shop_stock;
 CREATE POLICY "Admins can insert stock" ON shop_stock
   FOR INSERT WITH CHECK (
     EXISTS (
@@ -146,6 +156,7 @@ CREATE POLICY "Admins can insert stock" ON shop_stock
     )
   );
 
+DROP POLICY IF EXISTS "Users can update their shop stock" ON shop_stock;
 CREATE POLICY "Users can update their shop stock" ON shop_stock
   FOR UPDATE USING (
     EXISTS (
@@ -155,6 +166,7 @@ CREATE POLICY "Users can update their shop stock" ON shop_stock
   );
 
 -- RLS Policies for stock_history
+DROP POLICY IF EXISTS "Admins can view all history" ON stock_history;
 CREATE POLICY "Admins can view all history" ON stock_history
   FOR SELECT USING (
     EXISTS (
@@ -163,6 +175,7 @@ CREATE POLICY "Admins can view all history" ON stock_history
     )
   );
 
+DROP POLICY IF EXISTS "Users can view their shop history" ON stock_history;
 CREATE POLICY "Users can view their shop history" ON stock_history
   FOR SELECT USING (
     EXISTS (
@@ -171,6 +184,7 @@ CREATE POLICY "Users can view their shop history" ON stock_history
     )
   );
 
+DROP POLICY IF EXISTS "Users can insert history for their shop" ON stock_history;
 CREATE POLICY "Users can insert history for their shop" ON stock_history
   FOR INSERT WITH CHECK (
     EXISTS (
@@ -180,9 +194,11 @@ CREATE POLICY "Users can insert history for their shop" ON stock_history
   );
 
 -- RLS Policies for user_roles
+DROP POLICY IF EXISTS "Users can view their own role" ON user_roles;
 CREATE POLICY "Users can view their own role" ON user_roles
   FOR SELECT USING (auth.uid() = id);
 
+DROP POLICY IF EXISTS "Admins can view all roles" ON user_roles;
 CREATE POLICY "Admins can view all roles" ON user_roles
   FOR SELECT USING (
     EXISTS (
@@ -191,6 +207,7 @@ CREATE POLICY "Admins can view all roles" ON user_roles
     )
   );
 
+DROP POLICY IF EXISTS "Admins can insert roles" ON user_roles;
 CREATE POLICY "Admins can insert roles" ON user_roles
   FOR INSERT WITH CHECK (
     EXISTS (
@@ -199,6 +216,7 @@ CREATE POLICY "Admins can insert roles" ON user_roles
     )
   );
 
+DROP POLICY IF EXISTS "Admins can update roles" ON user_roles;
 CREATE POLICY "Admins can update roles" ON user_roles
   FOR UPDATE USING (
     EXISTS (
@@ -217,6 +235,7 @@ END;
 $$ language 'plpgsql';
 
 -- Trigger to automatically update updated_at
+DROP TRIGGER IF EXISTS update_shop_stock_updated_at ON shop_stock;
 CREATE TRIGGER update_shop_stock_updated_at BEFORE UPDATE ON shop_stock
   FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 

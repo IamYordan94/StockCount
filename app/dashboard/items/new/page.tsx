@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
@@ -8,10 +8,32 @@ export default function NewItemPage() {
   const router = useRouter()
   const [name, setName] = useState('')
   const [category, setCategory] = useState('')
+  const [newCategory, setNewCategory] = useState('')
+  const [showNewCategory, setShowNewCategory] = useState(false)
+  const [categories, setCategories] = useState<string[]>([])
   const [packagingUnitDescription, setPackagingUnitDescription] = useState('')
   const [mainCategory, setMainCategory] = useState<'floor' | 'catering'>('floor')
   const [loading, setLoading] = useState(false)
+  const [loadingCategories, setLoadingCategories] = useState(true)
   const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    fetchCategories()
+  }, [])
+
+  const fetchCategories = async () => {
+    try {
+      const response = await fetch('/api/categories')
+      if (response.ok) {
+        const data = await response.json()
+        setCategories(data.categories || [])
+      }
+    } catch (err) {
+      console.error('Failed to fetch categories:', err)
+    } finally {
+      setLoadingCategories(false)
+    }
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -80,17 +102,54 @@ export default function NewItemPage() {
             <label htmlFor="category" className="block text-sm font-medium text-gray-700">
               Category
             </label>
-            <input
-              type="text"
-              id="category"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-              placeholder="e.g., IJSJES, DRANK, ETEN"
-            />
-            <p className="mt-1 text-sm text-gray-500">
-              Shop-level category (e.g., IJSJES, DRANK, ETEN, Cheese, Stromma goods)
-            </p>
+            {loadingCategories ? (
+              <div className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-50">
+                Loading categories...
+              </div>
+            ) : (
+              <>
+                <select
+                  id="category"
+                  value={category}
+                  onChange={(e) => {
+                    if (e.target.value === '__new__') {
+                      setShowNewCategory(true)
+                      setCategory('')
+                    } else {
+                      setCategory(e.target.value)
+                      setShowNewCategory(false)
+                    }
+                  }}
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-base min-h-[44px]"
+                >
+                  <option value="">Select a category</option>
+                  {categories.map((cat) => (
+                    <option key={cat} value={cat}>
+                      {cat}
+                    </option>
+                  ))}
+                  <option value="__new__">+ Add New Category</option>
+                </select>
+                {showNewCategory && (
+                  <div className="mt-2">
+                    <input
+                      type="text"
+                      value={newCategory}
+                      onChange={(e) => {
+                        setNewCategory(e.target.value)
+                        setCategory(e.target.value)
+                      }}
+                      placeholder="Enter new category name"
+                      className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-base min-h-[44px]"
+                      autoFocus
+                    />
+                  </div>
+                )}
+                <p className="mt-1 text-sm text-gray-500">
+                  Shop-level category (e.g., IJSJES, DRANK, ETEN, Cheese, Stromma goods)
+                </p>
+              </>
+            )}
           </div>
 
           <div>

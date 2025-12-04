@@ -1,619 +1,4415 @@
 -- Seed data generated from Excel file: Stock take October.xlsx
--- Generated on: 2025-12-04T12:59:43.161Z
---
--- IMPORTANT: This seed file should be run ONCE after running migrations 001-006.
--- If you need to re-run this seed:
---   1. Clear existing data: DELETE FROM shop_stock; DELETE FROM items; DELETE FROM shops;
---   2. Then run this seed file again
---
--- This seed includes:
---   - 11 shops (including Damrak 4 and VC with items copied from template shop)
---   - 112 unique items with main_category (floor/catering)
---   - 475 shop stock entries with quantities
+-- Generated on: 2025-12-04T14:40:08.851Z
 
 -- Insert Shops
+-- IMPORTANT: If shops already exist with different IDs, uncomment the next 2 lines:
+-- DELETE FROM shop_stock;
+-- DELETE FROM shops;
+-- Otherwise, the seed will use COALESCE to find existing shop IDs automatically.
 
-INSERT INTO shops (id, name, created_at) VALUES ('40644f0a-7864-409d-91d6-1e29d06b1d7b', 'Winkel Rijks', NOW()) ON CONFLICT (name) DO UPDATE SET name = EXCLUDED.name;
-INSERT INTO shops (id, name, created_at) VALUES ('ade27a00-6584-45b3-a8e5-43079a6035fa', 'Ponton Rijks', NOW()) ON CONFLICT (name) DO UPDATE SET name = EXCLUDED.name;
-INSERT INTO shops (id, name, created_at) VALUES ('6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', 'ARK Rijks', NOW()) ON CONFLICT (name) DO UPDATE SET name = EXCLUDED.name;
-INSERT INTO shops (id, name, created_at) VALUES ('4332a571-36f7-4c23-9d53-db5289552f04', 'Leidse', NOW()) ON CONFLICT (name) DO UPDATE SET name = EXCLUDED.name;
-INSERT INTO shops (id, name, created_at) VALUES ('578784bf-2268-4fe9-9a94-4b8156e9f5d8', 'CS Oost', NOW()) ON CONFLICT (name) DO UPDATE SET name = EXCLUDED.name;
-INSERT INTO shops (id, name, created_at) VALUES ('a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', 'Bridge', NOW()) ON CONFLICT (name) DO UPDATE SET name = EXCLUDED.name;
-INSERT INTO shops (id, name, created_at) VALUES ('86526779-175e-4d80-8d71-fea2cd6b5668', 'Damrak 5', NOW()) ON CONFLICT (name) DO UPDATE SET name = EXCLUDED.name;
-INSERT INTO shops (id, name, created_at) VALUES ('75b22d80-9293-4498-9d00-93e516b61053', 'Damrak 6', NOW()) ON CONFLICT (name) DO UPDATE SET name = EXCLUDED.name;
-INSERT INTO shops (id, name, created_at) VALUES ('eef9c137-b857-4990-a378-bdd1209b750c', 'Vlaggenwinkel', NOW()) ON CONFLICT (name) DO UPDATE SET name = EXCLUDED.name;
-INSERT INTO shops (id, name, created_at) VALUES ('b54e9c3c-621d-400a-bc16-95f2f719f9fe', 'Damrak 4', NOW()) ON CONFLICT (name) DO UPDATE SET name = EXCLUDED.name;
-INSERT INTO shops (id, name, created_at) VALUES ('0aa9cca1-b5d0-4524-a03d-fe7039b96540', 'VC', NOW()) ON CONFLICT (name) DO UPDATE SET name = EXCLUDED.name;
+INSERT INTO shops (id, name, created_at) VALUES ('8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6', 'Winkel Rijks', NOW()) ON CONFLICT (name) DO UPDATE SET name = EXCLUDED.name;
+INSERT INTO shops (id, name, created_at) VALUES ('8239c24e-92f4-4140-830c-94c014639381', 'Ponton Rijks', NOW()) ON CONFLICT (name) DO UPDATE SET name = EXCLUDED.name;
+INSERT INTO shops (id, name, created_at) VALUES ('fceef697-1ef9-49d3-9308-023ba61c2cbe', 'ARK Rijks', NOW()) ON CONFLICT (name) DO UPDATE SET name = EXCLUDED.name;
+INSERT INTO shops (id, name, created_at) VALUES ('0189fb6a-7228-4bec-8baf-3d274c3dcc17', 'Leidse', NOW()) ON CONFLICT (name) DO UPDATE SET name = EXCLUDED.name;
+INSERT INTO shops (id, name, created_at) VALUES ('8cd447eb-ca21-4ba1-8b03-f308b211f8eb', 'CS Oost', NOW()) ON CONFLICT (name) DO UPDATE SET name = EXCLUDED.name;
+INSERT INTO shops (id, name, created_at) VALUES ('e06f3d74-8099-4d3f-9f67-f858fe5b689c', 'Bridge', NOW()) ON CONFLICT (name) DO UPDATE SET name = EXCLUDED.name;
+INSERT INTO shops (id, name, created_at) VALUES ('5825609a-fb44-442b-9d24-a40136a057b6', 'Damrak 5', NOW()) ON CONFLICT (name) DO UPDATE SET name = EXCLUDED.name;
+INSERT INTO shops (id, name, created_at) VALUES ('ce8b3886-03b8-4922-98e1-b3e974f57082', 'Damrak 6', NOW()) ON CONFLICT (name) DO UPDATE SET name = EXCLUDED.name;
+INSERT INTO shops (id, name, created_at) VALUES ('c410a3da-a83a-430a-9aa9-7c13a26f7345', 'Vlaggenwinkel', NOW()) ON CONFLICT (name) DO UPDATE SET name = EXCLUDED.name;
+INSERT INTO shops (id, name, created_at) VALUES ('3b9f0f1d-bca1-449e-9e3e-97ea70956d40', 'Damrak 4', NOW()) ON CONFLICT (name) DO UPDATE SET name = EXCLUDED.name;
+INSERT INTO shops (id, name, created_at) VALUES ('8054fcba-d23a-4764-bce9-8280648c8974', 'VC', NOW()) ON CONFLICT (name) DO UPDATE SET name = EXCLUDED.name;
 
 -- Insert Items
 
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('03794362-58cf-4022-a1f8-a715290ad430', 'OLA Raket', 'IJSJES', 'per 54 a 55 ml', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('790361ea-a4cb-4708-8d15-e111a5f848f9', 'OLA Donut', 'IJSJES', 'per 54 a 55 ml', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('9b40f01f-558f-40a5-be15-ec2b9170133a', 'OLA Dracula', 'IJSJES', 'per 35 x 50ml', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('b2af2ba2-b4d4-42b3-a48e-48c84612ce56', 'OLA Super Twister', 'IJSJES', 'per 24 a 120ml', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('1ec84977-7575-465f-a1ea-93c4eaacb6c0', 'OLA Magnum Classic', 'IJSJES', 'per 20 a 110 ml', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('24d2750f-c4bb-4567-af3d-84c0786bc818', 'OLA Magnum Almond', 'IJSJES', 'per 20 a 120 ml', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('9ab3220e-6ad2-4741-8d78-e7b875d0b19c', 'OLA Magnum White', 'IJSJES', 'per 20 a 120 ml', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('e6ac134a-c90d-4d36-b021-473d0e30d50f', 'OLA Cornetto Classico', 'IJSJES', 'per 20 a 85ml', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('12cbbe00-c785-4b4c-a79f-db7d6790019f', 'Heineken blik 33CL', 'DRANK', 'per 24 blikjes', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('aec0f41d-8925-4c88-b3d5-aa253473a6f6', 'Heineken blik 0,0 %  33CL', 'DRANK', 'per 24 blikjes', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('06271625-df52-4fa4-9691-cca462f2499e', 'Desperados 33CL', 'DRANK', 'per 24 blikjes', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('de2eb8d7-3b60-4c10-82aa-3483d40c58c7', 'La Croisade chardonnay grenache 25 CL', 'DRANK', 'per fles', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('87754f70-6d41-42f4-b881-8d3e0d59293a', 'La Croisade merlot rouge 25CL', 'DRANK', 'per fles', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('42aa394d-3c7e-4ef1-984f-3e60a659d107', 'La Croisade rosé 25CL', 'DRANK', 'per fles', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('3edfdac0-4d94-4a18-acfe-e9a872a83850', 'Lisetto Prosecco Klein flesje 20CL', 'DRANK', 'per 12 flesjes', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('73c3b3f2-9b5c-4f0c-8c39-3b65c1e2805d', 'Sourcy Mineraalwater blauw koolzuurvrij pet 50CL', 'DRANK', 'per 6 pieces', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('5d457caa-506b-457a-a3e2-bf28d09c08b1', 'Sourcy Rood pet 50CL', 'DRANK', 'per 6 pieces', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('6a7766ed-1027-4dad-ba8c-8a00beae7420', 'Sourcy Vitamin Water Braam Acai 0% 50CL', 'DRANK', 'per 6 pieces', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('4f675d76-6da0-43c2-882c-207106cb3df0', 'Sourcy Vitamin Water DruifCitroen 0% 50CL', 'DRANK', 'per 6 pieces', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('186daa47-699e-4fc6-993c-489ddfd66898', 'Sourcy Vitamin Water Mango Guave 0% 50CL', 'DRANK', 'per 6 pieces', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('0c95edeb-28c5-4d99-b3b7-35a58ec22de7', 'Rivella 50CL', 'DRANK', 'per 6 pieces', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('dbea3c69-d9ca-4362-8d25-d28078935987', 'Ranja fruitmix aardbei/framboos 33CL', 'DRANK', 'per 6 pieces', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('de5ac81b-1b14-4b8a-b638-57ab6417653e', 'Lipton Ice Tea Sparkling petfles 50 cl', 'DRANK', 'per 12 flesjes', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('cae97c4e-b37a-4b94-abef-ffa1ef2adbbd', 'Lipton Ice Tea peach/green Zero 50 cl', 'DRANK', 'per 12 flesjes', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('280524b4-543c-4125-aa33-b527e0e08ca8', 'Pepsi petfles regular 50CL', 'DRANK', 'per 6 pieces', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('c726228b-9c5e-4ed9-9f9b-aa9ef6116b8c', 'Pepsi petfles max 50CL', 'DRANK', 'per 6 pieces', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('109c8aea-6a65-45d9-9131-c3389f8c667f', 'Seven Up suikervrij 50 CL', 'DRANK', 'per 6 pieces', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('6b84982b-bcae-4cde-af4e-7aabb303e39a', 'Sisi suikevrij 50CL', 'DRANK', 'per 6 pieces', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('81ac8b00-c18d-4b88-9a90-4358e3016b70', 'Rockstar original regular/suikervrij (blik) 25CL', 'DRANK', 'per 12 blikjes', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('acc1a5c9-2461-4fc0-9cb3-520ca4f6e1d9', 'Lay''s zakje chips naturel/paprika/bolognese', 'ETEN', 'doos per 20 zakjes a 40 gr', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('fab32e59-faec-4d66-a2af-97f949fab7dc', 'Pringles Original/Sourcream/Hot', 'ETEN', 'tray 12 blikjes a 40 gr', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('91feeeb3-3cc5-4efe-872e-43a0c4007164', 'Haribo Starmix 75 gram', 'ETEN', 'doos 28 zakjes a 75 gr', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('186c89bd-86d2-4400-bac6-316814efac3d', 'Daelmans stroopwafels jumbo single', 'ETEN', 'doos 36 stuks a 39 gr', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('87059ae4-f11d-4fbd-bba9-631091a5dbee', 'Milky way single reep', 'ETEN', 'doos 28 stuks a 43 gr', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('9b9c4541-ffd0-4eb8-b549-80fbf2c5fb90', 'M&m''s pinda single', 'ETEN', 'doos 24 zakjes a 45 gr', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('81535350-9da7-4440-9383-af283ae1ef7c', 'Mars single reep', 'ETEN', 'doos 32 stuks a 51 gr', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('32d394f0-6c7a-4fd1-aa64-273d048b2956', 'Snickers single reep', 'ETEN', 'doos 32 stuks a 50 gr', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('e50e8194-9694-4b4c-beaa-a1f7899fc430', 'Twix single reep', 'ETEN', 'doos 25 stuks a 50 gr', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('fcf398b3-3145-49e7-aace-559490d64de3', 'KitKat chocobar', 'ETEN', 'doos 36 stuks a 41,5 gr', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('5efd34fa-6695-492a-81aa-475fd2a8c2cc', 'Oud hollandse candy’s', 'Stromma branded', 'dos 60 stucks a 150g', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('d7bab111-4944-44e1-ab22-7c560b4dbb71', 'Stroopwafel zakje', 'Stromma branded', 'dos 60 stucks a 150g', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('46676d9e-876b-43da-b511-7d91931ae442', 'Stroopwafel koker yellow box', 'Stromma branded', 'dos 60 stucks a 150g', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('d10ff55a-fb60-477d-b110-1ac296241944', 'Pretzel', 'Stromma branded', 'dos 60 stucks a 150g', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('4e86c336-b5f0-42ab-b5c5-97c2a3231c9d', 'Huismix', 'Stromma branded', 'dos 60 stucks a 150g', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('f46580f8-798d-477a-86fc-22e288fd74f0', 'Cubes Mature/ 4-6 months', 'Cheese', 'per 12 x 135g', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('95a09902-eb15-46dc-8667-f39302e3e79a', 'Sourcy Mineraalwater blauw koolzuurvrij pet 50CL', 'DRANK SHOP', 'per 6 flesjes ex emb €0,15 per fles', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('dc868dc5-a031-47e8-b343-2b41bdf51b4a', 'Sourcy Rood pet 50CL', 'DRANK SHOP', 'per 6 flesjes ex emb €0,15 per fles', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('b8d4c2d9-4011-4d7b-8095-776a4dab3b40', 'Sourcy Vitamin Water Braam Acai 0% 50CL', 'DRANK SHOP', 'per 6 flesjes ex emb €0,15 per fles', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('dc568973-5dd0-4a81-b28e-ce2eb5b1eccf', 'Sourcy Vitamin Water DruifCitroen 0% 50CL', 'DRANK SHOP', 'per 6 flesjes ex emb €0,15 per fles', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('ca7cb492-3b0d-45d4-b6b6-5b95a847eb4b', 'Sourcy Vitamin Water Mango Guave 0% 50CL', 'DRANK SHOP', 'per 6 flesjes ex emb €0,15 per fles', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('f44ea136-3cab-4a33-80f3-af4d11ad6958', 'Rivella 50CL', 'DRANK SHOP', 'per 6 flesjes ex emb €0,15 per fles', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('1f94e6f4-881d-4f3e-880e-86ed689de71a', 'Ranja fruitmix aardbei/framboos 33CL', 'DRANK SHOP', 'per 6 flesjes ex emb €0,15 per fles', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('89d5431e-c554-4b27-ac64-c4c953bc2b14', 'Lipton Ice Tea Sparkling petfles 50 cl', 'DRANK SHOP', 'per 12 flesjes ex emb €0,15 per fles', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('948925e9-74b6-4f96-a588-0e6ba695b576', 'Lipton Ice Tea peach/green Zero 50 cl', 'DRANK SHOP', 'per 12 flesjes ex emb €0,15 per fles', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('94654eeb-ed67-4217-935b-862640f4d58b', 'Pepsi petfles regular 50CL', 'DRANK SHOP', 'per 6 flesjes ex emb €0,15 per fles', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('a3118292-ae2b-4abb-aacc-b9a5726e1ec5', 'Pepsi petfles max 50CL', 'DRANK SHOP', 'per 6 flesjes ex emb €0,15 per fles', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('3c4935fb-44ee-42e0-99e7-6e1d74b66105', 'Seven Up suikervrij 50 CL', 'DRANK SHOP', 'per 6 flesjes ex emb €0,15 per fles', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('78f59490-7010-462c-b08c-d218fbe72576', 'Sisi suikevrij 50CL', 'DRANK SHOP', 'per 6 flesjes ex emb €0,15 per fles', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('aac59145-0fd4-4740-b287-1b12c8c27f77', 'Segura Viudas Cava Brut Fles 75 cl', 'DRANK CATERING', 'per doos 6 stuks', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('5e53d542-ddb3-4e5a-a245-b38210115a3d', 'Marival Rose 75 cl', 'DRANK CATERING', 'per doos 6 stuks', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('374621c2-cd2c-4146-ab17-5d951c34cb1b', 'Lisetto Prosecco Spumante Fles 75 cl', 'DRANK CATERING', 'fles per doos 6 stuks', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('47245b94-4200-49dc-9e0a-451960731de2', 'Laroche Wit Chardonnay Fles 75 cl', 'DRANK CATERING', 'fles per doos 6 stuks', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('d52d70f8-3e2a-4dd6-a811-da721478ef7c', 'Laroche Rood Merlot Fles 75 cl', 'DRANK CATERING', 'fles per doos 6 stuks', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('5c0de72f-370e-4f26-b551-3516eeb48e81', 'Laroche Rose Fles 75 cl', 'DRANK CATERING', 'fles per doos 6 stuks', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('81df6b13-c37c-47fb-a180-b150f2157dcf', 'La Croisade Chardonnay grenache 75cl', 'DRANK CATERING', 'fles per doos 6 stuks', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('2d06efa3-e9fb-4031-aa83-61f71812eff4', 'La Croisade Merlot rouge 75cl', 'DRANK CATERING', 'fles per doos 6 stuks', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('683e2606-5276-4b57-82dc-58fd96ebaf5c', 'La Croisade Rosé 75cl', 'DRANK CATERING', 'fles per doos 6 stuks', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('5a8eb74e-3eef-4acf-9e57-72a7697fc2ce', 'Heineken Pilsener Star Bottle krat', 'DRANK CATERING', 'per krat 24 stuks x 30cl', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('8acec481-efbf-4931-83ae-58ad956db6da', 'Heineken 0.0% Krat', 'DRANK CATERING', 'per krat 24 stuks', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('870a9bbd-7c27-4c44-9212-7d7dee9c40d9', 'Sourcy Rood mineraalwater 20 cl fles krat', 'DRANK CATERING', 'per krat 28 stuks', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('124055d5-7bb2-48c3-bad9-cae1b27af5fe', 'Sourcy Natuurlijk mineraalwater koolzuurvrij fles 20 cl krat', 'DRANK CATERING', 'per krat 28 stuks', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('819122f8-8ebc-4d16-b571-ba7d50dc5d4c', 'Pepsi Regular cola 20 cl fles krat', 'DRANK CATERING', 'per krat 28 stuks', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('cf126872-da46-44c5-9de9-2d5da3d6db01', 'Pepsi Max cola 20 cl fles krat', 'DRANK CATERING', 'per krat 28 stuks', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('b52a0038-5e1c-4ece-badd-5de592a4167f', '7 Up Free 20 cl fles krat', 'DRANK CATERING', 'per krat 28 stuks', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('53703d21-f064-48cf-bf49-a572ef8665e9', 'Sisi Suikervrije Sinas 20cl fles krat', 'DRANK CATERING', 'per krat 28 stuks', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('af6ba88f-6d5e-4397-b7f8-6c0b1e55256d', 'Lipton Ice tea green 20 cl fles krat', 'DRANK CATERING', 'per krat 28 stuks', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('6874ed52-cefb-45b7-ab48-28c282a54104', 'Royal Club Sinaasappelsap 20 cl fles krat', 'DRANK CATERING', 'per krat 28 stuks', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('028763a2-65e7-41e5-960e-0865e74a6641', 'Royal Club Appelsap 20 cl fles krat', 'DRANK CATERING', 'per krat 28 stuks', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('95c77109-fcbd-422c-ae30-b7cb0dea4271', 'Sourcy Natuurlijk mineraalwater koolzuurvrij 75 cl', 'DRANK CATERING', 'krat per 12', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('44723e89-0a5a-4e25-86b6-c938819e4649', 'Sourcy Rood mineraalwater 75 cl', 'DRANK CATERING', 'krat per 12', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('76078a68-7eef-4294-809a-2f7f440833a0', 'Duyvis Pinda''s gezouten nootjes', 'ETEN', 'doos 20 zakjes a 60 gr', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('e469ada4-e4d0-4bd5-bb63-f979c778608b', 'Kaasblokjes - jong', 'ETEN CATERING', '', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('3432bcf9-4a67-4f00-a9d5-b8382a107f86', 'Kaasblokjes - oud', 'ETEN CATERING', '', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('f31df979-d5ca-41bd-8071-7be8c14bfcc5', 'Komijn - blokjes', 'ETEN CATERING', '', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('0afcae6c-1903-4d37-8f27-499de5e788b0', 'Daelmans Mini stroopwafel blokzak', 'ETEN CATERING', 'per doos a 6 stuks a 400g', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('ddbbcbfb-d1eb-4380-b828-8b353ed33795', 'Daelmans Mini stroopwafels Doos 2,5 kilo', 'ETEN CATERING', 'per doos 200 stuks a 8g', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('5744da2b-b8f7-4143-a771-a4bbefd35f51', 'Leev Stroopwafel bio glutenvrij', 'ETEN CATERING', '16 wikkels a 60g', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('4efde8a2-8210-499c-8236-90c0ca6dbc83', 'Daendels Hotmix van rijstzoutjes en gecoate pinda''s Emmer 5 kilo', 'ETEN CATERING', 'per emmer 5 kilo', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('42f8c56d-ad6d-4a90-b2d8-4827436db93d', 'Daendels Roomboter kaasvlinders Emmer 750 gram', 'ETEN CATERING', 'per emmer 750 gram', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('7720bf35-0f0b-47ae-aafa-5ce720b559e7', 'Pickwick Theezakjes Earl Grey Met Envelop Pak 100 zakjes x 2 gram', 'ETEN CATERING', 'per 100 stuks a 2g', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('7e2483b5-4aba-41ff-9d63-bcde4a05a81f', 'Pickwick Theezakjes Green Lemon Met Envelop Pak 100 zakjes x 2 gram', 'ETEN CATERING', 'per 100 stuks a 2g', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('158837e9-036e-4f8f-b605-6ef2702017c0', 'Pickwick Theezakjes Bosvruchten Met Envelop Pak 100 stuks x 1,5 gram', 'ETEN CATERING', 'per 100 stuks a 1,5g', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('f5c9be3b-b0e5-4149-a868-5b7297361504', 'Apollo Zwarte pepermolen', 'ETEN CATERING', 'per 6 stuks x 45 gr', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('8463dad2-1c70-452a-a3f9-979ed342aaf5', 'Apollo Zeezoutmolen', 'ETEN CATERING', 'per 6 stuks', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('dc30cf85-852a-4a44-afa7-171567b51380', 'Hekos Spekkoek 570gr', 'ETEN CATERING', 'per box', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('46c8d6dd-8c97-4e52-8924-ce5dcdd52446', 'Ola Donut', 'IJSJES', 'per 54 a 55 ml', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('b9e49bd2-0d0f-4f8b-b737-9e3164768e05', 'Oud hollandse candy’s', 'Stromma branded', '60 pieces per 150g', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('1bae3771-2bc3-4c67-87d2-b237a479e205', 'Stroopwafel zakje', 'Stromma branded', '60 pieces per 150g', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('7abdd05b-006d-440a-af1a-7fc43b753c68', 'Stroopwafel koker yellow box', 'Stromma branded', '60 pieces per 150g', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('235da267-1acd-4bb2-baee-bb9de75e8b16', 'Pretzel', 'Stromma branded', '60 pieces per 150g', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('e060d103-63b6-4579-b952-713c9924acaf', 'Huismix', 'Stromma branded', '60 pieces per 150g', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('867b44b4-18b5-4b56-9b26-6efa873b7dc9', 'Villa Luisa Pinot Grigio 75cl', 'DRANK CATERING', 'fles per doos 6 stuks', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('cee857ec-02e8-4c58-af3f-615f7a9c7bce', 'Minute Maid Appel', 'DRANK CATERING', 'per krat 24 stuks', 'catering', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('804eb36e-f43b-4dc8-bb7c-475ff6ccaed8', 'Amstel Rosé', 'PRIDE EVENT', 'per krat 24 flessen', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('acb0e73f-4cd1-49e3-913c-0a4c7bd6f206', 'Floralba Pinot Grigio Blush Rose', 'PRIDE EVENT', 'per doos 6 flessen', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('0ab475af-a7f2-40e1-aac1-dede1966f983', 'Desperados 33CL', 'DRANK SHOP', 'per 12 blikjes', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('c0ef863b-5a9c-4341-af52-cf8b2683dd14', 'Oud hollandse candy’s', 'Stromma branded', '150 g per 150 in a box', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('21753f1f-6fa2-4193-9a6f-ec33bd54245f', 'Stroopwafel zakje', 'Stromma branded', 'dos 160 stuckjes a 100g', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('9bbb8416-43ab-4f7c-ac7c-95962a478a0f', 'Stroopwafel koker yellow box', 'Stromma branded', 'dos 60', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('9801b080-30a2-49dc-8a0b-bee12904b4f1', 'Pretzel', 'Stromma branded', 'dos 120', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('34032146-652e-4ce2-b8c0-fb1b8428b0d1', 'Huismix', 'Stromma branded', 'dos 120', 'floor', NOW());
-INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('cb64e091-7ef8-49d0-83fb-03f16194c17d', 'Brand IPA 33CL', 'DRANK SHOP', 'per 12 blikjes', 'floor', NOW());
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('5cacea9f-000a-4a2b-9449-da7976ec9a55', 'OLA Raket', 'IJSJES', 'per 54 a 55 ml', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('a7c39d48-b92c-427b-93dc-87a3a334d0f8', 'OLA Donut', 'IJSJES', 'per 54 a 55 ml', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('e5e80b55-289d-46a7-b2bd-a3b1e7a4b8ae', 'OLA Dracula', 'IJSJES', 'per 35 x 50ml', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('cee6a9db-3ef6-40ec-a39d-2dc0f5226116', 'OLA Super Twister', 'IJSJES', 'per 24 a 120ml', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('64aaa512-b6b8-4b01-af5d-c3830c9f6ec4', 'OLA Magnum Classic', 'IJSJES', 'per 20 a 110 ml', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('3f7b47b9-0f5a-4fb0-98f5-38f5c442f764', 'OLA Magnum Almond', 'IJSJES', 'per 20 a 120 ml', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('135cf50b-905c-4a56-8d09-8fa3f9937ad0', 'OLA Magnum White', 'IJSJES', 'per 20 a 120 ml', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('457024a9-9985-4aaa-bed4-e6f9167e4d16', 'OLA Cornetto Classico', 'IJSJES', 'per 20 a 85ml', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('f48cf38a-10ed-44d2-9422-dc0df82f572f', 'Heineken blik 33CL', 'DRANK', 'per 24 blikjes', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('6677c335-23d4-4681-b8c0-a099313e56eb', 'Heineken blik 0,0 %  33CL', 'DRANK', 'per 24 blikjes', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('426730a7-c37b-4e8e-9dcc-307df00b8fa0', 'Desperados 33CL', 'DRANK', 'per 24 blikjes', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('a1c46ba3-b912-46b1-9162-ab268e738f00', 'La Croisade chardonnay grenache 25 CL', 'DRANK', 'per fles', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('7547ba73-a094-4355-ac54-54e3e1afca20', 'La Croisade merlot rouge 25CL', 'DRANK', 'per fles', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('081ce98e-859a-424a-9d73-17eb89b16091', 'La Croisade rosé 25CL', 'DRANK', 'per fles', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('6b83fa1b-55dc-4a0c-99c3-5c4753f43b80', 'Lisetto Prosecco Klein flesje 20CL', 'DRANK', 'per 12 flesjes', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('703eb54d-f2e0-4c59-b62c-2a0cb6adf7fb', 'Sourcy Mineraalwater blauw koolzuurvrij pet 50CL', 'DRANK', 'per 6 pieces', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('db0b774c-5ea1-4f12-b9d4-7ac5a16e374f', 'Sourcy Rood pet 50CL', 'DRANK', 'per 6 pieces', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('3c8fe1c2-a129-4219-8130-060991c3fbe2', 'Sourcy Vitamin Water Braam Acai 0% 50CL', 'DRANK', 'per 6 pieces', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('abc5f330-7711-4069-931e-196494f57a7f', 'Sourcy Vitamin Water DruifCitroen 0% 50CL', 'DRANK', 'per 6 pieces', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('31841a68-7c29-4f8c-a533-a8813d0e9886', 'Sourcy Vitamin Water Mango Guave 0% 50CL', 'DRANK', 'per 6 pieces', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('5751fac6-b7e7-49b1-a5f7-60c98bf1aed1', 'Rivella 50CL', 'DRANK', 'per 6 pieces', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('2b0674c2-6d99-4922-a220-266c846cf858', 'Ranja fruitmix aardbei/framboos 33CL', 'DRANK', 'per 6 pieces', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('ec4c0b9b-a4ec-4854-8b13-ab33eccc7fae', 'Lipton Ice Tea Sparkling petfles 50 cl', 'DRANK', 'per 12 flesjes', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('efb380a6-241a-4634-bb3e-bd570309446a', 'Lipton Ice Tea peach/green Zero 50 cl', 'DRANK', 'per 12 flesjes', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('449dbbc4-a928-4483-abee-c7520abdfba9', 'Pepsi petfles regular 50CL', 'DRANK', 'per 6 pieces', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('d60b2130-9793-44c0-bc6a-dc594eccbf3b', 'Pepsi petfles max 50CL', 'DRANK', 'per 6 pieces', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('83544023-ac5d-49df-8709-db88c5f34e1c', 'Seven Up suikervrij 50 CL', 'DRANK', 'per 6 pieces', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('2a482631-ad4c-46c4-ac57-e9fe60a3b1d2', 'Sisi suikevrij 50CL', 'DRANK', 'per 6 pieces', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('e3b460f3-7b85-46c4-9fb5-46a99f17128b', 'Rockstar original regular/suikervrij (blik) 25CL', 'DRANK', 'per 12 blikjes', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('ab7b449e-1386-47d8-a46d-ada9f8415012', 'Lay''s zakje chips naturel/paprika/bolognese', 'ETEN', 'doos per 20 zakjes a 40 gr', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('2b0d382f-1fc5-4fb7-a833-07090409396a', 'Pringles Original/Sourcream/Hot', 'ETEN', 'tray 12 blikjes a 40 gr', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('09465f93-182f-4bdc-8130-02a19206d711', 'Haribo Starmix 75 gram', 'ETEN', 'doos 28 zakjes a 75 gr', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('0046c08a-02d8-4221-8ef3-5664b6820b7c', 'Daelmans stroopwafels jumbo single', 'ETEN', 'doos 36 stuks a 39 gr', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('0a47c79c-8435-457d-9d8d-389c1f780768', 'Milky way single reep', 'ETEN', 'doos 28 stuks a 43 gr', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('a7ae210d-3751-4598-9458-882191214b2c', 'M&m''s pinda single', 'ETEN', 'doos 24 zakjes a 45 gr', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('46b74937-eb06-4119-9abb-17221e73dc93', 'Mars single reep', 'ETEN', 'doos 32 stuks a 51 gr', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('52d4fe38-2b2d-41bf-932b-2761dc6639c9', 'Snickers single reep', 'ETEN', 'doos 32 stuks a 50 gr', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('8cbf44c9-12d5-479e-9174-145c28810778', 'Twix single reep', 'ETEN', 'doos 25 stuks a 50 gr', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('36a7f7b7-53b9-4913-9dc6-372c2d2668dc', 'KitKat chocobar', 'ETEN', 'doos 36 stuks a 41,5 gr', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('7ef2e565-acfc-4cf0-b7db-7c494b33981e', 'Oud hollandse candy’s', 'Stromma branded', 'dos 60 stucks a 150g', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('22c68ff3-4fc4-43d4-94eb-7f37f48d6b62', 'Stroopwafel zakje', 'Stromma branded', 'dos 60 stucks a 150g', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('faca5bd1-c10e-4809-b203-2f1744993f93', 'Stroopwafel koker yellow box', 'Stromma branded', 'dos 60 stucks a 150g', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('0203e781-d863-402c-abfb-13203529c7b2', 'Pretzel', 'Stromma branded', 'dos 60 stucks a 150g', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('a85d8cd3-9f3a-4c85-8e09-df26c58fc7c7', 'Huismix', 'Stromma branded', 'dos 60 stucks a 150g', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('09096d6a-ad7e-43b3-a456-de20f33d1fe6', 'Cubes Mature/ 4-6 months', 'Cheese', 'per 12 x 135g', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('a04fd71c-f4a6-4ef8-8de9-448e917099d4', 'Sourcy Mineraalwater blauw koolzuurvrij pet 50CL', 'DRANK SHOP', 'per 6 flesjes ex emb €0,15 per fles', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('63610cb9-1ba5-4b69-b3ed-60bae096222b', 'Sourcy Rood pet 50CL', 'DRANK SHOP', 'per 6 flesjes ex emb €0,15 per fles', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('92b97db6-0312-4877-a610-7fb9a7f42a5c', 'Sourcy Vitamin Water Braam Acai 0% 50CL', 'DRANK SHOP', 'per 6 flesjes ex emb €0,15 per fles', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('befdf5d1-2b1a-4c68-9f4c-e0e9d9c7c38e', 'Sourcy Vitamin Water DruifCitroen 0% 50CL', 'DRANK SHOP', 'per 6 flesjes ex emb €0,15 per fles', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('0ecb7dd9-00e9-4efe-ab0f-28500bbb32d2', 'Sourcy Vitamin Water Mango Guave 0% 50CL', 'DRANK SHOP', 'per 6 flesjes ex emb €0,15 per fles', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('02b449c0-9f57-4ea4-ae0d-03d93ec0a4f7', 'Rivella 50CL', 'DRANK SHOP', 'per 6 flesjes ex emb €0,15 per fles', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('64c9449b-9eb2-4522-a241-29ee77afdfff', 'Ranja fruitmix aardbei/framboos 33CL', 'DRANK SHOP', 'per 6 flesjes ex emb €0,15 per fles', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('fb2f6eeb-d17b-45aa-b369-7b3861f6eea4', 'Lipton Ice Tea Sparkling petfles 50 cl', 'DRANK SHOP', 'per 12 flesjes ex emb €0,15 per fles', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('6033ecc2-2b28-4e6a-8dff-f149d4804d5b', 'Lipton Ice Tea peach/green Zero 50 cl', 'DRANK SHOP', 'per 12 flesjes ex emb €0,15 per fles', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('7d2a9798-a303-461e-8487-be1fe9d66672', 'Pepsi petfles regular 50CL', 'DRANK SHOP', 'per 6 flesjes ex emb €0,15 per fles', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('b776cec8-ab31-48e7-9192-e7ce3a03a106', 'Pepsi petfles max 50CL', 'DRANK SHOP', 'per 6 flesjes ex emb €0,15 per fles', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('786ac8a5-6797-461e-8480-5e7f6bccdc59', 'Seven Up suikervrij 50 CL', 'DRANK SHOP', 'per 6 flesjes ex emb €0,15 per fles', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('380eb32b-e93d-4a94-a97e-4e1105559fe4', 'Sisi suikevrij 50CL', 'DRANK SHOP', 'per 6 flesjes ex emb €0,15 per fles', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('b3d44307-d86f-41ec-9258-2fd89869807f', 'Segura Viudas Cava Brut Fles 75 cl', 'DRANK CATERING', 'per doos 6 stuks', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('dda14fe7-65e7-4df6-a89a-5191c6845d8f', 'Marival Rose 75 cl', 'DRANK CATERING', 'per doos 6 stuks', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('98bce447-ec04-4711-9e03-d869b615555c', 'Lisetto Prosecco Spumante Fles 75 cl', 'DRANK CATERING', 'fles per doos 6 stuks', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('a0785b8b-ddd7-4046-b89c-c20c08530640', 'Laroche Wit Chardonnay Fles 75 cl', 'DRANK CATERING', 'fles per doos 6 stuks', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('ac6c0fa3-db11-4736-8919-653e86b4cc5c', 'Laroche Rood Merlot Fles 75 cl', 'DRANK CATERING', 'fles per doos 6 stuks', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('6a186a6b-859c-4584-aa68-e5f296b1f85e', 'Laroche Rose Fles 75 cl', 'DRANK CATERING', 'fles per doos 6 stuks', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('8e4c8e00-03b3-4a50-9e07-31e68bcd2a3c', 'La Croisade Chardonnay grenache 75cl', 'DRANK CATERING', 'fles per doos 6 stuks', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('19cad202-8144-48c9-8d13-eb2d2e611c40', 'La Croisade Merlot rouge 75cl', 'DRANK CATERING', 'fles per doos 6 stuks', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('bbd78e91-1c81-4ade-a48d-f39776c670b7', 'La Croisade Rosé 75cl', 'DRANK CATERING', 'fles per doos 6 stuks', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('95025844-a345-4c12-a40b-291344e087ad', 'Heineken Pilsener Star Bottle krat', 'DRANK CATERING', 'per krat 24 stuks x 30cl', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('6719141a-ddc0-44f3-b839-34ba6fbae05e', 'Heineken 0.0% Krat', 'DRANK CATERING', 'per krat 24 stuks', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('41f745e5-fd8f-407d-a566-f5054db53180', 'Sourcy Rood mineraalwater 20 cl fles krat', 'DRANK CATERING', 'per krat 28 stuks', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('de44cc49-ad63-4848-b04f-1416cd27b14b', 'Sourcy Natuurlijk mineraalwater koolzuurvrij fles 20 cl krat', 'DRANK CATERING', 'per krat 28 stuks', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('1883ee58-52bb-41aa-96f9-63cb5aef10ee', 'Pepsi Regular cola 20 cl fles krat', 'DRANK CATERING', 'per krat 28 stuks', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('9792062f-1af1-4789-8c7a-476521078cd8', 'Pepsi Max cola 20 cl fles krat', 'DRANK CATERING', 'per krat 28 stuks', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('d2c10e25-1bcf-4210-8e87-cdd3f306cf65', '7 Up Free 20 cl fles krat', 'DRANK CATERING', 'per krat 28 stuks', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('ea0878ef-e50c-46cf-ae3e-b28e8c621fc4', 'Sisi Suikervrije Sinas 20cl fles krat', 'DRANK CATERING', 'per krat 28 stuks', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('c3262fde-9825-4860-abe5-04790dddc241', 'Lipton Ice tea green 20 cl fles krat', 'DRANK CATERING', 'per krat 28 stuks', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('cb043a72-82d3-4a44-b539-5175833c75b6', 'Royal Club Sinaasappelsap 20 cl fles krat', 'DRANK CATERING', 'per krat 28 stuks', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('033f2d59-5c6b-49bc-8385-65f1e00bd90c', 'Royal Club Appelsap 20 cl fles krat', 'DRANK CATERING', 'per krat 28 stuks', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('2f19f558-1d43-43c5-bd47-3572e6d6aa2f', 'Sourcy Natuurlijk mineraalwater koolzuurvrij 75 cl', 'DRANK CATERING', 'krat per 12', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('950bf091-cf3b-4d64-b798-f01f7e2c457d', 'Sourcy Rood mineraalwater 75 cl', 'DRANK CATERING', 'krat per 12', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('8b9258ba-dd8d-41fc-bc0f-2aa9e1113d08', 'Duyvis Pinda''s gezouten nootjes', 'ETEN', 'doos 20 zakjes a 60 gr', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('553f6cbd-7ccc-4438-97e3-9be96bef5525', 'Kaasblokjes - jong', 'ETEN CATERING', '', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('894b60a4-a8cd-4185-9307-7f9d253a1cdf', 'Kaasblokjes - oud', 'ETEN CATERING', '', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('d4facbf9-1657-466c-bbf9-b86b6362b606', 'Komijn - blokjes', 'ETEN CATERING', '', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('26579898-f9c2-49ae-8514-6020bafa5c8e', 'Daelmans Mini stroopwafel blokzak', 'ETEN CATERING', 'per doos a 6 stuks a 400g', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('679eb1ed-cb86-464a-9a82-a0914d111f2c', 'Daelmans Mini stroopwafels Doos 2,5 kilo', 'ETEN CATERING', 'per doos 200 stuks a 8g', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('971de9a5-667d-44c4-a4c0-1a86c97ed6c5', 'Leev Stroopwafel bio glutenvrij', 'ETEN CATERING', '16 wikkels a 60g', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('2c37abfb-592e-4ca9-8f7e-df1e41d7aa65', 'Daendels Hotmix van rijstzoutjes en gecoate pinda''s Emmer 5 kilo', 'ETEN CATERING', 'per emmer 5 kilo', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('4eda1a7c-0517-456d-855f-d22bb2736278', 'Daendels Roomboter kaasvlinders Emmer 750 gram', 'ETEN CATERING', 'per emmer 750 gram', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('44e94a0d-fd32-4824-8993-e2a5dc0d0f87', 'Pickwick Theezakjes Earl Grey Met Envelop Pak 100 zakjes x 2 gram', 'ETEN CATERING', 'per 100 stuks a 2g', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('ab16c8fa-d0ae-4972-a2a3-e8e76370057a', 'Pickwick Theezakjes Green Lemon Met Envelop Pak 100 zakjes x 2 gram', 'ETEN CATERING', 'per 100 stuks a 2g', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('5903ef07-d99b-41a6-bd00-c48ad5d93f5a', 'Pickwick Theezakjes Bosvruchten Met Envelop Pak 100 stuks x 1,5 gram', 'ETEN CATERING', 'per 100 stuks a 1,5g', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('5fb6e52d-af6f-497e-883d-6d5a9f6b4c33', 'Apollo Zwarte pepermolen', 'ETEN CATERING', 'per 6 stuks x 45 gr', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('c4c27088-b76e-4fdd-8487-e5d4ed92da39', 'Apollo Zeezoutmolen', 'ETEN CATERING', 'per 6 stuks', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('85398b8c-cf7c-4b88-bea1-3fbc558e9ac1', 'Hekos Spekkoek 570gr', 'ETEN CATERING', 'per box', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('a1c0afae-aa17-4ddf-b752-17b0d1403f30', 'Ola Donut', 'IJSJES', 'per 54 a 55 ml', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('cbbee67d-3565-4917-aff4-3741bb0cde37', 'Oud hollandse candy’s', 'Stromma branded', '60 pieces per 150g', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('a095faa5-e77d-4fcc-8c76-524cc67b1b68', 'Stroopwafel zakje', 'Stromma branded', '60 pieces per 150g', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('9ccdaefc-a0de-4882-a058-6508b7b46a91', 'Stroopwafel koker yellow box', 'Stromma branded', '60 pieces per 150g', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('eb3336cb-887d-4239-a20a-4a491df5acea', 'Pretzel', 'Stromma branded', '60 pieces per 150g', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('16a71b1a-c90e-440d-973b-a88c60ec9cf2', 'Huismix', 'Stromma branded', '60 pieces per 150g', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('a766da8e-ff35-414a-addb-a3201ec52abe', 'Villa Luisa Pinot Grigio 75cl', 'DRANK CATERING', 'fles per doos 6 stuks', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('87cd8faa-651a-4338-969a-0fda178b3cd9', 'Minute Maid Appel', 'DRANK CATERING', 'per krat 24 stuks', 'catering', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('e889d7eb-7140-4f0a-9a8f-bb7ccc06701d', 'Amstel Rosé', 'PRIDE EVENT', 'per krat 24 flessen', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('8c06e30b-d3f7-4b6d-ad71-babe94794915', 'Floralba Pinot Grigio Blush Rose', 'PRIDE EVENT', 'per doos 6 flessen', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('da531ed6-3dda-4cf8-b555-9be984264420', 'Desperados 33CL', 'DRANK SHOP', 'per 12 blikjes', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('ad50fc24-e5d9-486b-908a-c628c62e4900', 'Oud hollandse candy’s', 'Stromma branded', '150 g per 150 in a box', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('995777d4-e77e-40eb-82a1-6aa3ce42d5bb', 'Stroopwafel zakje', 'Stromma branded', 'dos 160 stuckjes a 100g', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('ecf9ba7d-63c9-4f4f-92e1-6e426f911dee', 'Stroopwafel koker yellow box', 'Stromma branded', 'dos 60', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('1b771f0b-533d-44c1-b6bd-d2e916af7532', 'Pretzel', 'Stromma branded', 'dos 120', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('2fdb981b-1981-4251-b518-fb9ef6f9c88d', 'Huismix', 'Stromma branded', 'dos 120', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
+INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('71e6fd19-a499-48be-b1e2-d0dc6626cc27', 'Brand IPA 33CL', 'DRANK SHOP', 'per 12 blikjes', 'floor', NOW()) ON CONFLICT (id) DO NOTHING;
 
 -- Insert Shop Stock
 
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('4c8e71c0-28b7-4156-b48a-b2085227829f', '40644f0a-7864-409d-91d6-1e29d06b1d7b', '03794362-58cf-4022-a1f8-a715290ad430', 0, 24, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('666d6869-e9c5-4605-a2df-aebdb89bc51a', '40644f0a-7864-409d-91d6-1e29d06b1d7b', '790361ea-a4cb-4708-8d15-e111a5f848f9', 0, 15, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('09e62032-1a33-45df-b617-b264ba9d360c', '40644f0a-7864-409d-91d6-1e29d06b1d7b', '9b40f01f-558f-40a5-be15-ec2b9170133a', 0, 33, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('723c0bf6-722f-4145-820d-ab5e5e48f0b8', '40644f0a-7864-409d-91d6-1e29d06b1d7b', 'b2af2ba2-b4d4-42b3-a48e-48c84612ce56', 0, 12, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('98bac956-0c28-4d44-a64b-088b0836eecf', '40644f0a-7864-409d-91d6-1e29d06b1d7b', '1ec84977-7575-465f-a1ea-93c4eaacb6c0', 0, 50, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('b94656e2-c4ac-47d5-928a-e0647b67631b', '40644f0a-7864-409d-91d6-1e29d06b1d7b', '24d2750f-c4bb-4567-af3d-84c0786bc818', 0, 26, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('34e310d8-d453-462c-b8cc-e2654d9b13b3', '40644f0a-7864-409d-91d6-1e29d06b1d7b', '9ab3220e-6ad2-4741-8d78-e7b875d0b19c', 0, 21, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('f53f9550-0ba6-4e09-8ed1-320721b7e75e', '40644f0a-7864-409d-91d6-1e29d06b1d7b', 'e6ac134a-c90d-4d36-b021-473d0e30d50f', 0, 35, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('7408428f-fddf-4b80-8f05-686847081169', '40644f0a-7864-409d-91d6-1e29d06b1d7b', '12cbbe00-c785-4b4c-a79f-db7d6790019f', 0, 89, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('8926da35-78c5-412b-9695-415f2e66bb1e', '40644f0a-7864-409d-91d6-1e29d06b1d7b', 'aec0f41d-8925-4c88-b3d5-aa253473a6f6', 0, 10, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('ba8cfbbb-857e-46fb-9649-47a3a2378a71', '40644f0a-7864-409d-91d6-1e29d06b1d7b', '06271625-df52-4fa4-9691-cca462f2499e', 3, 55, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('6ba551dd-a6f0-4f93-adb2-960055aa3527', '40644f0a-7864-409d-91d6-1e29d06b1d7b', 'de2eb8d7-3b60-4c10-82aa-3483d40c58c7', 3, 8, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('7d6b1252-1738-471c-936a-2c832907560f', '40644f0a-7864-409d-91d6-1e29d06b1d7b', '87754f70-6d41-42f4-b881-8d3e0d59293a', 2, 53, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('19a4510f-8832-41b0-a769-1186718882e0', '40644f0a-7864-409d-91d6-1e29d06b1d7b', '42aa394d-3c7e-4ef1-984f-3e60a659d107', 2, 44, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('e104ad70-4d06-41bd-b813-51511a889e2a', '40644f0a-7864-409d-91d6-1e29d06b1d7b', '3edfdac0-4d94-4a18-acfe-e9a872a83850', 1, 18, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('d9267010-c3b0-4fde-94f3-6fb44885184e', '40644f0a-7864-409d-91d6-1e29d06b1d7b', '73c3b3f2-9b5c-4f0c-8c39-3b65c1e2805d', 0, 20, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('b2b90419-1b3f-42b7-ba21-f32d735b4fbc', '40644f0a-7864-409d-91d6-1e29d06b1d7b', '5d457caa-506b-457a-a3e2-bf28d09c08b1', 0, 50, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('5e61dcf7-2307-4adf-a5e9-293c807b0e0b', '40644f0a-7864-409d-91d6-1e29d06b1d7b', '6a7766ed-1027-4dad-ba8c-8a00beae7420', 1, 3, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('918eb69b-696d-4ef5-ad0e-d470d7843037', '40644f0a-7864-409d-91d6-1e29d06b1d7b', '4f675d76-6da0-43c2-882c-207106cb3df0', 1, 15, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('d504d577-092c-43c9-8447-411cff565208', '40644f0a-7864-409d-91d6-1e29d06b1d7b', '186daa47-699e-4fc6-993c-489ddfd66898', 1, 13, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('792eb223-1d0c-4b93-9da3-9f0da8387b6d', '40644f0a-7864-409d-91d6-1e29d06b1d7b', '0c95edeb-28c5-4d99-b3b7-35a58ec22de7', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('bf3bbfde-44f9-4391-ad7e-5eeabf0665ca', '40644f0a-7864-409d-91d6-1e29d06b1d7b', 'dbea3c69-d9ca-4362-8d25-d28078935987', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('41e56648-6286-45f3-ae3b-0fbc511eede4', '40644f0a-7864-409d-91d6-1e29d06b1d7b', 'de5ac81b-1b14-4b8a-b638-57ab6417653e', 1, 5, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('24398330-a03a-4431-a554-7e99ad9efb31', '40644f0a-7864-409d-91d6-1e29d06b1d7b', 'cae97c4e-b37a-4b94-abef-ffa1ef2adbbd', 0, 44, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('e2c86b4f-1ab5-4090-9ddc-33fd672e72db', '40644f0a-7864-409d-91d6-1e29d06b1d7b', '280524b4-543c-4125-aa33-b527e0e08ca8', 1, 70, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('592fd35a-9d99-4f00-9182-1f8affa733bf', '40644f0a-7864-409d-91d6-1e29d06b1d7b', 'c726228b-9c5e-4ed9-9f9b-aa9ef6116b8c', 0, 40, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('8a35d6ec-1498-42c9-92ba-bb0e6f825843', '40644f0a-7864-409d-91d6-1e29d06b1d7b', '109c8aea-6a65-45d9-9131-c3389f8c667f', 0, 50, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('c34a087e-e673-444b-86fa-1baf2df41833', '40644f0a-7864-409d-91d6-1e29d06b1d7b', '6b84982b-bcae-4cde-af4e-7aabb303e39a', 0, 10, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('77d2efd8-141f-46d3-817b-b472c3477d37', '40644f0a-7864-409d-91d6-1e29d06b1d7b', '81ac8b00-c18d-4b88-9a90-4358e3016b70', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('0514daf3-75d4-4474-b4c6-14fb9acf753d', '40644f0a-7864-409d-91d6-1e29d06b1d7b', 'acc1a5c9-2461-4fc0-9cb3-520ca4f6e1d9', 3, 60, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('ee625543-57b5-4f99-921c-5acd6c4088e2', '40644f0a-7864-409d-91d6-1e29d06b1d7b', 'fab32e59-faec-4d66-a2af-97f949fab7dc', 12, 35, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('e9ad423c-bf3e-4cc9-a06c-2707b236322e', '40644f0a-7864-409d-91d6-1e29d06b1d7b', '91feeeb3-3cc5-4efe-872e-43a0c4007164', 0, 17, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('c9e32ea6-5974-4f42-9607-2ca06f5e1e41', '40644f0a-7864-409d-91d6-1e29d06b1d7b', '186c89bd-86d2-4400-bac6-316814efac3d', 3, 25, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('868b7359-bf2b-47ca-be94-361af74768ca', '40644f0a-7864-409d-91d6-1e29d06b1d7b', '87059ae4-f11d-4fbd-bba9-631091a5dbee', 0, 15, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('2974eafd-0442-417b-96e3-9f607798f61c', '40644f0a-7864-409d-91d6-1e29d06b1d7b', '9b9c4541-ffd0-4eb8-b549-80fbf2c5fb90', 2, 9, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('7a81f5bf-6513-42bc-8073-3ec517609861', '40644f0a-7864-409d-91d6-1e29d06b1d7b', '81535350-9da7-4440-9383-af283ae1ef7c', 2, 12, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('fa714940-87af-4930-8ae7-89675d523542', '40644f0a-7864-409d-91d6-1e29d06b1d7b', '32d394f0-6c7a-4fd1-aa64-273d048b2956', 0, 10, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('e2d92637-57b6-4b38-a4db-5d876412f58a', '40644f0a-7864-409d-91d6-1e29d06b1d7b', 'e50e8194-9694-4b4c-beaa-a1f7899fc430', 0, 8, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('08a85949-a7b5-4c67-ad14-d62d9bb80ca7', '40644f0a-7864-409d-91d6-1e29d06b1d7b', 'fcf398b3-3145-49e7-aace-559490d64de3', 2, 5, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('33990545-101a-4a7e-b732-027159442d59', '40644f0a-7864-409d-91d6-1e29d06b1d7b', '5efd34fa-6695-492a-81aa-475fd2a8c2cc', 0, 33, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('67a40e17-b01c-429e-8b88-edce4130345a', '40644f0a-7864-409d-91d6-1e29d06b1d7b', 'd7bab111-4944-44e1-ab22-7c560b4dbb71', 0, 29, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('ed6c3ccd-9ac1-4e1a-94e9-1d9c2fc6cd3c', '40644f0a-7864-409d-91d6-1e29d06b1d7b', '46676d9e-876b-43da-b511-7d91931ae442', 1, 70, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('315be1d4-3dcf-4c4e-bedb-c96643936f30', '40644f0a-7864-409d-91d6-1e29d06b1d7b', 'd10ff55a-fb60-477d-b110-1ac296241944', 1, 63, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('55840a99-4d5b-4b19-9e9b-3f9bca5e985d', '40644f0a-7864-409d-91d6-1e29d06b1d7b', '4e86c336-b5f0-42ab-b5c5-97c2a3231c9d', 1, 19, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('950099c8-c684-4916-802d-9370e32e569e', '40644f0a-7864-409d-91d6-1e29d06b1d7b', 'f46580f8-798d-477a-86fc-22e288fd74f0', 2, 15, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('070c5e56-305c-4ee3-9733-85ef8aeda232', 'ade27a00-6584-45b3-a8e5-43079a6035fa', '12cbbe00-c785-4b4c-a79f-db7d6790019f', 2, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('43657dfd-9c6e-42a2-993f-ac07703ac007', 'ade27a00-6584-45b3-a8e5-43079a6035fa', 'aec0f41d-8925-4c88-b3d5-aa253473a6f6', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('8317e70e-9453-4d79-9225-55876ffef5e1', 'ade27a00-6584-45b3-a8e5-43079a6035fa', '06271625-df52-4fa4-9691-cca462f2499e', 3, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('2a99d5e2-3d11-4852-b06f-6fb33d04dc10', 'ade27a00-6584-45b3-a8e5-43079a6035fa', 'de2eb8d7-3b60-4c10-82aa-3483d40c58c7', 6, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('043380e6-9988-47f1-908e-3ba64e9dcc43', 'ade27a00-6584-45b3-a8e5-43079a6035fa', '87754f70-6d41-42f4-b881-8d3e0d59293a', 4, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('c95660e8-1b7f-40b1-ac88-6acb856879df', 'ade27a00-6584-45b3-a8e5-43079a6035fa', '42aa394d-3c7e-4ef1-984f-3e60a659d107', 4, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('5b93731d-10cf-4802-9fcf-431b8b877d27', 'ade27a00-6584-45b3-a8e5-43079a6035fa', '3edfdac0-4d94-4a18-acfe-e9a872a83850', 4, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('5c5fc5a9-403f-4213-8d1e-0db447b3ca27', 'ade27a00-6584-45b3-a8e5-43079a6035fa', '95a09902-eb15-46dc-8667-f39302e3e79a', 6, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('24279447-94b3-4ca2-b21c-4b61ef8b15e0', 'ade27a00-6584-45b3-a8e5-43079a6035fa', 'dc868dc5-a031-47e8-b343-2b41bdf51b4a', 5, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('bc82e53c-9249-4ea6-839d-0d5ccc191929', 'ade27a00-6584-45b3-a8e5-43079a6035fa', 'b8d4c2d9-4011-4d7b-8095-776a4dab3b40', 1, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('7b0d9e12-8fd8-4a44-b5b1-4bf73d6d6f29', 'ade27a00-6584-45b3-a8e5-43079a6035fa', 'dc568973-5dd0-4a81-b28e-ce2eb5b1eccf', 2, 2, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('70c5abcc-3b2b-469b-923d-ad28e85e539e', 'ade27a00-6584-45b3-a8e5-43079a6035fa', 'ca7cb492-3b0d-45d4-b6b6-5b95a847eb4b', 2, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('3960ac0e-4179-4310-8f77-d6c6e8cd936c', 'ade27a00-6584-45b3-a8e5-43079a6035fa', 'f44ea136-3cab-4a33-80f3-af4d11ad6958', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('fb3b595f-3248-4b0a-ad46-26a42c56ce9e', 'ade27a00-6584-45b3-a8e5-43079a6035fa', '1f94e6f4-881d-4f3e-880e-86ed689de71a', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('0623583c-44cc-4706-8246-7dbcb5826c7d', 'ade27a00-6584-45b3-a8e5-43079a6035fa', '89d5431e-c554-4b27-ac64-c4c953bc2b14', 2, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('99a38276-ca88-485b-970f-0102b9d4ae21', 'ade27a00-6584-45b3-a8e5-43079a6035fa', '948925e9-74b6-4f96-a588-0e6ba695b576', 1, 2, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('8933d03a-c7d5-4bc7-b190-5b981f36c233', 'ade27a00-6584-45b3-a8e5-43079a6035fa', '94654eeb-ed67-4217-935b-862640f4d58b', 8, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('70026c52-adeb-4e06-bbd4-ede54615feed', 'ade27a00-6584-45b3-a8e5-43079a6035fa', 'a3118292-ae2b-4abb-aacc-b9a5726e1ec5', 7, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('e01aa8d9-85ed-4935-879f-359fd9da32bc', 'ade27a00-6584-45b3-a8e5-43079a6035fa', '3c4935fb-44ee-42e0-99e7-6e1d74b66105', 1, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('5c505c69-2a5c-435f-bd35-5307d24b8c01', 'ade27a00-6584-45b3-a8e5-43079a6035fa', '78f59490-7010-462c-b08c-d218fbe72576', 1, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('6b95e9bb-f740-4030-8845-b5abd5735fd7', 'ade27a00-6584-45b3-a8e5-43079a6035fa', '81ac8b00-c18d-4b88-9a90-4358e3016b70', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('153bc670-f4bb-4906-95a2-37f1285ba152', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', 'aac59145-0fd4-4740-b287-1b12c8c27f77', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('6d3f234c-6100-47d0-a784-dea8cd3c3e82', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', '5e53d542-ddb3-4e5a-a245-b38210115a3d', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('0b1c191f-52bb-43f9-bb33-84e505209d54', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', '374621c2-cd2c-4146-ab17-5d951c34cb1b', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('6f1ba697-85b2-4818-86b8-e5fe7506eed1', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', '47245b94-4200-49dc-9e0a-451960731de2', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('969847e0-1b99-4b55-bf7a-d22b7b2ac8eb', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', 'd52d70f8-3e2a-4dd6-a811-da721478ef7c', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('a77e6931-04c9-40cc-bcfd-d4159cd47df2', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', '5c0de72f-370e-4f26-b551-3516eeb48e81', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('0c8f5965-68ac-463c-a312-45c04bbb0ff5', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', '81df6b13-c37c-47fb-a180-b150f2157dcf', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('b6c888a9-8c8f-480d-97e0-b1241dd2ca8e', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', '2d06efa3-e9fb-4031-aa83-61f71812eff4', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('7ca784d8-2661-465d-83f8-03e4dbeab539', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', '683e2606-5276-4b57-82dc-58fd96ebaf5c', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('08f48f74-8d93-479e-bf65-52ec677ffcd8', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', '5a8eb74e-3eef-4acf-9e57-72a7697fc2ce', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('1cd1a122-0551-4c09-ad88-1f486738582b', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', '8acec481-efbf-4931-83ae-58ad956db6da', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('9487854a-a7e2-4b61-8b0e-71ab73f69a32', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', '870a9bbd-7c27-4c44-9212-7d7dee9c40d9', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('13e26e82-97f6-4d0f-b4c7-d560f5e62b80', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', '124055d5-7bb2-48c3-bad9-cae1b27af5fe', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('26f43948-147c-4297-bdfb-096fa13e5310', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', '819122f8-8ebc-4d16-b571-ba7d50dc5d4c', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('b562aac5-9f01-40c0-97bc-e648d1064198', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', 'cf126872-da46-44c5-9de9-2d5da3d6db01', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('1858912f-5679-452a-a813-ab75cd08594e', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', 'b52a0038-5e1c-4ece-badd-5de592a4167f', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('60721721-683c-43a7-afe1-40d71b56282e', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', '53703d21-f064-48cf-bf49-a572ef8665e9', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('0eebd4db-9cba-4bef-8756-ef2624a885f5', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', 'af6ba88f-6d5e-4397-b7f8-6c0b1e55256d', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('08b59a96-2af5-4ba6-8d9d-5266b8f571a8', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', '6874ed52-cefb-45b7-ab48-28c282a54104', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('bb899fb5-3184-46db-9d38-89f4f0962057', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', '028763a2-65e7-41e5-960e-0865e74a6641', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('c2010e27-3359-428c-87ac-b7f8268afd27', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', '95c77109-fcbd-422c-ae30-b7cb0dea4271', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('bc812dca-ea78-4136-9215-c562e07948ad', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', '44723e89-0a5a-4e25-86b6-c938819e4649', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('458491ea-0d06-4cb5-9386-7bd9876a2ac4', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', 'acc1a5c9-2461-4fc0-9cb3-520ca4f6e1d9', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('8580ae0c-e072-4a91-be99-c2951fc5c10d', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', 'fab32e59-faec-4d66-a2af-97f949fab7dc', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('cd00e355-87bc-40cf-a24c-ba2bff2149db', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', '91feeeb3-3cc5-4efe-872e-43a0c4007164', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('8b908b67-08b8-4cd3-824a-5d430bb07ebe', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', '186c89bd-86d2-4400-bac6-316814efac3d', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('af80e5e6-7d94-4989-8a19-57d8761e6419', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', '87059ae4-f11d-4fbd-bba9-631091a5dbee', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('a941a4bd-966d-4421-a7ba-e4a2efc4787d', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', '9b9c4541-ffd0-4eb8-b549-80fbf2c5fb90', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('e52d7fed-2a2c-4e7b-91e2-2a41ee059462', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', '81535350-9da7-4440-9383-af283ae1ef7c', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('4fd34188-3634-442d-b43c-dda37d0787b7', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', '32d394f0-6c7a-4fd1-aa64-273d048b2956', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('a76baf82-f257-473d-bcd5-07f9fb1bb986', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', 'e50e8194-9694-4b4c-beaa-a1f7899fc430', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('93248d8d-273d-42e4-b39a-da0ca156e232', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', 'fcf398b3-3145-49e7-aace-559490d64de3', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('cbd87265-2d20-4c9c-825c-a4fb35d9ee1a', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', '76078a68-7eef-4294-809a-2f7f440833a0', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('57dc93bc-e694-46b7-aad5-dc35158f8103', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', 'e469ada4-e4d0-4bd5-bb63-f979c778608b', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('27c2d45c-05d3-444c-9606-a269836f16f7', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', '3432bcf9-4a67-4f00-a9d5-b8382a107f86', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('33a32c49-82a2-4830-9871-8d6cf5bef1fb', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', 'f31df979-d5ca-41bd-8071-7be8c14bfcc5', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('a7cf5cb6-ee94-453b-8fcb-30d16a66a840', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', '0afcae6c-1903-4d37-8f27-499de5e788b0', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('6d7dc6e2-a640-42ee-8450-609a36d12c0a', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', 'ddbbcbfb-d1eb-4380-b828-8b353ed33795', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('c45e4ea4-66bb-4b45-bb48-1b5b92ac9345', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', '5744da2b-b8f7-4143-a771-a4bbefd35f51', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('f2699f5f-f019-44d7-ae9a-c5541bab50c4', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', '4efde8a2-8210-499c-8236-90c0ca6dbc83', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('effa87df-c5c2-4a5f-84c1-2b966450d5c6', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', '42f8c56d-ad6d-4a90-b2d8-4827436db93d', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('9ad757c0-502e-463d-92f5-fc1f78246119', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', '7720bf35-0f0b-47ae-aafa-5ce720b559e7', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('6ca43d0a-9673-4cff-a5f6-7ffa66f9a91d', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', '7e2483b5-4aba-41ff-9d63-bcde4a05a81f', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('a36965da-4b8c-4a3e-aea5-86b62286a7bc', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', '158837e9-036e-4f8f-b605-6ef2702017c0', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('bff5f0d2-58b3-44d4-9951-4921053a759b', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', 'f5c9be3b-b0e5-4149-a868-5b7297361504', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('4d1aa6a4-1148-4c0c-9837-1794265d432c', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', '8463dad2-1c70-452a-a3f9-979ed342aaf5', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('a001e9a9-4983-4610-af03-473de9a33c0d', '6f9f3aba-67aa-4f1e-b0e2-c546ee599d1c', 'dc30cf85-852a-4a44-afa7-171567b51380', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('cb3d8326-8e87-482b-929a-0369574c96f6', '4332a571-36f7-4c23-9d53-db5289552f04', '03794362-58cf-4022-a1f8-a715290ad430', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('b8101e2f-ff51-4fce-8609-65acfbf90e74', '4332a571-36f7-4c23-9d53-db5289552f04', '46c8d6dd-8c97-4e52-8924-ce5dcdd52446', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('14bf476f-d1ba-4b44-b978-5c3348f5e882', '4332a571-36f7-4c23-9d53-db5289552f04', '9b40f01f-558f-40a5-be15-ec2b9170133a', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('a3dea856-14df-4834-9340-bb4f49de1ca8', '4332a571-36f7-4c23-9d53-db5289552f04', 'b2af2ba2-b4d4-42b3-a48e-48c84612ce56', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('8d45706b-a50c-4b99-b681-c3a8f7f2c2a7', '4332a571-36f7-4c23-9d53-db5289552f04', '1ec84977-7575-465f-a1ea-93c4eaacb6c0', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('4d26a5b6-bb03-4a06-8e38-c1c2608f2abc', '4332a571-36f7-4c23-9d53-db5289552f04', '24d2750f-c4bb-4567-af3d-84c0786bc818', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('95bacaa9-318a-4c74-a29a-9c74adb45c2c', '4332a571-36f7-4c23-9d53-db5289552f04', '9ab3220e-6ad2-4741-8d78-e7b875d0b19c', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('bf353a0b-0932-48dc-9167-1bb3da6f1496', '4332a571-36f7-4c23-9d53-db5289552f04', 'e6ac134a-c90d-4d36-b021-473d0e30d50f', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('91604306-f939-4e40-b232-e6aaa4430f13', '4332a571-36f7-4c23-9d53-db5289552f04', '12cbbe00-c785-4b4c-a79f-db7d6790019f', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('6cb320d1-73fb-4703-9059-07477b23a849', '4332a571-36f7-4c23-9d53-db5289552f04', 'aec0f41d-8925-4c88-b3d5-aa253473a6f6', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('6f51bbf4-50b6-40bd-b55f-9058987cb461', '4332a571-36f7-4c23-9d53-db5289552f04', '06271625-df52-4fa4-9691-cca462f2499e', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('9dcdf83c-06a4-46b0-af14-d350767e3331', '4332a571-36f7-4c23-9d53-db5289552f04', 'de2eb8d7-3b60-4c10-82aa-3483d40c58c7', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('f3c02c23-ef88-4af6-a7b9-71942a9eaf49', '4332a571-36f7-4c23-9d53-db5289552f04', '87754f70-6d41-42f4-b881-8d3e0d59293a', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('d3277513-c282-4517-8784-e901e0956272', '4332a571-36f7-4c23-9d53-db5289552f04', '42aa394d-3c7e-4ef1-984f-3e60a659d107', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('81601aa0-46ba-43b0-83a5-d2c07c00219e', '4332a571-36f7-4c23-9d53-db5289552f04', '3edfdac0-4d94-4a18-acfe-e9a872a83850', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('7c0e18f3-57a4-49af-9bcd-bac03474edd1', '4332a571-36f7-4c23-9d53-db5289552f04', '95a09902-eb15-46dc-8667-f39302e3e79a', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('907ba054-8b5e-4a8e-82ba-b538b3dbdb10', '4332a571-36f7-4c23-9d53-db5289552f04', 'dc868dc5-a031-47e8-b343-2b41bdf51b4a', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('63a844bf-2808-4a8a-a5dd-ad12f885f300', '4332a571-36f7-4c23-9d53-db5289552f04', 'b8d4c2d9-4011-4d7b-8095-776a4dab3b40', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('d199df79-c672-48b0-95a9-d4513d5135cb', '4332a571-36f7-4c23-9d53-db5289552f04', 'dc568973-5dd0-4a81-b28e-ce2eb5b1eccf', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('cc1403f8-a3c0-412b-b0bd-3fab58ba9cd4', '4332a571-36f7-4c23-9d53-db5289552f04', 'ca7cb492-3b0d-45d4-b6b6-5b95a847eb4b', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('3c74a20a-e381-47ab-9fb5-0dece2413ab4', '4332a571-36f7-4c23-9d53-db5289552f04', 'f44ea136-3cab-4a33-80f3-af4d11ad6958', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('bd33c857-175d-40b9-8b7f-a65c1ebd6b17', '4332a571-36f7-4c23-9d53-db5289552f04', '1f94e6f4-881d-4f3e-880e-86ed689de71a', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('5549e735-b35e-48ba-93fe-7442b31b79f3', '4332a571-36f7-4c23-9d53-db5289552f04', '89d5431e-c554-4b27-ac64-c4c953bc2b14', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('b2c6433b-db4a-49c0-a4ac-69f6e40d633e', '4332a571-36f7-4c23-9d53-db5289552f04', '948925e9-74b6-4f96-a588-0e6ba695b576', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('8d400597-579e-4dce-b58a-b5e4593bb870', '4332a571-36f7-4c23-9d53-db5289552f04', '94654eeb-ed67-4217-935b-862640f4d58b', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('2ea62fcc-3afa-4a13-8f7f-d095d4e29e54', '4332a571-36f7-4c23-9d53-db5289552f04', 'a3118292-ae2b-4abb-aacc-b9a5726e1ec5', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('cede7dca-2afa-48d5-8e16-cdf05140588d', '4332a571-36f7-4c23-9d53-db5289552f04', '3c4935fb-44ee-42e0-99e7-6e1d74b66105', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('8f48822c-1819-4d6e-ae11-8c49db15f3e2', '4332a571-36f7-4c23-9d53-db5289552f04', '78f59490-7010-462c-b08c-d218fbe72576', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('c4652906-ccd5-4119-a3b5-3b222cf5d563', '4332a571-36f7-4c23-9d53-db5289552f04', '81ac8b00-c18d-4b88-9a90-4358e3016b70', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('f5220952-2d2f-4f48-b126-5337c873682b', '4332a571-36f7-4c23-9d53-db5289552f04', 'acc1a5c9-2461-4fc0-9cb3-520ca4f6e1d9', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('e57144c5-e7be-4578-8748-837d058afee1', '4332a571-36f7-4c23-9d53-db5289552f04', 'fab32e59-faec-4d66-a2af-97f949fab7dc', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('e15a5e63-8aeb-461f-a130-e39d945dff59', '4332a571-36f7-4c23-9d53-db5289552f04', '91feeeb3-3cc5-4efe-872e-43a0c4007164', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('3f65917d-446b-42a1-90fb-001c9268bc53', '4332a571-36f7-4c23-9d53-db5289552f04', '186c89bd-86d2-4400-bac6-316814efac3d', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('6682da2b-1ae0-4496-83b9-39b8c368b5bf', '4332a571-36f7-4c23-9d53-db5289552f04', '87059ae4-f11d-4fbd-bba9-631091a5dbee', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('bfdc6d35-eee0-4e14-a9ef-93e0a527a687', '4332a571-36f7-4c23-9d53-db5289552f04', '9b9c4541-ffd0-4eb8-b549-80fbf2c5fb90', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('db0f826d-17da-415a-bb31-d6bb77b9cdb9', '4332a571-36f7-4c23-9d53-db5289552f04', '81535350-9da7-4440-9383-af283ae1ef7c', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('564c1b98-a2e5-4827-95f5-9e4b8a18d219', '4332a571-36f7-4c23-9d53-db5289552f04', '32d394f0-6c7a-4fd1-aa64-273d048b2956', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('4a033d8a-b775-44ae-821f-c7c7de57a21a', '4332a571-36f7-4c23-9d53-db5289552f04', 'e50e8194-9694-4b4c-beaa-a1f7899fc430', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('9f7dffa3-47e9-401e-a326-2c1b435d3a9a', '4332a571-36f7-4c23-9d53-db5289552f04', 'fcf398b3-3145-49e7-aace-559490d64de3', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('573f1194-96f2-460e-a10d-7f40fe7b5b99', '4332a571-36f7-4c23-9d53-db5289552f04', '76078a68-7eef-4294-809a-2f7f440833a0', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('9c879350-022b-49e4-a7f7-4eeee938ac91', '4332a571-36f7-4c23-9d53-db5289552f04', 'b9e49bd2-0d0f-4f8b-b737-9e3164768e05', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('9284d998-efa3-4029-b39b-cc67e16673eb', '4332a571-36f7-4c23-9d53-db5289552f04', '1bae3771-2bc3-4c67-87d2-b237a479e205', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('98942c5f-b1bd-4eef-98e9-84d9d80b4399', '4332a571-36f7-4c23-9d53-db5289552f04', '7abdd05b-006d-440a-af1a-7fc43b753c68', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('eed9f226-603e-4ded-89ad-dc5dceece266', '4332a571-36f7-4c23-9d53-db5289552f04', '235da267-1acd-4bb2-baee-bb9de75e8b16', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('2ab45577-9f89-4f5f-af18-40bd8510b67e', '4332a571-36f7-4c23-9d53-db5289552f04', 'e060d103-63b6-4579-b952-713c9924acaf', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('dd1ed628-22dc-4efb-a890-81ffd28ec608', '4332a571-36f7-4c23-9d53-db5289552f04', 'f46580f8-798d-477a-86fc-22e288fd74f0', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('37436d67-0bee-44b5-b6ff-a156d3be0287', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', 'aac59145-0fd4-4740-b287-1b12c8c27f77', 8, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('5e7c0516-7601-47ba-b1c2-9dd87a6a0587', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', '5e53d542-ddb3-4e5a-a245-b38210115a3d', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('16396afa-8713-4ce3-a32b-945b0e8d2078', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', '374621c2-cd2c-4146-ab17-5d951c34cb1b', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('c45c4faa-7b7b-478d-a55c-7d90276304cf', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', '47245b94-4200-49dc-9e0a-451960731de2', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('5e371138-666a-4ef7-a8e0-0cd323569881', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', 'd52d70f8-3e2a-4dd6-a811-da721478ef7c', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('f3bf96d3-2fd5-4ae0-b94a-7169ba1217ec', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', '5c0de72f-370e-4f26-b551-3516eeb48e81', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('265a8abb-fa9a-47c1-a229-a715984bf826', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', '81df6b13-c37c-47fb-a180-b150f2157dcf', 2, 3, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('25ee4e2e-b9d0-4a02-9a8c-e4dc3e95b7ff', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', '2d06efa3-e9fb-4031-aa83-61f71812eff4', 4, 2, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('9e09c08f-e00e-445f-935f-60dbdc90bf09', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', '683e2606-5276-4b57-82dc-58fd96ebaf5c', 1, 2, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('e4d50ee5-6675-4338-bc36-e33ad8ffb1f2', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', '867b44b4-18b5-4b56-9b26-6efa873b7dc9', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('948ec1bf-1a44-4de9-94b1-2b276d6ed847', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', '5a8eb74e-3eef-4acf-9e57-72a7697fc2ce', 11, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('ad7eae90-bcfc-4e18-ac02-36452d296ada', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', '8acec481-efbf-4931-83ae-58ad956db6da', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('7faf01cc-b944-4c01-9d7e-b2c82cf745d0', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', 'cee857ec-02e8-4c58-af3f-615f7a9c7bce', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('49e3a312-0fbf-45ff-bfd0-f21f5ff33835', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', '870a9bbd-7c27-4c44-9212-7d7dee9c40d9', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('9d55d558-e038-4a01-af85-52e2d596c22c', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', '124055d5-7bb2-48c3-bad9-cae1b27af5fe', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('7c8ff625-080f-4bfa-8264-391a2dcda564', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', '819122f8-8ebc-4d16-b571-ba7d50dc5d4c', 0, 60, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('4efadb7e-18bc-48aa-acc0-f60ff39f9108', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', 'cf126872-da46-44c5-9de9-2d5da3d6db01', 0, 36, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('4453bffa-ab20-4806-a1cc-7bfecf441064', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', 'b52a0038-5e1c-4ece-badd-5de592a4167f', 0, 41, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('988968eb-881a-4885-9cdd-17d0044d95fb', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', '53703d21-f064-48cf-bf49-a572ef8665e9', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('388c5893-097d-4749-9922-33494be03d41', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', 'af6ba88f-6d5e-4397-b7f8-6c0b1e55256d', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('021b4e43-5f88-4d8d-ae66-f95039dd6762', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', '6874ed52-cefb-45b7-ab48-28c282a54104', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('6f8bcb01-6f0b-440a-a437-04ae3048551c', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', '028763a2-65e7-41e5-960e-0865e74a6641', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('80970b60-9993-490d-868e-8237861753b2', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', '95c77109-fcbd-422c-ae30-b7cb0dea4271', 12, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('f9d90592-5c73-4e61-9fc8-122c98d842f9', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', '44723e89-0a5a-4e25-86b6-c938819e4649', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('a5bd407f-2cdf-4225-8a89-4f7e690ef31d', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', 'e469ada4-e4d0-4bd5-bb63-f979c778608b', 0, 4, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('11dcae84-6fb6-4295-9bc3-e95f1c4736d1', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', '3432bcf9-4a67-4f00-a9d5-b8382a107f86', 0, 2, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('6f8277cc-a645-473d-adda-315435c6b4ae', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', 'f31df979-d5ca-41bd-8071-7be8c14bfcc5', 0, 1, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('38321a3e-c10b-4b55-b703-03d787f59289', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', '0afcae6c-1903-4d37-8f27-499de5e788b0', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('912d68e2-5070-4cdc-b033-ccb2d3e62bdc', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', 'ddbbcbfb-d1eb-4380-b828-8b353ed33795', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('0121cd7e-6191-458c-8d93-be0caed3d2de', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', '5744da2b-b8f7-4143-a771-a4bbefd35f51', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('34e035d5-56a2-4175-957e-01072af33a8e', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', '4efde8a2-8210-499c-8236-90c0ca6dbc83', 0, 1, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('5a8efe1a-984c-4299-96ce-1f3eba6e0f4a', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', '42f8c56d-ad6d-4a90-b2d8-4827436db93d', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('7e64422e-da7a-4f43-a3fd-b3474fd30965', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', '7720bf35-0f0b-47ae-aafa-5ce720b559e7', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('43d608ef-6efe-427b-8dbf-8074b2025dee', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', '7e2483b5-4aba-41ff-9d63-bcde4a05a81f', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('78352688-9b15-4934-a10d-c2bcee1a7dcb', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', '158837e9-036e-4f8f-b605-6ef2702017c0', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('2f14eb38-e832-429f-aa2a-fd7ba99d59fc', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', 'f5c9be3b-b0e5-4149-a868-5b7297361504', 2, 4, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('3cd81952-02b8-4ea2-a254-8db57afb7beb', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', '8463dad2-1c70-452a-a3f9-979ed342aaf5', 2, 4, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('7b9f6491-6d04-4be7-a26d-8dd8bc772c28', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', 'dc30cf85-852a-4a44-afa7-171567b51380', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('1a102681-c5a4-4ffe-a8c4-aa8b1b8a872d', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', '12cbbe00-c785-4b4c-a79f-db7d6790019f', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('e4cb0979-a059-4262-9aa7-5b84adef480e', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', '804eb36e-f43b-4dc8-bb7c-475ff6ccaed8', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('f0523701-6259-498a-9f13-f1cecb14e68e', '578784bf-2268-4fe9-9a94-4b8156e9f5d8', 'acb0e73f-4cd1-49e3-913c-0a4c7bd6f206', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('26592ee8-4f76-435a-806f-8974e8c70c20', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', '12cbbe00-c785-4b4c-a79f-db7d6790019f', 0, 34, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('719484f4-033f-4a54-bce3-fccb4234018a', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', 'aec0f41d-8925-4c88-b3d5-aa253473a6f6', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('f9d54fb8-9f35-4d3f-b055-bb204428b3c5', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', '0ab475af-a7f2-40e1-aac1-dede1966f983', 0, 32, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('25a5537f-6eed-4a00-8960-3158e82c5c97', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', 'de2eb8d7-3b60-4c10-82aa-3483d40c58c7', 1, 12, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('aa298e76-828d-48e7-a470-3417e1dce010', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', '87754f70-6d41-42f4-b881-8d3e0d59293a', 1, 13, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('97af5169-ed12-4e6c-9e54-a17935b016c4', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', '42aa394d-3c7e-4ef1-984f-3e60a659d107', 0, 24, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('99df225d-4492-4b47-908a-218441bf56a3', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', '3edfdac0-4d94-4a18-acfe-e9a872a83850', 3, 15, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('3efea946-ec8c-4157-afc4-f304bde896c4', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', '95a09902-eb15-46dc-8667-f39302e3e79a', 0, 92, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('37a28cd9-e18a-4ac3-a038-901bd2c623c3', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', 'dc868dc5-a031-47e8-b343-2b41bdf51b4a', 3, 40, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('5eb37313-9298-4ba7-b3b9-1f81a747ec29', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', 'b8d4c2d9-4011-4d7b-8095-776a4dab3b40', 0, 13, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('af2e03c1-572b-437c-9667-385644ad4157', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', 'dc568973-5dd0-4a81-b28e-ce2eb5b1eccf', 0, 16, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('f59dd746-6da7-4927-88c4-5ea5dc88a639', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', 'ca7cb492-3b0d-45d4-b6b6-5b95a847eb4b', 0, 9, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('0308b991-1501-468b-93fd-f07d6659c71c', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', 'f44ea136-3cab-4a33-80f3-af4d11ad6958', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('b3f3f819-e186-43aa-bca3-fedfaf2bf7f8', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', '1f94e6f4-881d-4f3e-880e-86ed689de71a', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('056679af-5e6b-4813-88d0-b5b78504c06e', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', '89d5431e-c554-4b27-ac64-c4c953bc2b14', 2, 18, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('36cbdba5-b982-49b9-be9b-259eec462dc0', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', '948925e9-74b6-4f96-a588-0e6ba695b576', 0, 15, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('2153dd28-9eb7-4625-abdf-f7a53247dd8c', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', '94654eeb-ed67-4217-935b-862640f4d58b', 1, 22, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('d664f986-e5d6-4af8-9e60-c7d49d115386', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', 'a3118292-ae2b-4abb-aacc-b9a5726e1ec5', 1, 25, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('a1da6b93-823e-47f8-a6b2-5af4043a418e', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', '3c4935fb-44ee-42e0-99e7-6e1d74b66105', 0, 10, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('63c4fba4-db26-4119-a041-11fa370e1195', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', '78f59490-7010-462c-b08c-d218fbe72576', 0, 12, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('c5c493ce-6628-4ef2-b0de-ac74f608d428', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', '81ac8b00-c18d-4b88-9a90-4358e3016b70', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('eb252987-6e27-4e48-be4f-1c3b08dc6323', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', 'acc1a5c9-2461-4fc0-9cb3-520ca4f6e1d9', 4, 19, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('7a0fb0d0-d9b2-4336-aba5-2d0638f72eb1', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', 'fab32e59-faec-4d66-a2af-97f949fab7dc', 8, 30, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('b5f67675-1bd0-4af5-ab21-e2d188576e4a', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', '91feeeb3-3cc5-4efe-872e-43a0c4007164', 1, 17, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('83ec55f4-29af-4b6a-8101-42e014ef24e5', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', '186c89bd-86d2-4400-bac6-316814efac3d', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('ae1fbfa7-f8d9-4de8-9b27-46792bc0c32e', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', '87059ae4-f11d-4fbd-bba9-631091a5dbee', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('510f6b4a-79c3-4cdd-83c5-d6f475c54719', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', '9b9c4541-ffd0-4eb8-b549-80fbf2c5fb90', 1, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('94ac541b-9767-41f1-b49f-e6d4f1a2e5f6', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', '81535350-9da7-4440-9383-af283ae1ef7c', 1, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('8b0b1499-e46f-4880-9949-e74fd248b94f', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', '32d394f0-6c7a-4fd1-aa64-273d048b2956', 1, 14, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('41067662-568b-4fb5-b490-5e9e8ba75d26', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', 'e50e8194-9694-4b4c-beaa-a1f7899fc430', 1, 5, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('62bd59dc-1002-49ab-ad03-93ea6f6c92ca', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', 'fcf398b3-3145-49e7-aace-559490d64de3', 1, 12, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('11a6d874-8141-4f30-9110-e2c8731c0b34', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', '76078a68-7eef-4294-809a-2f7f440833a0', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('9de5f135-3c93-4d7e-b361-80482652f8a2', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', '03794362-58cf-4022-a1f8-a715290ad430', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('97a3a2c7-2599-4b5a-b6e0-5a05729c185e', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', '46c8d6dd-8c97-4e52-8924-ce5dcdd52446', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('c2a14bfd-d288-4e36-bf41-22b8ea8bc71c', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', '9b40f01f-558f-40a5-be15-ec2b9170133a', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('42a424a4-1df2-410e-838b-d073efd7ea86', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', 'b2af2ba2-b4d4-42b3-a48e-48c84612ce56', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('411d6bba-6305-4f45-a873-4d3ca97bdb1e', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', '1ec84977-7575-465f-a1ea-93c4eaacb6c0', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('fe4fb379-687b-40db-bcc1-b1b4c20d1c7e', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', '24d2750f-c4bb-4567-af3d-84c0786bc818', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('f7f7c6b3-34eb-4f39-88f2-b5d36f1e9553', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', '9ab3220e-6ad2-4741-8d78-e7b875d0b19c', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('267656e9-6f10-4a76-9f7f-bc75f7585575', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', 'e6ac134a-c90d-4d36-b021-473d0e30d50f', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('07e7f749-c4dc-4ccc-8aa6-7b4cc491e70d', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', 'b9e49bd2-0d0f-4f8b-b737-9e3164768e05', 0, 45, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('bc7e4bd4-f845-4153-be9d-3c01b51a93cc', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', '1bae3771-2bc3-4c67-87d2-b237a479e205', 0, 54, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('df55c244-b47e-474e-b15d-5f68085262cc', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', '7abdd05b-006d-440a-af1a-7fc43b753c68', 0, 45, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('26c20369-81d5-4ee8-b09f-2770dda1e7fd', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', '235da267-1acd-4bb2-baee-bb9de75e8b16', 0, 51, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('646b983b-0cb7-4598-8d5f-4fa88f0e505d', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', 'e060d103-63b6-4579-b952-713c9924acaf', 0, 50, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('b4041746-e5f7-4d72-a7f3-bf6b17c9b344', 'a1eaa2bf-8f28-4c39-86da-4b655b56a8e4', 'f46580f8-798d-477a-86fc-22e288fd74f0', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('88a48bdd-604b-4629-bc2a-694a01bff6cb', '86526779-175e-4d80-8d71-fea2cd6b5668', '03794362-58cf-4022-a1f8-a715290ad430', 1, 35, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('cb968ed8-f4b0-4244-93c3-dba37163bc7b', '86526779-175e-4d80-8d71-fea2cd6b5668', '790361ea-a4cb-4708-8d15-e111a5f848f9', 0, 34, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('1c972686-4e68-4317-bff6-1dbe5f1007c5', '86526779-175e-4d80-8d71-fea2cd6b5668', '9b40f01f-558f-40a5-be15-ec2b9170133a', 0, 41, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('5705fbfe-9bec-4f56-ad36-58fc7748e205', '86526779-175e-4d80-8d71-fea2cd6b5668', 'b2af2ba2-b4d4-42b3-a48e-48c84612ce56', 0, 15, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('2b85bc72-be03-4e54-a77e-3ffa9e6e85b1', '86526779-175e-4d80-8d71-fea2cd6b5668', '1ec84977-7575-465f-a1ea-93c4eaacb6c0', 0, 32, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('28c3b0bd-6587-445a-a115-b12c4e9dfda9', '86526779-175e-4d80-8d71-fea2cd6b5668', '24d2750f-c4bb-4567-af3d-84c0786bc818', 0, 35, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('20a99247-05d2-4c70-831c-84216a33464e', '86526779-175e-4d80-8d71-fea2cd6b5668', '9ab3220e-6ad2-4741-8d78-e7b875d0b19c', 0, 9, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('1e9ee639-26d8-42fb-8f34-837e728fe858', '86526779-175e-4d80-8d71-fea2cd6b5668', 'e6ac134a-c90d-4d36-b021-473d0e30d50f', 0, 31, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('a700e028-24e5-4d9d-9433-489105479024', '86526779-175e-4d80-8d71-fea2cd6b5668', '12cbbe00-c785-4b4c-a79f-db7d6790019f', 35, 96, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('d974426a-859c-410d-84af-35ae7c0c6daa', '86526779-175e-4d80-8d71-fea2cd6b5668', 'aec0f41d-8925-4c88-b3d5-aa253473a6f6', 2, 21, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('4e6fd9b9-088f-4977-a074-91105546cb94', '86526779-175e-4d80-8d71-fea2cd6b5668', '06271625-df52-4fa4-9691-cca462f2499e', 2, 73, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('574cedd3-40df-43cb-8c6c-3f05d896755f', '86526779-175e-4d80-8d71-fea2cd6b5668', 'de2eb8d7-3b60-4c10-82aa-3483d40c58c7', 13, 64, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('f2a1d434-9c82-4e75-bb7d-869429a27aca', '86526779-175e-4d80-8d71-fea2cd6b5668', '87754f70-6d41-42f4-b881-8d3e0d59293a', 17, 55, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('927c8fc4-0e3e-4a79-b36e-d5fe3259e7c3', '86526779-175e-4d80-8d71-fea2cd6b5668', '42aa394d-3c7e-4ef1-984f-3e60a659d107', 7, 41, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('1688fbea-722c-4a37-8e11-d2283016a5d4', '86526779-175e-4d80-8d71-fea2cd6b5668', '3edfdac0-4d94-4a18-acfe-e9a872a83850', 2, 30, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('7943f6a1-44e3-4ccb-94fe-ca02f4d15445', '86526779-175e-4d80-8d71-fea2cd6b5668', '95a09902-eb15-46dc-8667-f39302e3e79a', 51, 18, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('2484b26c-945d-4ad4-836d-8ca30cc1d699', '86526779-175e-4d80-8d71-fea2cd6b5668', 'dc868dc5-a031-47e8-b343-2b41bdf51b4a', 48, 93, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('bd606c02-0be8-4507-b45e-57291773a231', '86526779-175e-4d80-8d71-fea2cd6b5668', 'b8d4c2d9-4011-4d7b-8095-776a4dab3b40', 3, 21, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('ace3d89e-1274-463f-9d8b-35bd57049f6a', '86526779-175e-4d80-8d71-fea2cd6b5668', 'dc568973-5dd0-4a81-b28e-ce2eb5b1eccf', 4, 26, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('5bbe8c8d-8aeb-4bb8-a4c5-7849c866f73e', '86526779-175e-4d80-8d71-fea2cd6b5668', 'ca7cb492-3b0d-45d4-b6b6-5b95a847eb4b', 4, 13, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('8d046fc2-0af5-40a9-a406-57bc8a1f2623', '86526779-175e-4d80-8d71-fea2cd6b5668', 'f44ea136-3cab-4a33-80f3-af4d11ad6958', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('54ff6f3c-855b-4b45-b9b1-c965bdc0159a', '86526779-175e-4d80-8d71-fea2cd6b5668', '1f94e6f4-881d-4f3e-880e-86ed689de71a', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('33df19d4-2e12-4a6d-949b-a061f96d5b1e', '86526779-175e-4d80-8d71-fea2cd6b5668', '89d5431e-c554-4b27-ac64-c4c953bc2b14', 2, 30, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('9e24dfeb-ef9d-4b17-99f4-d54bbac72cb7', '86526779-175e-4d80-8d71-fea2cd6b5668', '948925e9-74b6-4f96-a588-0e6ba695b576', 8, 70, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('98ec2a06-6187-42cb-a3ca-4f2d8e097ab2', '86526779-175e-4d80-8d71-fea2cd6b5668', '94654eeb-ed67-4217-935b-862640f4d58b', 17, 79, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('924356a4-3d61-4b8f-a758-91029bbda948', '86526779-175e-4d80-8d71-fea2cd6b5668', 'a3118292-ae2b-4abb-aacc-b9a5726e1ec5', 7, 48, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('bd99beb8-a09d-4799-a468-cd621a7fba55', '86526779-175e-4d80-8d71-fea2cd6b5668', '3c4935fb-44ee-42e0-99e7-6e1d74b66105', 6, 35, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('95960657-fe21-48f6-ae6d-acb393e1c2c4', '86526779-175e-4d80-8d71-fea2cd6b5668', '78f59490-7010-462c-b08c-d218fbe72576', 0, 30, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('86998637-ef0f-4062-a247-a7bef6cc65ab', '86526779-175e-4d80-8d71-fea2cd6b5668', '81ac8b00-c18d-4b88-9a90-4358e3016b70', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('90f2d912-cc8d-47aa-b14b-124dd2d6e0d8', '86526779-175e-4d80-8d71-fea2cd6b5668', 'acc1a5c9-2461-4fc0-9cb3-520ca4f6e1d9', 14, 62, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('2a5f0ca3-ee98-4915-af81-e4f47c1781c7', '86526779-175e-4d80-8d71-fea2cd6b5668', 'fab32e59-faec-4d66-a2af-97f949fab7dc', 8, 10, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('86503fa5-60d2-4fb3-8b7f-11af3d95171f', '86526779-175e-4d80-8d71-fea2cd6b5668', '91feeeb3-3cc5-4efe-872e-43a0c4007164', 1, 20, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('11042cc1-e448-4ab8-9fe8-7f79c55ce828', '86526779-175e-4d80-8d71-fea2cd6b5668', '186c89bd-86d2-4400-bac6-316814efac3d', 1, 35, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('3419e442-28d9-4ea2-aab8-4c0d79da2228', '86526779-175e-4d80-8d71-fea2cd6b5668', '87059ae4-f11d-4fbd-bba9-631091a5dbee', 0, 2, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('8003ba29-4f44-4936-9d9a-92643aa05666', '86526779-175e-4d80-8d71-fea2cd6b5668', '9b9c4541-ffd0-4eb8-b549-80fbf2c5fb90', 0, 19, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('20295ae4-6e14-451f-a9ef-4b6619e568d6', '86526779-175e-4d80-8d71-fea2cd6b5668', '81535350-9da7-4440-9383-af283ae1ef7c', 0, 45, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('2ce26fff-c18e-4f7d-8a8c-9064e6169d3d', '86526779-175e-4d80-8d71-fea2cd6b5668', '32d394f0-6c7a-4fd1-aa64-273d048b2956', 0, 7, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('9d951e36-c703-4bb5-92c7-c92ab01a0056', '86526779-175e-4d80-8d71-fea2cd6b5668', 'e50e8194-9694-4b4c-beaa-a1f7899fc430', 0, 31, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('17790258-b0a5-476d-aba2-708f635500a2', '86526779-175e-4d80-8d71-fea2cd6b5668', 'fcf398b3-3145-49e7-aace-559490d64de3', 1, 38, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('8b7d4db4-9c74-413d-81c4-16364cacbfb0', '86526779-175e-4d80-8d71-fea2cd6b5668', '76078a68-7eef-4294-809a-2f7f440833a0', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('5a54c388-ac8a-4258-91a7-db14123c917d', '86526779-175e-4d80-8d71-fea2cd6b5668', 'c0ef863b-5a9c-4341-af52-cf8b2683dd14', 0, 66, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('fc2688ef-f318-489f-b1b6-53eb358eaf18', '86526779-175e-4d80-8d71-fea2cd6b5668', '21753f1f-6fa2-4193-9a6f-ec33bd54245f', 0, 21, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('5497f89b-4447-4eac-b3a7-a8e5ed98d869', '86526779-175e-4d80-8d71-fea2cd6b5668', '9bbb8416-43ab-4f7c-ac7c-95962a478a0f', 1, 79, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('cca29c51-42a5-47b1-aa45-2932f0857f7e', '86526779-175e-4d80-8d71-fea2cd6b5668', '9801b080-30a2-49dc-8a0b-bee12904b4f1', 0, 65, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('88f6e579-e4ad-4807-a472-420d06a2e25e', '86526779-175e-4d80-8d71-fea2cd6b5668', '34032146-652e-4ce2-b8c0-fb1b8428b0d1', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('91037dba-e0d6-4e08-8481-e1ab663e6433', '86526779-175e-4d80-8d71-fea2cd6b5668', 'f46580f8-798d-477a-86fc-22e288fd74f0', 11, 98, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('3fa85c89-da9d-438e-8375-da2bcfc815fd', '75b22d80-9293-4498-9d00-93e516b61053', '03794362-58cf-4022-a1f8-a715290ad430', 0, 15, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('5a3ae159-ec1c-4791-93ac-bc68e333e206', '75b22d80-9293-4498-9d00-93e516b61053', '9b40f01f-558f-40a5-be15-ec2b9170133a', 0, 17, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('5441d014-81c8-4a0b-8593-571b92f6e802', '75b22d80-9293-4498-9d00-93e516b61053', 'b2af2ba2-b4d4-42b3-a48e-48c84612ce56', 0, 11, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('eb00874b-b4ed-4b4c-a83b-f180a1fd1adb', '75b22d80-9293-4498-9d00-93e516b61053', '1ec84977-7575-465f-a1ea-93c4eaacb6c0', 0, 17, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('5e1feaa5-efe5-4910-a44b-5554e98024c9', '75b22d80-9293-4498-9d00-93e516b61053', '24d2750f-c4bb-4567-af3d-84c0786bc818', 0, 21, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('f2a548d3-5f7a-49fe-b07b-b6178026bf85', '75b22d80-9293-4498-9d00-93e516b61053', '9ab3220e-6ad2-4741-8d78-e7b875d0b19c', 0, 20, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('7fc8bb73-ab3a-4a69-b0e9-d1706ebd05fd', '75b22d80-9293-4498-9d00-93e516b61053', 'e6ac134a-c90d-4d36-b021-473d0e30d50f', 0, 14, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('a8879a62-16f4-4a8e-8d9e-779e39b1e6a3', '75b22d80-9293-4498-9d00-93e516b61053', '12cbbe00-c785-4b4c-a79f-db7d6790019f', 0, 66, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('2d046cc4-31a7-4da0-bfcc-5dee15543438', '75b22d80-9293-4498-9d00-93e516b61053', 'aec0f41d-8925-4c88-b3d5-aa253473a6f6', 0, 10, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('82e4dd05-880d-4aa7-b698-c88906605960', '75b22d80-9293-4498-9d00-93e516b61053', '0ab475af-a7f2-40e1-aac1-dede1966f983', 0, 110, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('b29bb679-92b1-4613-812c-784ab35797f5', '75b22d80-9293-4498-9d00-93e516b61053', 'de2eb8d7-3b60-4c10-82aa-3483d40c58c7', 0, 24, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('bec61517-a7c9-474e-9606-d8ba05a955f8', '75b22d80-9293-4498-9d00-93e516b61053', '87754f70-6d41-42f4-b881-8d3e0d59293a', 0, 13, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('1da6ce43-cfc1-44b6-8693-27220dd9e722', '75b22d80-9293-4498-9d00-93e516b61053', '42aa394d-3c7e-4ef1-984f-3e60a659d107', 0, 21, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('ab25cd89-6e3b-4748-ae8d-1cfcb3d6e5b2', '75b22d80-9293-4498-9d00-93e516b61053', '3edfdac0-4d94-4a18-acfe-e9a872a83850', 0, 14, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('77530aee-e529-4180-b618-90733b6b0d20', '75b22d80-9293-4498-9d00-93e516b61053', '95a09902-eb15-46dc-8667-f39302e3e79a', 0, 28, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('7894edd2-ae05-4e6a-bc60-f22fb6036cf6', '75b22d80-9293-4498-9d00-93e516b61053', 'dc868dc5-a031-47e8-b343-2b41bdf51b4a', 0, 22, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('1bad833f-f939-4fa7-bb67-84e80c9deaf2', '75b22d80-9293-4498-9d00-93e516b61053', 'b8d4c2d9-4011-4d7b-8095-776a4dab3b40', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('f5c8b9e8-f54c-4956-8724-b1fe240a005a', '75b22d80-9293-4498-9d00-93e516b61053', 'dc568973-5dd0-4a81-b28e-ce2eb5b1eccf', 0, 6, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('033359c2-142c-4f2c-9c1a-bee7371ca557', '75b22d80-9293-4498-9d00-93e516b61053', 'ca7cb492-3b0d-45d4-b6b6-5b95a847eb4b', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('2547472c-b736-4423-b636-e75fd74ef8d9', '75b22d80-9293-4498-9d00-93e516b61053', 'f44ea136-3cab-4a33-80f3-af4d11ad6958', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('241217e2-51c0-4596-b321-ea69507e327f', '75b22d80-9293-4498-9d00-93e516b61053', '1f94e6f4-881d-4f3e-880e-86ed689de71a', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('c388fb58-2954-468d-a8ef-74ef843c83bb', '75b22d80-9293-4498-9d00-93e516b61053', '89d5431e-c554-4b27-ac64-c4c953bc2b14', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('0554afba-a091-431f-a004-39ebe9a2c1e7', '75b22d80-9293-4498-9d00-93e516b61053', '948925e9-74b6-4f96-a588-0e6ba695b576', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('999ea469-6716-4c8b-a7f0-bfbd2d6b4c63', '75b22d80-9293-4498-9d00-93e516b61053', '94654eeb-ed67-4217-935b-862640f4d58b', 0, 22, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('75d7f422-0b47-4931-a3d9-a2f857c508d5', '75b22d80-9293-4498-9d00-93e516b61053', 'a3118292-ae2b-4abb-aacc-b9a5726e1ec5', 0, 18, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('bbae34ff-f287-4233-9e55-8973b0d7a630', '75b22d80-9293-4498-9d00-93e516b61053', '3c4935fb-44ee-42e0-99e7-6e1d74b66105', 0, 4, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('ebd2f8f4-ae96-4685-9c1e-aafdf1fcedb4', '75b22d80-9293-4498-9d00-93e516b61053', '78f59490-7010-462c-b08c-d218fbe72576', 0, 4, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('418c2e4f-4d9f-404f-b339-026e0602da09', '75b22d80-9293-4498-9d00-93e516b61053', '81ac8b00-c18d-4b88-9a90-4358e3016b70', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('54bc6eaa-2a85-4f53-92b7-72e86f52b8bf', '75b22d80-9293-4498-9d00-93e516b61053', 'acc1a5c9-2461-4fc0-9cb3-520ca4f6e1d9', 0, 45, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('a3b09f82-19c6-4c01-9de7-f1805a4b53a7', '75b22d80-9293-4498-9d00-93e516b61053', 'fab32e59-faec-4d66-a2af-97f949fab7dc', 0, 44, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('f791568a-164c-457a-940e-60a0ec4c9b52', '75b22d80-9293-4498-9d00-93e516b61053', '91feeeb3-3cc5-4efe-872e-43a0c4007164', 0, 18, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('11070af9-ba7a-4fa3-8dc9-74f2044404e9', '75b22d80-9293-4498-9d00-93e516b61053', '186c89bd-86d2-4400-bac6-316814efac3d', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('feeac198-b50c-44ee-a2a9-36100938db87', '75b22d80-9293-4498-9d00-93e516b61053', '87059ae4-f11d-4fbd-bba9-631091a5dbee', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('161892a6-e243-43a6-af06-50e30ab1f0fc', '75b22d80-9293-4498-9d00-93e516b61053', '9b9c4541-ffd0-4eb8-b549-80fbf2c5fb90', 0, 8, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('50ca5487-5dfd-4601-828a-5f62e0879e8b', '75b22d80-9293-4498-9d00-93e516b61053', '81535350-9da7-4440-9383-af283ae1ef7c', 0, 24, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('4295250f-0e10-499c-ab20-1db1ce24b3e4', '75b22d80-9293-4498-9d00-93e516b61053', '32d394f0-6c7a-4fd1-aa64-273d048b2956', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('3ec766ab-e97a-464c-b152-4ed35102295d', '75b22d80-9293-4498-9d00-93e516b61053', 'e50e8194-9694-4b4c-beaa-a1f7899fc430', 0, 8, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('642f4dce-7731-419a-bf82-905685be86f5', '75b22d80-9293-4498-9d00-93e516b61053', 'fcf398b3-3145-49e7-aace-559490d64de3', 0, 10, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('4af86bd5-91f8-4c7d-8830-8041d50475f0', '75b22d80-9293-4498-9d00-93e516b61053', '76078a68-7eef-4294-809a-2f7f440833a0', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('31743a10-79a3-444c-aa03-ce9870338ce1', '75b22d80-9293-4498-9d00-93e516b61053', 'b9e49bd2-0d0f-4f8b-b737-9e3164768e05', 0, 22, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('a334be18-aaf1-4104-8a28-b78640b45e96', '75b22d80-9293-4498-9d00-93e516b61053', '1bae3771-2bc3-4c67-87d2-b237a479e205', 0, 25, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('7c9578ed-5aaf-4fc9-b9fc-476eb95cfdd8', '75b22d80-9293-4498-9d00-93e516b61053', '7abdd05b-006d-440a-af1a-7fc43b753c68', 0, 45, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('49df78fd-2e46-4b04-88b6-106ee2f76f1a', '75b22d80-9293-4498-9d00-93e516b61053', '235da267-1acd-4bb2-baee-bb9de75e8b16', 0, 14, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('a9c3cc47-ec35-449c-a2d0-93ded47fb955', '75b22d80-9293-4498-9d00-93e516b61053', 'e060d103-63b6-4579-b952-713c9924acaf', 0, 11, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('b23899ce-9494-49b6-a183-c1e1ec0abc49', '75b22d80-9293-4498-9d00-93e516b61053', 'f46580f8-798d-477a-86fc-22e288fd74f0', 0, 18, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('a3f80c27-a034-4dec-be62-d45dcf63e718', 'eef9c137-b857-4990-a378-bdd1209b750c', '12cbbe00-c785-4b4c-a79f-db7d6790019f', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('a01cede3-b101-4ceb-b53e-49d8fc36f84e', 'eef9c137-b857-4990-a378-bdd1209b750c', 'aec0f41d-8925-4c88-b3d5-aa253473a6f6', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('9b6305a5-a568-4637-94b6-d99021418802', 'eef9c137-b857-4990-a378-bdd1209b750c', 'cb64e091-7ef8-49d0-83fb-03f16194c17d', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('0a9aa015-58a9-4abe-8323-9157da75b85a', 'eef9c137-b857-4990-a378-bdd1209b750c', 'de2eb8d7-3b60-4c10-82aa-3483d40c58c7', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('83856a0f-9893-4a85-a2e2-e4a29bb96661', 'eef9c137-b857-4990-a378-bdd1209b750c', '87754f70-6d41-42f4-b881-8d3e0d59293a', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('d6adf2f3-69d5-41c8-9860-103a6a6e4a56', 'eef9c137-b857-4990-a378-bdd1209b750c', '42aa394d-3c7e-4ef1-984f-3e60a659d107', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('9b256b6f-7c2d-41ec-a73e-607a6e3364e5', 'eef9c137-b857-4990-a378-bdd1209b750c', '3edfdac0-4d94-4a18-acfe-e9a872a83850', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('652eb670-5c6e-43f8-902a-3918468f126c', 'eef9c137-b857-4990-a378-bdd1209b750c', '95a09902-eb15-46dc-8667-f39302e3e79a', 0, 34, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('fada1ea3-60ea-4cb1-a298-05e25ed14ae9', 'eef9c137-b857-4990-a378-bdd1209b750c', 'dc868dc5-a031-47e8-b343-2b41bdf51b4a', 0, 40, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('a5ac9b34-c5d7-402d-8789-4e951d73dffd', 'eef9c137-b857-4990-a378-bdd1209b750c', 'b8d4c2d9-4011-4d7b-8095-776a4dab3b40', 0, 7, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('7ea2a628-a853-4d4f-88c9-708175d37224', 'eef9c137-b857-4990-a378-bdd1209b750c', 'dc568973-5dd0-4a81-b28e-ce2eb5b1eccf', 0, 7, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('8d23e2bf-6b37-43f0-bcaa-fa5243fb7424', 'eef9c137-b857-4990-a378-bdd1209b750c', 'ca7cb492-3b0d-45d4-b6b6-5b95a847eb4b', 0, 8, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('be27f8ba-5f1b-4208-aedf-92e479f4d5a6', 'eef9c137-b857-4990-a378-bdd1209b750c', 'f44ea136-3cab-4a33-80f3-af4d11ad6958', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('45204545-353d-4b26-869a-4d06dd6c4fa9', 'eef9c137-b857-4990-a378-bdd1209b750c', '1f94e6f4-881d-4f3e-880e-86ed689de71a', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('be6fe32e-34c9-4f87-ac0b-2677359296ad', 'eef9c137-b857-4990-a378-bdd1209b750c', '89d5431e-c554-4b27-ac64-c4c953bc2b14', 0, 28, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('b516fcb4-6393-4498-9d42-a1463f9622ab', 'eef9c137-b857-4990-a378-bdd1209b750c', '948925e9-74b6-4f96-a588-0e6ba695b576', 0, 38, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('044ef457-f540-4149-90e5-fbef0cc4f883', 'eef9c137-b857-4990-a378-bdd1209b750c', '94654eeb-ed67-4217-935b-862640f4d58b', 0, 18, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('cf9db2e6-7690-4fbc-a5a5-4a576c0d5213', 'eef9c137-b857-4990-a378-bdd1209b750c', 'a3118292-ae2b-4abb-aacc-b9a5726e1ec5', 0, 24, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('7aa9fb88-fd9c-42da-ae30-3524a93a3beb', 'eef9c137-b857-4990-a378-bdd1209b750c', '3c4935fb-44ee-42e0-99e7-6e1d74b66105', 0, 7, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('9c72cc93-993f-4056-88da-f4d20f989099', 'eef9c137-b857-4990-a378-bdd1209b750c', '78f59490-7010-462c-b08c-d218fbe72576', 0, 5, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('f62ea8ff-0127-4149-b78d-c13239850a73', 'eef9c137-b857-4990-a378-bdd1209b750c', '81ac8b00-c18d-4b88-9a90-4358e3016b70', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('5f968fb5-eb9e-4e16-bd37-20463911564c', 'eef9c137-b857-4990-a378-bdd1209b750c', 'acc1a5c9-2461-4fc0-9cb3-520ca4f6e1d9', 0, 30, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('dd72c92c-34d2-4503-ab7c-d9eaf8683ba1', 'eef9c137-b857-4990-a378-bdd1209b750c', 'fab32e59-faec-4d66-a2af-97f949fab7dc', 0, 19, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('2c3eb409-871b-402e-9eb6-bdfcd2cf9108', 'eef9c137-b857-4990-a378-bdd1209b750c', '91feeeb3-3cc5-4efe-872e-43a0c4007164', 0, 13, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('cd484b5c-e8fe-46e7-b527-2fa4a6d67d8d', 'eef9c137-b857-4990-a378-bdd1209b750c', '186c89bd-86d2-4400-bac6-316814efac3d', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('5afd8edf-636e-4789-b077-036ab7b06e32', 'eef9c137-b857-4990-a378-bdd1209b750c', '87059ae4-f11d-4fbd-bba9-631091a5dbee', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('fdf7ba5c-b7af-4f02-9adb-469f16075932', 'eef9c137-b857-4990-a378-bdd1209b750c', '9b9c4541-ffd0-4eb8-b549-80fbf2c5fb90', 0, 10, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('81c944ff-e386-47d1-9e20-7d9088115de9', 'eef9c137-b857-4990-a378-bdd1209b750c', '81535350-9da7-4440-9383-af283ae1ef7c', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('61d27c75-d523-4ec0-82d7-85bddead25f4', 'eef9c137-b857-4990-a378-bdd1209b750c', '32d394f0-6c7a-4fd1-aa64-273d048b2956', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('754d561f-2963-4c44-8f95-5e1300fce75b', 'eef9c137-b857-4990-a378-bdd1209b750c', 'e50e8194-9694-4b4c-beaa-a1f7899fc430', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('958ecd1c-cdc3-415a-be19-d798333aa5ae', 'eef9c137-b857-4990-a378-bdd1209b750c', 'fcf398b3-3145-49e7-aace-559490d64de3', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('ed6d3a41-512c-4934-91fe-1596326215cc', 'eef9c137-b857-4990-a378-bdd1209b750c', '76078a68-7eef-4294-809a-2f7f440833a0', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('0ebed1ff-e66f-45e8-a7fa-6ea75f7c4798', 'eef9c137-b857-4990-a378-bdd1209b750c', '03794362-58cf-4022-a1f8-a715290ad430', 0, 13, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('86c5a918-362a-4a92-a586-4cde720412b2', 'eef9c137-b857-4990-a378-bdd1209b750c', '46c8d6dd-8c97-4e52-8924-ce5dcdd52446', 0, 10, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('b8c3c811-22a1-46ee-8990-3431c3f53fcd', 'eef9c137-b857-4990-a378-bdd1209b750c', '9b40f01f-558f-40a5-be15-ec2b9170133a', 2, 15, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('502f30c7-7593-48ca-8c6f-9fa5910aeb92', 'eef9c137-b857-4990-a378-bdd1209b750c', 'b2af2ba2-b4d4-42b3-a48e-48c84612ce56', 2, 10, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('84422514-5a4c-4bf2-99a3-212a12d9712d', 'eef9c137-b857-4990-a378-bdd1209b750c', '1ec84977-7575-465f-a1ea-93c4eaacb6c0', 1, 19, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('0f56c500-2d6a-4d8d-8fa9-6aeeea9ffb3f', 'eef9c137-b857-4990-a378-bdd1209b750c', '24d2750f-c4bb-4567-af3d-84c0786bc818', 1, 20, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('2e0f2a3f-9e01-4ff9-8250-6d3385470fcd', 'eef9c137-b857-4990-a378-bdd1209b750c', '9ab3220e-6ad2-4741-8d78-e7b875d0b19c', 2, 19, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('da3184e7-ec36-44ad-9ead-80929648f885', 'eef9c137-b857-4990-a378-bdd1209b750c', 'e6ac134a-c90d-4d36-b021-473d0e30d50f', 1, 16, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('d81e3a7f-1bc0-4926-9247-468c2b5a82f6', 'eef9c137-b857-4990-a378-bdd1209b750c', 'b9e49bd2-0d0f-4f8b-b737-9e3164768e05', 0, 8, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('2e1e1bf5-aa03-40bc-9b04-277ee37890f8', 'eef9c137-b857-4990-a378-bdd1209b750c', '1bae3771-2bc3-4c67-87d2-b237a479e205', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('603bd743-8d7c-41d6-a582-359c34c52627', 'eef9c137-b857-4990-a378-bdd1209b750c', '7abdd05b-006d-440a-af1a-7fc43b753c68', 0, 20, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('2d99a804-a62f-46b4-9851-7b38bc663eb6', 'eef9c137-b857-4990-a378-bdd1209b750c', '235da267-1acd-4bb2-baee-bb9de75e8b16', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('dcb9d5d1-b36c-497b-9eaf-f23aae067657', 'eef9c137-b857-4990-a378-bdd1209b750c', 'e060d103-63b6-4579-b952-713c9924acaf', 0, 9, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('835c3a1b-5d80-499a-aa03-cc87c8f94dda', 'eef9c137-b857-4990-a378-bdd1209b750c', 'f46580f8-798d-477a-86fc-22e288fd74f0', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('6884e657-a847-4b41-8ea7-2731b81bc4e0', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', '03794362-58cf-4022-a1f8-a715290ad430', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('813c90d3-c7bc-4728-8ade-9e48c8cb3360', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', '46c8d6dd-8c97-4e52-8924-ce5dcdd52446', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('3169266d-8767-4e51-b164-a19d7fcc62ca', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', '9b40f01f-558f-40a5-be15-ec2b9170133a', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('5faad14d-5e78-4988-a878-104504518493', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', 'b2af2ba2-b4d4-42b3-a48e-48c84612ce56', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('25373711-525b-4d1c-8dae-2946cb87fc3d', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', '1ec84977-7575-465f-a1ea-93c4eaacb6c0', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('c077873e-fda3-4fd1-acc4-434fa09b3e53', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', '24d2750f-c4bb-4567-af3d-84c0786bc818', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('92856a09-5c09-4b17-9584-578104569c93', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', '9ab3220e-6ad2-4741-8d78-e7b875d0b19c', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('a8ea8c55-6dcf-4b75-9ec3-7e58624979bc', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', 'e6ac134a-c90d-4d36-b021-473d0e30d50f', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('6f11bc29-671b-4514-8e4f-38b20f027b0d', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', '12cbbe00-c785-4b4c-a79f-db7d6790019f', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('9702e930-6b2c-471a-a776-952ed4e30b7b', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', 'aec0f41d-8925-4c88-b3d5-aa253473a6f6', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('f06352f8-4ada-46ae-8c45-ca59a4f69b10', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', '06271625-df52-4fa4-9691-cca462f2499e', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('5e705064-2876-4136-9e55-90907e33b91b', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', 'de2eb8d7-3b60-4c10-82aa-3483d40c58c7', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('41196ad3-fbee-4ec2-b963-760d2310c128', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', '87754f70-6d41-42f4-b881-8d3e0d59293a', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('7b7005ce-9f68-4a98-a696-d43946273b5d', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', '42aa394d-3c7e-4ef1-984f-3e60a659d107', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('87ec7954-eb71-446b-b630-5450b1a4cae5', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', '3edfdac0-4d94-4a18-acfe-e9a872a83850', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('50c1b330-7857-482b-af1c-e0ff20f1bbb7', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', '95a09902-eb15-46dc-8667-f39302e3e79a', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('09639123-bfee-46cc-995c-3333db0d468b', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', 'dc868dc5-a031-47e8-b343-2b41bdf51b4a', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('4eb61b1f-034b-48f3-b2a7-99318e0fd12b', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', 'b8d4c2d9-4011-4d7b-8095-776a4dab3b40', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('0fb642fe-2151-4621-92c5-42a1cdbb8d02', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', 'dc568973-5dd0-4a81-b28e-ce2eb5b1eccf', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('5f9123f0-aa95-4a8b-90c3-c3ce7f457127', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', 'ca7cb492-3b0d-45d4-b6b6-5b95a847eb4b', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('86c08180-e233-46aa-9214-1dfb3adf3ad6', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', 'f44ea136-3cab-4a33-80f3-af4d11ad6958', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('79793d27-d521-48cc-a27c-c1556975837c', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', '1f94e6f4-881d-4f3e-880e-86ed689de71a', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('a32d6684-966a-4484-864b-641230aa7641', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', '89d5431e-c554-4b27-ac64-c4c953bc2b14', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('d8469f57-96a0-4167-a3a3-6cbf77a82aa0', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', '948925e9-74b6-4f96-a588-0e6ba695b576', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('f184b4ac-e154-4335-871d-859cd09fd5e2', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', '94654eeb-ed67-4217-935b-862640f4d58b', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('8ffe7d91-f2ee-4dbc-974f-4f2febbd17d4', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', 'a3118292-ae2b-4abb-aacc-b9a5726e1ec5', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('4343c181-bd7d-48cc-8d13-ca194c26774a', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', '3c4935fb-44ee-42e0-99e7-6e1d74b66105', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('4a53ad8e-4761-4b15-856e-4fbe3617125f', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', '78f59490-7010-462c-b08c-d218fbe72576', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('e481aa41-dccb-4f72-b036-1b2f2092e783', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', '81ac8b00-c18d-4b88-9a90-4358e3016b70', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('3469d406-c4d2-4517-a4ea-4a3694cdd44e', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', 'acc1a5c9-2461-4fc0-9cb3-520ca4f6e1d9', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('0739c2b2-848e-4986-a324-14bfc5ca1171', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', 'fab32e59-faec-4d66-a2af-97f949fab7dc', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('7626213e-bb33-42b1-9101-134b1fdc343e', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', '91feeeb3-3cc5-4efe-872e-43a0c4007164', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('598e5a38-6c55-485a-915d-991d716124cc', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', '186c89bd-86d2-4400-bac6-316814efac3d', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('e8abd306-26a6-45df-ba36-b98fe3d990fd', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', '87059ae4-f11d-4fbd-bba9-631091a5dbee', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('10c2ba86-0637-44d3-8127-81b0befbc316', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', '9b9c4541-ffd0-4eb8-b549-80fbf2c5fb90', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('deb762b6-78b1-4ef7-b885-4dd29891005f', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', '81535350-9da7-4440-9383-af283ae1ef7c', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('19d28531-b7be-4298-be90-2b5f7ab4488e', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', '32d394f0-6c7a-4fd1-aa64-273d048b2956', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('b3b5dc23-8b45-48d2-9c04-f59ea5f96b84', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', 'e50e8194-9694-4b4c-beaa-a1f7899fc430', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('74c7d017-f269-4282-b225-eddaeb9cfc52', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', 'fcf398b3-3145-49e7-aace-559490d64de3', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('dd33d496-16e6-4551-89c1-e6ae3baa3e1a', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', '76078a68-7eef-4294-809a-2f7f440833a0', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('e4e21a4d-64e7-44d9-8492-db09ca0f494a', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', 'b9e49bd2-0d0f-4f8b-b737-9e3164768e05', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('e34ebebc-bcc9-4fe3-b0f3-beb3851dfffa', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', '1bae3771-2bc3-4c67-87d2-b237a479e205', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('c0b6c000-a0d9-43d7-8e92-58bed9d4fcc6', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', '7abdd05b-006d-440a-af1a-7fc43b753c68', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('433d8da8-54f0-44d3-a7c2-b09123f24d4c', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', '235da267-1acd-4bb2-baee-bb9de75e8b16', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('9de959b2-bf4e-4fe4-92b7-ae5d2240d8ad', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', 'e060d103-63b6-4579-b952-713c9924acaf', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('758d7c95-cf2b-4a28-843f-eecc38d55b51', 'b54e9c3c-621d-400a-bc16-95f2f719f9fe', 'f46580f8-798d-477a-86fc-22e288fd74f0', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('7f5bc0b9-371d-4cfe-b0b3-5ae1dce70827', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', '03794362-58cf-4022-a1f8-a715290ad430', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('b5e56a62-dec3-4bc0-b719-b15ebd2fbd02', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', '46c8d6dd-8c97-4e52-8924-ce5dcdd52446', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('301a64bf-1af5-49dc-b55a-76841a40dc51', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', '9b40f01f-558f-40a5-be15-ec2b9170133a', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('bcb071d6-c074-4b32-a680-30913dd96c57', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', 'b2af2ba2-b4d4-42b3-a48e-48c84612ce56', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('25294bd6-82ee-4bd3-abaa-6286e060f70d', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', '1ec84977-7575-465f-a1ea-93c4eaacb6c0', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('ae1c845f-1ed1-44d9-898a-e6d0c1ad2e14', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', '24d2750f-c4bb-4567-af3d-84c0786bc818', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('afb0e57f-92f0-42d4-952b-064666170c7c', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', '9ab3220e-6ad2-4741-8d78-e7b875d0b19c', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('45996389-7d46-43a3-adab-7f8ed133f402', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', 'e6ac134a-c90d-4d36-b021-473d0e30d50f', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('7544ffef-bacf-4a0c-a8d6-dd202cd4f126', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', '12cbbe00-c785-4b4c-a79f-db7d6790019f', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('5b19be56-0c9c-4ef4-9173-b26e5c97c368', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', 'aec0f41d-8925-4c88-b3d5-aa253473a6f6', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('699595e0-7954-4991-929a-f3c6d34bcc4f', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', '06271625-df52-4fa4-9691-cca462f2499e', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('20f12b69-a0a8-40b5-b4c5-0617e5b32695', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', 'de2eb8d7-3b60-4c10-82aa-3483d40c58c7', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('dae6e124-d23b-411b-b222-8386ef934254', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', '87754f70-6d41-42f4-b881-8d3e0d59293a', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('3c3c5b19-5032-49cf-8f02-b78493e37e9b', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', '42aa394d-3c7e-4ef1-984f-3e60a659d107', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('1d2e1b75-c703-4f3e-857e-1fa12df04a2c', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', '3edfdac0-4d94-4a18-acfe-e9a872a83850', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('3779053a-8af9-420f-920b-5282043d52c7', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', '95a09902-eb15-46dc-8667-f39302e3e79a', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('d87bbd65-d546-41ca-a76b-7566cc15edc8', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', 'dc868dc5-a031-47e8-b343-2b41bdf51b4a', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('d492b384-0f1c-4020-bd5a-a49969942b28', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', 'b8d4c2d9-4011-4d7b-8095-776a4dab3b40', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('6616678b-f084-4ad0-b184-d338df515913', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', 'dc568973-5dd0-4a81-b28e-ce2eb5b1eccf', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('a60177f8-1aa3-43af-b05d-b910a4d0b691', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', 'ca7cb492-3b0d-45d4-b6b6-5b95a847eb4b', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('540ab479-dc34-41a3-9141-c70739e3404f', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', 'f44ea136-3cab-4a33-80f3-af4d11ad6958', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('8a646935-36a0-44ea-952f-54b5677d245e', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', '1f94e6f4-881d-4f3e-880e-86ed689de71a', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('ffabfe15-2e4b-4f17-b5cb-22fae3362298', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', '89d5431e-c554-4b27-ac64-c4c953bc2b14', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('dc37a54c-ba4a-4fbd-be2c-712d7953588c', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', '948925e9-74b6-4f96-a588-0e6ba695b576', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('ec44312a-2cee-42fc-b1b5-a49c698b6101', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', '94654eeb-ed67-4217-935b-862640f4d58b', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('f0b7a72c-df1a-41cf-921e-435720d3a095', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', 'a3118292-ae2b-4abb-aacc-b9a5726e1ec5', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('0607a0ba-3ba0-4da4-9dcf-85b1ceab3196', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', '3c4935fb-44ee-42e0-99e7-6e1d74b66105', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('87a770c1-86a4-469f-848c-812af0f40ce5', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', '78f59490-7010-462c-b08c-d218fbe72576', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('b9ea28ac-b273-4ab2-b62f-d66f0dcbdf99', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', '81ac8b00-c18d-4b88-9a90-4358e3016b70', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('ecead795-c0bb-4989-9eb4-d9b7dfe85cac', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', 'acc1a5c9-2461-4fc0-9cb3-520ca4f6e1d9', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('30e07b31-5cbe-4d14-beb0-8227c8ce01bd', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', 'fab32e59-faec-4d66-a2af-97f949fab7dc', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('9ac86521-4820-4cdb-8729-88d70cc8847b', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', '91feeeb3-3cc5-4efe-872e-43a0c4007164', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('ea6cd524-fb63-4846-814c-f2a56b0f8576', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', '186c89bd-86d2-4400-bac6-316814efac3d', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('07f85bc2-6fdc-410e-8323-39162aee136f', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', '87059ae4-f11d-4fbd-bba9-631091a5dbee', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('1242cccd-ad7a-4f61-b589-dca7cf4dc92c', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', '9b9c4541-ffd0-4eb8-b549-80fbf2c5fb90', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('e8817bf2-66cc-4468-9600-41ea183d37ee', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', '81535350-9da7-4440-9383-af283ae1ef7c', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('ac75bf53-f43a-46d2-b0ef-cb9a93e8ef22', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', '32d394f0-6c7a-4fd1-aa64-273d048b2956', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('44dad788-8b9a-4e21-8758-e0d473744662', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', 'e50e8194-9694-4b4c-beaa-a1f7899fc430', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('d76f7978-476b-4777-b701-3b52d3752ac5', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', 'fcf398b3-3145-49e7-aace-559490d64de3', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('ba00f2b5-f933-4f1b-a3e9-eb8930f88e07', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', '76078a68-7eef-4294-809a-2f7f440833a0', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('ed7a02bd-4fe8-4752-be03-c09685e3ff69', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', 'b9e49bd2-0d0f-4f8b-b737-9e3164768e05', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('b129a562-8cba-40e6-9781-26ba6659b6e3', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', '1bae3771-2bc3-4c67-87d2-b237a479e205', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('0462d25f-ace9-4555-81e8-5d770962fd4b', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', '7abdd05b-006d-440a-af1a-7fc43b753c68', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('d2c8ddaa-7194-4449-b415-ae1ded97a62b', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', '235da267-1acd-4bb2-baee-bb9de75e8b16', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('00ac23f0-e712-4ab7-9732-bbd5c9ebe793', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', 'e060d103-63b6-4579-b952-713c9924acaf', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
-INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('616c2332-647e-45a4-b576-900cd80da544', '0aa9cca1-b5d0-4524-a03d-fe7039b96540', 'f46580f8-798d-477a-86fc-22e288fd74f0', 0, 0, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+-- Insert Shop Stock
+
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('998cbe29-774b-4a75-bd7f-bbf63b6d2acb', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      '5cacea9f-000a-4a2b-9449-da7976ec9a55', 
+      0, 
+      24, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('a13ea4b5-c75e-4e5a-95e7-e0c9924b9765', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      'a7c39d48-b92c-427b-93dc-87a3a334d0f8', 
+      0, 
+      15, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('45f5a6ed-19f6-42c2-a74d-e217d47d8a49', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      'e5e80b55-289d-46a7-b2bd-a3b1e7a4b8ae', 
+      0, 
+      33, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('dafb376e-a927-4392-abf0-981a0b4e03b2', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      'cee6a9db-3ef6-40ec-a39d-2dc0f5226116', 
+      0, 
+      12, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('b4b909b0-cbfc-4f12-81cc-4a712843f252', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      '64aaa512-b6b8-4b01-af5d-c3830c9f6ec4', 
+      0, 
+      50, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('8f82fc9d-ead6-4802-9dcf-4c94f88e300f', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      '3f7b47b9-0f5a-4fb0-98f5-38f5c442f764', 
+      0, 
+      26, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('2e28e860-b623-4ee6-b8ad-829ed1eb1ca9', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      '135cf50b-905c-4a56-8d09-8fa3f9937ad0', 
+      0, 
+      21, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('1708ad28-ec69-48ca-9d93-e8d6c343f6ee', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      '457024a9-9985-4aaa-bed4-e6f9167e4d16', 
+      0, 
+      35, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('7b674857-a15c-4e69-bbd1-423232de092a', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      'f48cf38a-10ed-44d2-9422-dc0df82f572f', 
+      0, 
+      89, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('c09a78b0-3524-4646-90a8-09f566495829', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      '6677c335-23d4-4681-b8c0-a099313e56eb', 
+      0, 
+      10, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('20ba376f-e8e4-4660-b620-6b7abc5deed9', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      '426730a7-c37b-4e8e-9dcc-307df00b8fa0', 
+      3, 
+      55, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('e257f6cc-4f10-4f24-a171-13a523fa3c3b', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      'a1c46ba3-b912-46b1-9162-ab268e738f00', 
+      3, 
+      8, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('1c1bebd2-71a1-4d0f-90d9-a5f1b20c470e', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      '7547ba73-a094-4355-ac54-54e3e1afca20', 
+      2, 
+      53, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('b9f2f6bf-3c67-4cb7-9137-f4f82f81a7fb', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      '081ce98e-859a-424a-9d73-17eb89b16091', 
+      2, 
+      44, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('fd395817-bc5f-426e-803c-f57eeaa07483', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      '6b83fa1b-55dc-4a0c-99c3-5c4753f43b80', 
+      1, 
+      18, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('08ca8fcb-09be-4616-b7cf-d32be7b07305', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      '703eb54d-f2e0-4c59-b62c-2a0cb6adf7fb', 
+      0, 
+      20, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('c85bf610-c680-4a38-95c4-5eca5139fccd', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      'db0b774c-5ea1-4f12-b9d4-7ac5a16e374f', 
+      0, 
+      50, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('22a45d8c-b709-4713-a694-dc7fdcc83860', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      '3c8fe1c2-a129-4219-8130-060991c3fbe2', 
+      1, 
+      3, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('96496053-e570-4b8c-a164-372c2d1448dd', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      'abc5f330-7711-4069-931e-196494f57a7f', 
+      1, 
+      15, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('79fd080f-69c2-4333-9783-8317230b8be6', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      '31841a68-7c29-4f8c-a533-a8813d0e9886', 
+      1, 
+      13, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('d8421dee-41fe-43e2-9419-8c693f2da8d4', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      '5751fac6-b7e7-49b1-a5f7-60c98bf1aed1', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('350c92c2-180e-41bd-b3fa-6d474b3e93e0', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      '2b0674c2-6d99-4922-a220-266c846cf858', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('7e3adfff-40f9-4a9f-aa9e-5e8bda369c01', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      'ec4c0b9b-a4ec-4854-8b13-ab33eccc7fae', 
+      1, 
+      5, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('8ea54863-daf2-4345-b44f-3f0b6cd28f0b', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      'efb380a6-241a-4634-bb3e-bd570309446a', 
+      0, 
+      44, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('45565fb8-ff81-4750-95a5-c4b92e84c30d', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      '449dbbc4-a928-4483-abee-c7520abdfba9', 
+      1, 
+      70, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('345c4adc-0a76-4e05-8119-cc39af2d1f6c', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      'd60b2130-9793-44c0-bc6a-dc594eccbf3b', 
+      0, 
+      40, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('c28b49ef-1df5-4e48-bc1d-ce66105f8a4a', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      '83544023-ac5d-49df-8709-db88c5f34e1c', 
+      0, 
+      50, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('e2ce5d11-7431-466a-87e5-3e4e54c5d139', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      '2a482631-ad4c-46c4-ac57-e9fe60a3b1d2', 
+      0, 
+      10, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('777129b5-f130-40c6-95f1-8388957ddac1', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      'e3b460f3-7b85-46c4-9fb5-46a99f17128b', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('f6ff04de-3bbe-4a73-9cba-f82d1efbd915', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      'ab7b449e-1386-47d8-a46d-ada9f8415012', 
+      3, 
+      60, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('209839e2-5e98-44e6-9208-c6a691e9921b', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      '2b0d382f-1fc5-4fb7-a833-07090409396a', 
+      12, 
+      35, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('0fefe1e2-725e-4091-bd3b-b55b8e550c0a', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      '09465f93-182f-4bdc-8130-02a19206d711', 
+      0, 
+      17, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('291c57f0-bee3-4e77-a338-4ea0a33fd9ce', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      '0046c08a-02d8-4221-8ef3-5664b6820b7c', 
+      3, 
+      25, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('7c863376-63ab-4a4b-bcbb-b98fd9b2cd7f', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      '0a47c79c-8435-457d-9d8d-389c1f780768', 
+      0, 
+      15, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('5926353f-0d00-495f-a15e-c79ab3ff96de', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      'a7ae210d-3751-4598-9458-882191214b2c', 
+      2, 
+      9, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('73a5e400-41db-458c-a662-e796c55c6d96', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      '46b74937-eb06-4119-9abb-17221e73dc93', 
+      2, 
+      12, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('485f159b-d6df-497d-9cce-724b34c57c63', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      '52d4fe38-2b2d-41bf-932b-2761dc6639c9', 
+      0, 
+      10, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('1e85df4d-a066-46ce-bd53-a493525fec0e', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      '8cbf44c9-12d5-479e-9174-145c28810778', 
+      0, 
+      8, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('2d3037a8-e558-4fe8-b1f6-4bae292654a8', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      '36a7f7b7-53b9-4913-9dc6-372c2d2668dc', 
+      2, 
+      5, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('108e3fcd-4ffd-4ef3-ba27-7023372d003a', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      '7ef2e565-acfc-4cf0-b7db-7c494b33981e', 
+      0, 
+      33, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('bf50c44f-b81a-42b2-a034-70dc83f0eaa2', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      '22c68ff3-4fc4-43d4-94eb-7f37f48d6b62', 
+      0, 
+      29, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('7537f122-2bbc-4914-a739-dfeed49750af', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      'faca5bd1-c10e-4809-b203-2f1744993f93', 
+      1, 
+      70, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('f274dee5-3248-4c18-b5b9-4dc03430956c', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      '0203e781-d863-402c-abfb-13203529c7b2', 
+      1, 
+      63, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('290c2a6b-1502-4395-83ce-a85949427bc1', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      'a85d8cd3-9f3a-4c85-8e09-df26c58fc7c7', 
+      1, 
+      19, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('c42aa883-4d7a-46d2-9924-1d1d4d154624', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Winkel Rijks'), '8be4a6ac-cd1e-47d0-bf4f-027bb27f55e6'), 
+      '09096d6a-ad7e-43b3-a456-de20f33d1fe6', 
+      2, 
+      15, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('08722767-5c19-411f-894e-5834c6a52339', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Ponton Rijks'), '8239c24e-92f4-4140-830c-94c014639381'), 
+      'f48cf38a-10ed-44d2-9422-dc0df82f572f', 
+      2, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('038040cc-c46a-4471-94e7-2ad843cf25d2', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Ponton Rijks'), '8239c24e-92f4-4140-830c-94c014639381'), 
+      '6677c335-23d4-4681-b8c0-a099313e56eb', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('c56e729e-45ca-4072-bf01-4048c4df79f1', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Ponton Rijks'), '8239c24e-92f4-4140-830c-94c014639381'), 
+      '426730a7-c37b-4e8e-9dcc-307df00b8fa0', 
+      3, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('0fc8b280-0162-4135-b88d-b2c87e2e2ab6', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Ponton Rijks'), '8239c24e-92f4-4140-830c-94c014639381'), 
+      'a1c46ba3-b912-46b1-9162-ab268e738f00', 
+      6, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('d791791c-45c4-4983-b9d7-5523502913aa', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Ponton Rijks'), '8239c24e-92f4-4140-830c-94c014639381'), 
+      '7547ba73-a094-4355-ac54-54e3e1afca20', 
+      4, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('5965b14f-fd94-456b-bde3-4ce183d5dfee', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Ponton Rijks'), '8239c24e-92f4-4140-830c-94c014639381'), 
+      '081ce98e-859a-424a-9d73-17eb89b16091', 
+      4, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('1bb5e162-7cc0-48dc-ad12-b537472bb7cc', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Ponton Rijks'), '8239c24e-92f4-4140-830c-94c014639381'), 
+      '6b83fa1b-55dc-4a0c-99c3-5c4753f43b80', 
+      4, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('70e9fed6-e11e-4581-a370-1c6f6a26e68d', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Ponton Rijks'), '8239c24e-92f4-4140-830c-94c014639381'), 
+      'a04fd71c-f4a6-4ef8-8de9-448e917099d4', 
+      6, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('0062ffdb-422c-4eca-9870-fd6d74820a84', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Ponton Rijks'), '8239c24e-92f4-4140-830c-94c014639381'), 
+      '63610cb9-1ba5-4b69-b3ed-60bae096222b', 
+      5, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('f8859906-5b1a-4fe8-a033-0f2bdd042c15', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Ponton Rijks'), '8239c24e-92f4-4140-830c-94c014639381'), 
+      '92b97db6-0312-4877-a610-7fb9a7f42a5c', 
+      1, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('2eac8f78-eddf-41bd-a49f-d096b054a2a7', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Ponton Rijks'), '8239c24e-92f4-4140-830c-94c014639381'), 
+      'befdf5d1-2b1a-4c68-9f4c-e0e9d9c7c38e', 
+      2, 
+      2, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('5ae45238-66c8-4c53-8c8e-88432085ef84', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Ponton Rijks'), '8239c24e-92f4-4140-830c-94c014639381'), 
+      '0ecb7dd9-00e9-4efe-ab0f-28500bbb32d2', 
+      2, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('3c06a971-c7b1-4c60-841b-7fd3ea6dc7e9', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Ponton Rijks'), '8239c24e-92f4-4140-830c-94c014639381'), 
+      '02b449c0-9f57-4ea4-ae0d-03d93ec0a4f7', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('401f2aaa-16c6-4a57-b941-4cd934ac5941', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Ponton Rijks'), '8239c24e-92f4-4140-830c-94c014639381'), 
+      '64c9449b-9eb2-4522-a241-29ee77afdfff', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('f4fefa12-da41-4fba-8628-1ffa3d017e97', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Ponton Rijks'), '8239c24e-92f4-4140-830c-94c014639381'), 
+      'fb2f6eeb-d17b-45aa-b369-7b3861f6eea4', 
+      2, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('9fb8fa93-04d3-4acb-9c3a-69ec4aae68b7', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Ponton Rijks'), '8239c24e-92f4-4140-830c-94c014639381'), 
+      '6033ecc2-2b28-4e6a-8dff-f149d4804d5b', 
+      1, 
+      2, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('8b76bded-afd4-4852-b729-5ab3a9e92b8a', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Ponton Rijks'), '8239c24e-92f4-4140-830c-94c014639381'), 
+      '7d2a9798-a303-461e-8487-be1fe9d66672', 
+      8, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('8ffee170-bec3-4c5d-8ae1-535e1549bf53', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Ponton Rijks'), '8239c24e-92f4-4140-830c-94c014639381'), 
+      'b776cec8-ab31-48e7-9192-e7ce3a03a106', 
+      7, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('27982acd-c146-4b20-a8de-281db9defc52', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Ponton Rijks'), '8239c24e-92f4-4140-830c-94c014639381'), 
+      '786ac8a5-6797-461e-8480-5e7f6bccdc59', 
+      1, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('1c689530-b850-4959-b548-dab2b25b3ee3', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Ponton Rijks'), '8239c24e-92f4-4140-830c-94c014639381'), 
+      '380eb32b-e93d-4a94-a97e-4e1105559fe4', 
+      1, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('38676258-ed10-48f0-bc7e-64cc6689ca42', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Ponton Rijks'), '8239c24e-92f4-4140-830c-94c014639381'), 
+      'e3b460f3-7b85-46c4-9fb5-46a99f17128b', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('8dcdce44-2a26-442d-81de-bd329bb9ac8a', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      'b3d44307-d86f-41ec-9258-2fd89869807f', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('8e0170e6-db10-40f8-a831-97f28620397d', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      'dda14fe7-65e7-4df6-a89a-5191c6845d8f', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('75c76add-6b5b-4bbe-bf20-1e2008b56c5d', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      '98bce447-ec04-4711-9e03-d869b615555c', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('5aa4fdcd-31fd-4010-8df0-d6ef8eb02758', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      'a0785b8b-ddd7-4046-b89c-c20c08530640', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('35c8f756-3d6f-48f2-bbbc-a4bd5962cb2d', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      'ac6c0fa3-db11-4736-8919-653e86b4cc5c', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('5806b634-d6db-4b91-b259-525eaa9a76c4', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      '6a186a6b-859c-4584-aa68-e5f296b1f85e', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('65f923fe-4705-4950-8290-04c22af1df1d', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      '8e4c8e00-03b3-4a50-9e07-31e68bcd2a3c', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('dc954c18-61ef-43d0-88b7-d48f2f228eac', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      '19cad202-8144-48c9-8d13-eb2d2e611c40', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('eecae979-aa62-49ed-b217-be8ac87d4376', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      'bbd78e91-1c81-4ade-a48d-f39776c670b7', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('443ec672-bec1-41d1-bd0a-837f7c47ff15', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      '95025844-a345-4c12-a40b-291344e087ad', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('ddc8dabe-09e1-462e-9cc0-9b8524fd7a83', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      '6719141a-ddc0-44f3-b839-34ba6fbae05e', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('69e95d27-56d1-4265-b876-3d2ba557ff2a', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      '41f745e5-fd8f-407d-a566-f5054db53180', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('9c425562-44cf-4e50-840f-0ef58acb039a', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      'de44cc49-ad63-4848-b04f-1416cd27b14b', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('886652e3-60a2-4e2d-99b8-3c6fb31966f3', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      '1883ee58-52bb-41aa-96f9-63cb5aef10ee', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('05b42563-d0b3-4dd4-a11c-7328c86fe8a4', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      '9792062f-1af1-4789-8c7a-476521078cd8', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('0a3f2db2-233e-4142-af17-62f3f34ae50e', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      'd2c10e25-1bcf-4210-8e87-cdd3f306cf65', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('f0248355-e5e5-4ec0-a684-ba74b591af69', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      'ea0878ef-e50c-46cf-ae3e-b28e8c621fc4', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('e316c259-438c-4107-9e4b-9835b10951cf', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      'c3262fde-9825-4860-abe5-04790dddc241', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('a8105dd6-9f81-49bc-90be-d41365ece693', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      'cb043a72-82d3-4a44-b539-5175833c75b6', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('e8478593-33a3-471b-9c60-86086da020d1', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      '033f2d59-5c6b-49bc-8385-65f1e00bd90c', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('28ec89e2-44a8-4f0b-b0b7-e4350be14bf0', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      '2f19f558-1d43-43c5-bd47-3572e6d6aa2f', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('584105d5-f79d-4b1a-b562-2131b9a5e455', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      '950bf091-cf3b-4d64-b798-f01f7e2c457d', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('3036911f-1957-4581-ac67-b2bc6a303798', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      'ab7b449e-1386-47d8-a46d-ada9f8415012', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('570583ae-3a23-47b6-9e00-674e73a71371', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      '2b0d382f-1fc5-4fb7-a833-07090409396a', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('7abe56f8-427a-4e70-965d-80ca039c6df6', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      '09465f93-182f-4bdc-8130-02a19206d711', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('511e0eb4-f7ce-4fbf-a796-a6a68e419d49', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      '0046c08a-02d8-4221-8ef3-5664b6820b7c', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('e129fbb1-422e-4350-9a19-ed6e3f9c9ac8', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      '0a47c79c-8435-457d-9d8d-389c1f780768', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('ffc853a1-f634-480f-a75a-b2e0d14b78e0', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      'a7ae210d-3751-4598-9458-882191214b2c', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('c6538169-7e78-42e6-b4b0-1e7c905aa07e', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      '46b74937-eb06-4119-9abb-17221e73dc93', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('e28449fa-6be8-4491-b821-198c363d49b5', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      '52d4fe38-2b2d-41bf-932b-2761dc6639c9', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('c6dcca0e-cb75-40d9-89c7-bcab3b77b010', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      '8cbf44c9-12d5-479e-9174-145c28810778', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('0ec50808-dfef-480d-97ce-79e3e327a858', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      '36a7f7b7-53b9-4913-9dc6-372c2d2668dc', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('c4ebd94d-72fc-46a3-bc39-f4c413b4e9fb', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      '8b9258ba-dd8d-41fc-bc0f-2aa9e1113d08', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('cc4dd1da-db14-4f33-bdb5-c9381548f26f', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      '553f6cbd-7ccc-4438-97e3-9be96bef5525', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('1a7eabb2-1746-4ff0-bec4-cc0dfa71cdc9', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      '894b60a4-a8cd-4185-9307-7f9d253a1cdf', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('0dc87d59-d010-405e-a5a9-1887f5795676', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      'd4facbf9-1657-466c-bbf9-b86b6362b606', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('26e22e48-6a82-4314-a354-5942545b8da0', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      '26579898-f9c2-49ae-8514-6020bafa5c8e', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('237021d4-e0bd-4388-9354-2031757f0e37', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      '679eb1ed-cb86-464a-9a82-a0914d111f2c', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('19286dd0-fc73-4493-8498-01bca2acc38e', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      '971de9a5-667d-44c4-a4c0-1a86c97ed6c5', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('036dc0ae-5273-4352-ba4b-ffc4b94b9cf4', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      '2c37abfb-592e-4ca9-8f7e-df1e41d7aa65', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('bb3f25a0-05cd-4699-a7ef-3ee2001944c4', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      '4eda1a7c-0517-456d-855f-d22bb2736278', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('aa603800-2199-46f2-8879-3547c23908df', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      '44e94a0d-fd32-4824-8993-e2a5dc0d0f87', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('06abb9f0-7147-43c1-9176-220d9d7a347e', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      'ab16c8fa-d0ae-4972-a2a3-e8e76370057a', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('288b910e-ab7f-4651-81e9-5c8dcc2a0285', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      '5903ef07-d99b-41a6-bd00-c48ad5d93f5a', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('2f5605f7-6c31-42f7-9d55-def5abc14af4', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      '5fb6e52d-af6f-497e-883d-6d5a9f6b4c33', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('c015939f-8550-4775-9fd3-c854dd65ea58', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      'c4c27088-b76e-4fdd-8487-e5d4ed92da39', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('6b32b837-23d3-4ae1-a918-537094e7f78d', 
+      COALESCE((SELECT id FROM shops WHERE name = 'ARK Rijks'), 'fceef697-1ef9-49d3-9308-023ba61c2cbe'), 
+      '85398b8c-cf7c-4b88-bea1-3fbc558e9ac1', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('d6e1efc5-a7bd-4f8e-92a6-002b61089332', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      '5cacea9f-000a-4a2b-9449-da7976ec9a55', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('d6371722-3e6f-40d1-ada1-a28883719f55', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      'a1c0afae-aa17-4ddf-b752-17b0d1403f30', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('a889df27-6931-42c5-8e51-21b52f41070e', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      'e5e80b55-289d-46a7-b2bd-a3b1e7a4b8ae', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('f686ac58-4a78-4dfe-a117-648c235baeba', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      'cee6a9db-3ef6-40ec-a39d-2dc0f5226116', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('16eb71d9-61be-4b37-be1f-1647d7697b37', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      '64aaa512-b6b8-4b01-af5d-c3830c9f6ec4', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('5fd23b7a-b527-4cd2-9955-b9166a9eace2', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      '3f7b47b9-0f5a-4fb0-98f5-38f5c442f764', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('5fe32992-350c-44e4-bbcf-ecc2828e8eb4', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      '135cf50b-905c-4a56-8d09-8fa3f9937ad0', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('a8e86c87-f106-4a72-b202-308a0b1e1170', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      '457024a9-9985-4aaa-bed4-e6f9167e4d16', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('0f00c7fb-ae14-4403-8324-287b7f3fc8c9', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      'f48cf38a-10ed-44d2-9422-dc0df82f572f', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('aa86c4fc-9c73-47d4-9b5b-f7b2905b3c9a', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      '6677c335-23d4-4681-b8c0-a099313e56eb', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('7fd8ad00-068d-431e-b64f-1dda61bad836', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      '426730a7-c37b-4e8e-9dcc-307df00b8fa0', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('fcc2d661-d8a5-438d-90a0-21b667e8240b', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      'a1c46ba3-b912-46b1-9162-ab268e738f00', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('fa1ee40d-5831-4d02-8b11-32633fbf1259', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      '7547ba73-a094-4355-ac54-54e3e1afca20', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('31104f78-9d60-4f33-b666-c27fd16aaae4', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      '081ce98e-859a-424a-9d73-17eb89b16091', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('087c938a-4c3e-4942-a4e5-342ff9f83539', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      '6b83fa1b-55dc-4a0c-99c3-5c4753f43b80', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('e34461c9-6dbb-4767-b72a-5c6ad552b25a', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      'a04fd71c-f4a6-4ef8-8de9-448e917099d4', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('0c2e6b25-72b2-4ce5-8f53-ca0b57614298', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      '63610cb9-1ba5-4b69-b3ed-60bae096222b', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('583297b7-249d-4b44-adf0-d5ff8b3d087f', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      '92b97db6-0312-4877-a610-7fb9a7f42a5c', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('bfde251f-b22c-45e3-a5c2-b38d6c669b2d', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      'befdf5d1-2b1a-4c68-9f4c-e0e9d9c7c38e', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('58a26d7a-918f-4226-aefb-12d99ef0b54b', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      '0ecb7dd9-00e9-4efe-ab0f-28500bbb32d2', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('fc980d9d-0740-4e99-a97e-5f60770becc8', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      '02b449c0-9f57-4ea4-ae0d-03d93ec0a4f7', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('85b84bc8-5ffd-4d7e-a320-4ef4246f7b7c', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      '64c9449b-9eb2-4522-a241-29ee77afdfff', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('11e5a535-4e38-4abb-8b86-0115c2df2f4d', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      'fb2f6eeb-d17b-45aa-b369-7b3861f6eea4', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('3898dd38-0f03-4c0e-879a-7a17407fdd91', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      '6033ecc2-2b28-4e6a-8dff-f149d4804d5b', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('c5d81590-4cba-41c2-89ed-a89dbc730892', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      '7d2a9798-a303-461e-8487-be1fe9d66672', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('6fd76915-1949-4275-96a5-5cc65c78b584', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      'b776cec8-ab31-48e7-9192-e7ce3a03a106', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('54bb55fc-d784-42a1-b41a-5da57f1594b3', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      '786ac8a5-6797-461e-8480-5e7f6bccdc59', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('65d29e1a-f3ae-4b36-bddc-37dedc875d45', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      '380eb32b-e93d-4a94-a97e-4e1105559fe4', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('7badf61b-d42c-4f93-9f2e-604ccfdb03d8', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      'e3b460f3-7b85-46c4-9fb5-46a99f17128b', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('9f1af8fe-c3d1-42d1-886e-e4d41d8663dc', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      'ab7b449e-1386-47d8-a46d-ada9f8415012', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('29123032-6eda-4edd-b61e-6fefd92b48e8', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      '2b0d382f-1fc5-4fb7-a833-07090409396a', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('4a513363-459e-4e26-85c4-ef85f42ce9a4', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      '09465f93-182f-4bdc-8130-02a19206d711', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('96371082-f25f-4dd5-bec2-09d2a83d249e', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      '0046c08a-02d8-4221-8ef3-5664b6820b7c', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('62c81bab-c895-4dca-94f0-5e33fbb92657', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      '0a47c79c-8435-457d-9d8d-389c1f780768', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('3e255177-22c2-4027-ba75-92fd19d02167', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      'a7ae210d-3751-4598-9458-882191214b2c', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('f80de55a-ab86-4234-9621-797b1398d0eb', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      '46b74937-eb06-4119-9abb-17221e73dc93', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('f65930b8-276f-4bb7-8617-b4c4f2b21700', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      '52d4fe38-2b2d-41bf-932b-2761dc6639c9', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('a39dffff-d03c-48fa-9f79-75f7f1877b1e', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      '8cbf44c9-12d5-479e-9174-145c28810778', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('6d0ffeae-600f-4ab3-b94c-b619cc39e200', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      '36a7f7b7-53b9-4913-9dc6-372c2d2668dc', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('a7b36a18-e5e7-4cbf-b4df-972192d68d4d', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      '8b9258ba-dd8d-41fc-bc0f-2aa9e1113d08', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('88c1a45d-38a5-496f-aef6-8580a3703ec7', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      'cbbee67d-3565-4917-aff4-3741bb0cde37', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('aea05fac-df47-4a1c-a934-80253e6b539f', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      'a095faa5-e77d-4fcc-8c76-524cc67b1b68', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('fe12241f-e554-4f04-976a-ef5f52f0cca1', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      '9ccdaefc-a0de-4882-a058-6508b7b46a91', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('6f0f6f4c-84ba-4dd3-b0d5-715a2572dfbe', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      'eb3336cb-887d-4239-a20a-4a491df5acea', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('4ea5f3c3-5457-4501-8b04-479877e88824', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      '16a71b1a-c90e-440d-973b-a88c60ec9cf2', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('c91134ce-41d3-4551-ba52-4153d58ea707', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Leidse'), '0189fb6a-7228-4bec-8baf-3d274c3dcc17'), 
+      '09096d6a-ad7e-43b3-a456-de20f33d1fe6', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('4795f5f0-062e-4b82-b864-6a6de82846dd', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      'b3d44307-d86f-41ec-9258-2fd89869807f', 
+      8, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('213bc23b-1b5f-46ed-acc2-9ade805965fe', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      'dda14fe7-65e7-4df6-a89a-5191c6845d8f', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('2077e6e4-3116-4ff3-a8f3-735170ef5050', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      '98bce447-ec04-4711-9e03-d869b615555c', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('0fb61dea-3dce-4852-a6bd-c040d55bea4d', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      'a0785b8b-ddd7-4046-b89c-c20c08530640', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('bb242321-bf2d-468b-83f0-bf53a22c6972', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      'ac6c0fa3-db11-4736-8919-653e86b4cc5c', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('32bc92b9-1932-4d8f-87bd-2a1c63b0153d', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      '6a186a6b-859c-4584-aa68-e5f296b1f85e', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('1eca0e60-ab3e-45f2-9f3e-aee530d84ffc', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      '8e4c8e00-03b3-4a50-9e07-31e68bcd2a3c', 
+      2, 
+      3, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('3060e4e1-37b5-4c47-bf99-4680c48876c9', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      '19cad202-8144-48c9-8d13-eb2d2e611c40', 
+      4, 
+      2, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('e977faa3-288c-43b1-aa24-bd2ff64fa3a1', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      'bbd78e91-1c81-4ade-a48d-f39776c670b7', 
+      1, 
+      2, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('8ef9bd04-88db-40c5-80ea-1e29c0dca1a8', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      'a766da8e-ff35-414a-addb-a3201ec52abe', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('31c9564b-4572-49e6-a233-e60eb9a189c2', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      '95025844-a345-4c12-a40b-291344e087ad', 
+      11, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('c9a768f8-0aff-45d5-9267-0bf2e79ed4d4', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      '6719141a-ddc0-44f3-b839-34ba6fbae05e', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('6343cf19-99cc-4676-8d33-79c4c438172d', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      '87cd8faa-651a-4338-969a-0fda178b3cd9', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('4af300a0-90b6-4588-ad4d-56420d42a4d9', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      '41f745e5-fd8f-407d-a566-f5054db53180', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('cb999c5f-1d28-4e38-8f3d-973fa3edf0c4', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      'de44cc49-ad63-4848-b04f-1416cd27b14b', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('bf7dad43-91de-4358-abd1-c77bd8d193d4', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      '1883ee58-52bb-41aa-96f9-63cb5aef10ee', 
+      0, 
+      60, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('4ce1fb9a-5f98-4209-92af-a3c90268716a', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      '9792062f-1af1-4789-8c7a-476521078cd8', 
+      0, 
+      36, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('bb91be92-c800-4b89-8aab-7f09c40ec718', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      'd2c10e25-1bcf-4210-8e87-cdd3f306cf65', 
+      0, 
+      41, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('bf9eb4d5-14ba-4ff3-bf0d-a4fa3982ea1b', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      'ea0878ef-e50c-46cf-ae3e-b28e8c621fc4', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('e5fc7d77-0385-40ae-9847-f3ae9f17a093', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      'c3262fde-9825-4860-abe5-04790dddc241', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('4ded567d-3c47-4d89-a6ad-e908a9b5b6ab', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      'cb043a72-82d3-4a44-b539-5175833c75b6', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('170618a4-473c-471b-a9ce-f69acc2c420f', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      '033f2d59-5c6b-49bc-8385-65f1e00bd90c', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('ec3ac320-393f-423e-bcac-cdca77f217c5', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      '2f19f558-1d43-43c5-bd47-3572e6d6aa2f', 
+      12, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('c859a193-2311-4ed1-b16e-0ef2e633ef98', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      '950bf091-cf3b-4d64-b798-f01f7e2c457d', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('a1fc8b3e-96c0-4cab-9c16-52291aed913f', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      '553f6cbd-7ccc-4438-97e3-9be96bef5525', 
+      0, 
+      4, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('692549c0-6bbe-4736-b05f-3ab7e73f1a57', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      '894b60a4-a8cd-4185-9307-7f9d253a1cdf', 
+      0, 
+      2, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('4efd9e38-5979-4b7c-b23b-57516e3d0fac', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      'd4facbf9-1657-466c-bbf9-b86b6362b606', 
+      0, 
+      1, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('3a7ec3e6-bec7-428a-9d08-d69124c07819', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      '26579898-f9c2-49ae-8514-6020bafa5c8e', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('7b146593-8fc2-43a3-bfcf-5b370b57a5e1', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      '679eb1ed-cb86-464a-9a82-a0914d111f2c', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('4f9a0caa-f424-42bd-9c69-b56ceffaf6b0', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      '971de9a5-667d-44c4-a4c0-1a86c97ed6c5', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('15a6a63f-7288-456e-8003-baccdbf8c079', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      '2c37abfb-592e-4ca9-8f7e-df1e41d7aa65', 
+      0, 
+      1, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('d2fbc21c-cd78-475f-976a-821a71c813ed', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      '4eda1a7c-0517-456d-855f-d22bb2736278', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('62942378-3ad4-4fa3-b9c7-c3d5f5cdb234', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      '44e94a0d-fd32-4824-8993-e2a5dc0d0f87', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('27c4c4ad-c339-4eee-ae78-570a966dc451', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      'ab16c8fa-d0ae-4972-a2a3-e8e76370057a', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('59bf3e96-7023-4c79-b874-a0d4669e0b7c', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      '5903ef07-d99b-41a6-bd00-c48ad5d93f5a', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('687f93d6-078a-4035-8a96-cbe2bfcc9fec', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      '5fb6e52d-af6f-497e-883d-6d5a9f6b4c33', 
+      2, 
+      4, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('dea0c161-c63d-41e9-85c8-fbdd056efcfc', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      'c4c27088-b76e-4fdd-8487-e5d4ed92da39', 
+      2, 
+      4, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('97038bb5-97f6-44b3-b19b-0fa010546970', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      '85398b8c-cf7c-4b88-bea1-3fbc558e9ac1', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('df8ec426-79d6-4958-8a2a-c6ecfbed4254', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      'f48cf38a-10ed-44d2-9422-dc0df82f572f', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('d6d84837-34cd-4d1a-a832-a0a62da52a29', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      'e889d7eb-7140-4f0a-9a8f-bb7ccc06701d', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('244b5093-15d5-45b6-b8e4-c4bf70cff2a9', 
+      COALESCE((SELECT id FROM shops WHERE name = 'CS Oost'), '8cd447eb-ca21-4ba1-8b03-f308b211f8eb'), 
+      '8c06e30b-d3f7-4b6d-ad71-babe94794915', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('c49a3ae5-a341-4b27-bef8-0e010bd41b7b', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      'f48cf38a-10ed-44d2-9422-dc0df82f572f', 
+      0, 
+      34, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('f13402ba-ca68-4429-85e5-546d17fbbbec', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      '6677c335-23d4-4681-b8c0-a099313e56eb', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('af449807-fdb9-4b15-9017-8736329decd0', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      'da531ed6-3dda-4cf8-b555-9be984264420', 
+      0, 
+      32, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('b087ae2f-8fc6-4886-821d-06158953f6e5', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      'a1c46ba3-b912-46b1-9162-ab268e738f00', 
+      1, 
+      12, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('398d93dc-6f44-46b2-8564-54e7fed8e2bb', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      '7547ba73-a094-4355-ac54-54e3e1afca20', 
+      1, 
+      13, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('9658f87d-a13f-41c4-9a36-dcb4dc844855', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      '081ce98e-859a-424a-9d73-17eb89b16091', 
+      0, 
+      24, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('0ae86df8-26b0-41ec-87ba-52165cad8fae', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      '6b83fa1b-55dc-4a0c-99c3-5c4753f43b80', 
+      3, 
+      15, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('ebf8fc46-56fd-4812-a198-ec36256cde59', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      'a04fd71c-f4a6-4ef8-8de9-448e917099d4', 
+      0, 
+      92, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('941b6cb6-01fb-4c21-8547-a7d9d0e06baf', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      '63610cb9-1ba5-4b69-b3ed-60bae096222b', 
+      3, 
+      40, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('8cdfa7f7-3596-4ce2-9320-bb7963b526a2', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      '92b97db6-0312-4877-a610-7fb9a7f42a5c', 
+      0, 
+      13, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('ef9b51c6-2fb9-4f2f-b8d5-d62f2156aed7', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      'befdf5d1-2b1a-4c68-9f4c-e0e9d9c7c38e', 
+      0, 
+      16, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('3afb6ba2-c87c-4223-96d8-2f9d0b2b1661', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      '0ecb7dd9-00e9-4efe-ab0f-28500bbb32d2', 
+      0, 
+      9, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('15fa91b5-ad01-4dbd-a1b1-38cb1662b213', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      '02b449c0-9f57-4ea4-ae0d-03d93ec0a4f7', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('64a57c86-7904-47d8-9890-c22dbe581785', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      '64c9449b-9eb2-4522-a241-29ee77afdfff', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('4ae53d98-1690-4630-b188-4b88d3114fa6', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      'fb2f6eeb-d17b-45aa-b369-7b3861f6eea4', 
+      2, 
+      18, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('94a25e45-aa07-4cf6-9b79-5793b73a3b95', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      '6033ecc2-2b28-4e6a-8dff-f149d4804d5b', 
+      0, 
+      15, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('e27e035d-f938-4fe9-acb7-5606406bfbff', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      '7d2a9798-a303-461e-8487-be1fe9d66672', 
+      1, 
+      22, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('42342a4b-1666-48a8-9c98-87123a8d1946', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      'b776cec8-ab31-48e7-9192-e7ce3a03a106', 
+      1, 
+      25, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('eb02e6db-f25e-4ea3-aa53-02cbba1196b2', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      '786ac8a5-6797-461e-8480-5e7f6bccdc59', 
+      0, 
+      10, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('1bf47f7d-4f8d-42a8-9db1-d7220500e629', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      '380eb32b-e93d-4a94-a97e-4e1105559fe4', 
+      0, 
+      12, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('d376ff0d-b2c1-4eae-91e7-c49c82874a47', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      'e3b460f3-7b85-46c4-9fb5-46a99f17128b', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('5b81bde0-a530-41df-87f2-002c2ea57b24', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      'ab7b449e-1386-47d8-a46d-ada9f8415012', 
+      4, 
+      19, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('15d4b87e-fff0-459b-9c89-8856d061a348', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      '2b0d382f-1fc5-4fb7-a833-07090409396a', 
+      8, 
+      30, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('de94d9ec-4c46-40e6-8367-f684eb8a267b', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      '09465f93-182f-4bdc-8130-02a19206d711', 
+      1, 
+      17, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('a24cbcef-ef88-4350-8fdc-67f54d499dd8', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      '0046c08a-02d8-4221-8ef3-5664b6820b7c', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('c970f0fb-e20c-4d59-bef8-5651a1be5b97', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      '0a47c79c-8435-457d-9d8d-389c1f780768', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('bd0d7cef-4f0f-47bf-8c50-d40a18c1b7c7', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      'a7ae210d-3751-4598-9458-882191214b2c', 
+      1, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('0e37ee32-c671-4f42-81d2-83e38ed1befd', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      '46b74937-eb06-4119-9abb-17221e73dc93', 
+      1, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('919907f8-d267-48f1-a02c-ca74e4b4466a', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      '52d4fe38-2b2d-41bf-932b-2761dc6639c9', 
+      1, 
+      14, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('8d959756-be34-426c-a356-0d061f58c952', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      '8cbf44c9-12d5-479e-9174-145c28810778', 
+      1, 
+      5, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('5ca1bb1a-ad54-4b96-8de1-0b73187c4e2b', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      '36a7f7b7-53b9-4913-9dc6-372c2d2668dc', 
+      1, 
+      12, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('4d342fcd-605b-44be-916f-a0f425e8b2c4', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      '8b9258ba-dd8d-41fc-bc0f-2aa9e1113d08', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('2f850dd7-9852-4668-91f3-8a5c5144da2c', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      '5cacea9f-000a-4a2b-9449-da7976ec9a55', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('d7ff03a4-e103-4994-9e06-795a77aef50b', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      'a1c0afae-aa17-4ddf-b752-17b0d1403f30', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('2e534017-508a-4a3d-acc3-405c4e34d4fe', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      'e5e80b55-289d-46a7-b2bd-a3b1e7a4b8ae', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('0007c404-f64b-4669-b7f2-996af185d996', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      'cee6a9db-3ef6-40ec-a39d-2dc0f5226116', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('3c16d6ee-23ba-480d-a750-ff8737d200f6', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      '64aaa512-b6b8-4b01-af5d-c3830c9f6ec4', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('8ace4acf-b46f-4fdf-ad1b-80c7e68b7659', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      '3f7b47b9-0f5a-4fb0-98f5-38f5c442f764', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('17fcac26-458c-4844-8040-10689708c011', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      '135cf50b-905c-4a56-8d09-8fa3f9937ad0', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('4cb562a0-43c7-4645-ac5f-5d5ab3bf2d2f', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      '457024a9-9985-4aaa-bed4-e6f9167e4d16', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('3e07e8c1-d084-4227-9afa-94316bd3ff39', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      'cbbee67d-3565-4917-aff4-3741bb0cde37', 
+      0, 
+      45, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('a53dd118-5a35-4351-ba99-3b5024f42fdf', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      'a095faa5-e77d-4fcc-8c76-524cc67b1b68', 
+      0, 
+      54, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('ea032cca-c839-48f0-b344-a0b0565dfcf7', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      '9ccdaefc-a0de-4882-a058-6508b7b46a91', 
+      0, 
+      45, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('ec85b7ba-3a69-4a33-8c47-52990f3edba3', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      'eb3336cb-887d-4239-a20a-4a491df5acea', 
+      0, 
+      51, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('c3505e3c-f281-44a3-815e-d36672c3d697', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      '16a71b1a-c90e-440d-973b-a88c60ec9cf2', 
+      0, 
+      50, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('8bfbf08a-62bc-4dea-b11f-710481fb6a49', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Bridge'), 'e06f3d74-8099-4d3f-9f67-f858fe5b689c'), 
+      '09096d6a-ad7e-43b3-a456-de20f33d1fe6', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('98667827-eb46-4b75-9cf9-2e9db9696923', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      '5cacea9f-000a-4a2b-9449-da7976ec9a55', 
+      1, 
+      35, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('62b14f08-bd37-49de-ab03-e25e049f614e', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      'a7c39d48-b92c-427b-93dc-87a3a334d0f8', 
+      0, 
+      34, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('2c26d273-9673-4604-8ae9-46b3a8cfd2f5', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      'e5e80b55-289d-46a7-b2bd-a3b1e7a4b8ae', 
+      0, 
+      41, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('2dc25233-18a0-4fa2-b640-eb3f96ba7393', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      'cee6a9db-3ef6-40ec-a39d-2dc0f5226116', 
+      0, 
+      15, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('6f64d3d2-048a-4fc1-9316-22c4391b5851', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      '64aaa512-b6b8-4b01-af5d-c3830c9f6ec4', 
+      0, 
+      32, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('1c69f2f8-e654-4fc7-a141-d1026230a528', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      '3f7b47b9-0f5a-4fb0-98f5-38f5c442f764', 
+      0, 
+      35, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('071474df-fa77-4be3-a2cf-a82d482b0c50', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      '135cf50b-905c-4a56-8d09-8fa3f9937ad0', 
+      0, 
+      9, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('fe089479-b854-4139-bf12-6c7ed41460f1', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      '457024a9-9985-4aaa-bed4-e6f9167e4d16', 
+      0, 
+      31, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('0488a551-3245-4f56-9be0-6e8d1d666491', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      'f48cf38a-10ed-44d2-9422-dc0df82f572f', 
+      35, 
+      96, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('07d1dba6-c3fb-4270-bca1-7ea8bba3d4a6', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      '6677c335-23d4-4681-b8c0-a099313e56eb', 
+      2, 
+      21, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('1c2f4339-1811-46ec-ba23-8c608a1a05ca', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      '426730a7-c37b-4e8e-9dcc-307df00b8fa0', 
+      2, 
+      73, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('e0d4706a-f35a-4f93-a62f-478862d2adc0', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      'a1c46ba3-b912-46b1-9162-ab268e738f00', 
+      13, 
+      64, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('27fc9485-4fda-4658-aeed-5e2369351ce5', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      '7547ba73-a094-4355-ac54-54e3e1afca20', 
+      17, 
+      55, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('ac97468c-e7e7-4ad9-87b0-8940bb6ba9f6', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      '081ce98e-859a-424a-9d73-17eb89b16091', 
+      7, 
+      41, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('18e25be4-e5fb-4370-80a7-c1c173cf298a', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      '6b83fa1b-55dc-4a0c-99c3-5c4753f43b80', 
+      2, 
+      30, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('1eba0b79-8601-4472-b3c8-6e8b660b29a8', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      'a04fd71c-f4a6-4ef8-8de9-448e917099d4', 
+      51, 
+      18, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('13f4d2bc-364e-479b-9a33-5e48a7fd7121', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      '63610cb9-1ba5-4b69-b3ed-60bae096222b', 
+      48, 
+      93, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('e48bc4cf-668c-454a-8337-2f7dae0ede9a', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      '92b97db6-0312-4877-a610-7fb9a7f42a5c', 
+      3, 
+      21, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('57629c2c-3033-43b5-853f-0d7a9db8501d', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      'befdf5d1-2b1a-4c68-9f4c-e0e9d9c7c38e', 
+      4, 
+      26, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('33cfaf83-74fb-445b-9b38-3efede0dfa0b', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      '0ecb7dd9-00e9-4efe-ab0f-28500bbb32d2', 
+      4, 
+      13, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('b0d0e920-7699-420f-99ca-c9364fec9a02', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      '02b449c0-9f57-4ea4-ae0d-03d93ec0a4f7', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('cea83f3f-654c-4bcd-9fd2-011414e4c880', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      '64c9449b-9eb2-4522-a241-29ee77afdfff', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('0ca64c7e-f410-4138-a40c-eaffe4db353d', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      'fb2f6eeb-d17b-45aa-b369-7b3861f6eea4', 
+      2, 
+      30, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('415023c7-06a1-4b82-a932-7baac6032b8e', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      '6033ecc2-2b28-4e6a-8dff-f149d4804d5b', 
+      8, 
+      70, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('35881efa-dd3a-4f35-bda5-a3c6458911b0', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      '7d2a9798-a303-461e-8487-be1fe9d66672', 
+      17, 
+      79, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('3ceac62e-9678-475a-98b2-9ec74c9e6a91', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      'b776cec8-ab31-48e7-9192-e7ce3a03a106', 
+      7, 
+      48, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('038aecb9-a9eb-483e-bd8d-f3a1e91c1133', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      '786ac8a5-6797-461e-8480-5e7f6bccdc59', 
+      6, 
+      35, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('74cf0267-9875-49b1-9300-8f50c727dfc1', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      '380eb32b-e93d-4a94-a97e-4e1105559fe4', 
+      0, 
+      30, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('f78ee726-3993-48a7-9742-22414eb29902', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      'e3b460f3-7b85-46c4-9fb5-46a99f17128b', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('bcfe705f-f369-4acc-8b53-a54d31f3231f', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      'ab7b449e-1386-47d8-a46d-ada9f8415012', 
+      14, 
+      62, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('a6cea23c-315a-4aa5-b80f-fc4746c2a8fc', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      '2b0d382f-1fc5-4fb7-a833-07090409396a', 
+      8, 
+      10, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('0aabfa7f-e04c-4fc1-ac32-568a7cdf05ba', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      '09465f93-182f-4bdc-8130-02a19206d711', 
+      1, 
+      20, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('9d984b0f-ae9d-4705-9f81-65f0f83e65de', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      '0046c08a-02d8-4221-8ef3-5664b6820b7c', 
+      1, 
+      35, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('a84486ef-e26f-41ff-9cfc-f765cf89dc93', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      '0a47c79c-8435-457d-9d8d-389c1f780768', 
+      0, 
+      2, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('078f5402-7e0f-47b1-ba05-fe40784f173e', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      'a7ae210d-3751-4598-9458-882191214b2c', 
+      0, 
+      19, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('7763e3e7-f158-4260-b455-cd5c40ec2b3d', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      '46b74937-eb06-4119-9abb-17221e73dc93', 
+      0, 
+      45, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('4ef7f53b-bffd-4ac9-b09e-b4b572adc484', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      '52d4fe38-2b2d-41bf-932b-2761dc6639c9', 
+      0, 
+      7, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('61a1b3c5-702a-4f14-a5df-b3c0e0e6e67e', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      '8cbf44c9-12d5-479e-9174-145c28810778', 
+      0, 
+      31, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('da16b180-b397-44a0-bde6-5d37c3f83ba8', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      '36a7f7b7-53b9-4913-9dc6-372c2d2668dc', 
+      1, 
+      38, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('75450b61-b2e1-4264-8b4b-9317a45cdecb', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      '8b9258ba-dd8d-41fc-bc0f-2aa9e1113d08', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('f4220100-4666-443e-800c-5bd0860ddcab', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      'ad50fc24-e5d9-486b-908a-c628c62e4900', 
+      0, 
+      66, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('21223534-250f-4b25-ae2c-fe8035467746', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      '995777d4-e77e-40eb-82a1-6aa3ce42d5bb', 
+      0, 
+      21, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('64e65369-459a-4956-b55e-c9920b7ae66b', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      'ecf9ba7d-63c9-4f4f-92e1-6e426f911dee', 
+      1, 
+      79, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('0f0a85d5-6e4b-4e99-a457-ccce92f7df6a', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      '1b771f0b-533d-44c1-b6bd-d2e916af7532', 
+      0, 
+      65, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('57ca6dcc-9f40-4d25-9d54-6dc3ec1edeb1', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      '2fdb981b-1981-4251-b518-fb9ef6f9c88d', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('6f214e4c-44e2-4e7a-841a-9e34597c9a5a', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 5'), '5825609a-fb44-442b-9d24-a40136a057b6'), 
+      '09096d6a-ad7e-43b3-a456-de20f33d1fe6', 
+      11, 
+      98, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('d2bbf111-9c54-42b0-af1c-f412e1296998', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      '5cacea9f-000a-4a2b-9449-da7976ec9a55', 
+      0, 
+      15, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('189e0746-abcb-40d0-b399-70a2611b006a', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      'e5e80b55-289d-46a7-b2bd-a3b1e7a4b8ae', 
+      0, 
+      17, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('bd105b11-922b-40b3-a336-da40fdc65b00', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      'cee6a9db-3ef6-40ec-a39d-2dc0f5226116', 
+      0, 
+      11, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('b4d04e07-75f4-4c1a-8d94-910799cc0ff6', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      '64aaa512-b6b8-4b01-af5d-c3830c9f6ec4', 
+      0, 
+      17, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('6d0f0f41-3f83-4761-813b-d7bcd83c5076', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      '3f7b47b9-0f5a-4fb0-98f5-38f5c442f764', 
+      0, 
+      21, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('d21a894b-10bd-4670-8dff-dd0cd30e8ffe', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      '135cf50b-905c-4a56-8d09-8fa3f9937ad0', 
+      0, 
+      20, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('72bc4942-8f6a-4060-bf6d-5f6eaeb116b1', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      '457024a9-9985-4aaa-bed4-e6f9167e4d16', 
+      0, 
+      14, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('69c36042-db46-4d9b-bd04-3af74eaad083', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      'f48cf38a-10ed-44d2-9422-dc0df82f572f', 
+      0, 
+      66, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('fd78a633-8923-4f1e-be5d-8cb3227fec4b', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      '6677c335-23d4-4681-b8c0-a099313e56eb', 
+      0, 
+      10, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('923a70fc-3b28-4728-9328-b1f14eda99f1', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      'da531ed6-3dda-4cf8-b555-9be984264420', 
+      0, 
+      110, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('0c4d61e8-ec84-4a20-929b-53d6e17531d9', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      'a1c46ba3-b912-46b1-9162-ab268e738f00', 
+      0, 
+      24, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('0bf54b70-df46-48a6-87e0-fff8a0ccc0fc', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      '7547ba73-a094-4355-ac54-54e3e1afca20', 
+      0, 
+      13, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('51d78709-3e7a-4d0d-ab86-001aa2964d0a', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      '081ce98e-859a-424a-9d73-17eb89b16091', 
+      0, 
+      21, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('7c06925f-c717-4ff7-a406-f5e7211f0ca5', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      '6b83fa1b-55dc-4a0c-99c3-5c4753f43b80', 
+      0, 
+      14, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('649c600c-47d6-43a9-a86f-1baa249576c9', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      'a04fd71c-f4a6-4ef8-8de9-448e917099d4', 
+      0, 
+      28, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('7bb1918e-df02-4ff5-8913-cc4bcb1fb1b4', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      '63610cb9-1ba5-4b69-b3ed-60bae096222b', 
+      0, 
+      22, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('4980c543-eca9-4054-8748-1a087d76de05', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      '92b97db6-0312-4877-a610-7fb9a7f42a5c', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('22eafbf7-ad65-42af-8528-e2bc0c238cb4', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      'befdf5d1-2b1a-4c68-9f4c-e0e9d9c7c38e', 
+      0, 
+      6, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('82a4f90e-2f8a-43e0-b911-adf1aee4a709', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      '0ecb7dd9-00e9-4efe-ab0f-28500bbb32d2', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('bc7b6149-75b1-4639-b01d-7f0f77fe820b', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      '02b449c0-9f57-4ea4-ae0d-03d93ec0a4f7', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('6044589e-f1cd-4a0e-840f-8f64fb04b025', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      '64c9449b-9eb2-4522-a241-29ee77afdfff', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('528d79af-e918-47e8-bdec-5b22fefcab0b', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      'fb2f6eeb-d17b-45aa-b369-7b3861f6eea4', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('706e5bcc-b448-40ac-8018-f98fb5d8f8a3', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      '6033ecc2-2b28-4e6a-8dff-f149d4804d5b', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('a2d465ad-b43a-4ca9-942e-80bd12c2e688', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      '7d2a9798-a303-461e-8487-be1fe9d66672', 
+      0, 
+      22, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('58c36d03-7f9e-42ca-9360-0c6e9a6e6f6c', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      'b776cec8-ab31-48e7-9192-e7ce3a03a106', 
+      0, 
+      18, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('c6c3435b-f047-47b9-bfea-ddb0a9a65102', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      '786ac8a5-6797-461e-8480-5e7f6bccdc59', 
+      0, 
+      4, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('3ebc63e7-b042-49dd-a67d-4723845d9afb', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      '380eb32b-e93d-4a94-a97e-4e1105559fe4', 
+      0, 
+      4, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('1c953c62-02c0-4526-bbf4-c17ff7b1a26c', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      'e3b460f3-7b85-46c4-9fb5-46a99f17128b', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('46fba077-df8c-4736-a2d1-784ed8c9b539', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      'ab7b449e-1386-47d8-a46d-ada9f8415012', 
+      0, 
+      45, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('3fdb3215-3e84-440b-9a61-51e1ca8faaac', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      '2b0d382f-1fc5-4fb7-a833-07090409396a', 
+      0, 
+      44, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('4dd8264c-e8b0-4381-ad2c-4accd573086f', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      '09465f93-182f-4bdc-8130-02a19206d711', 
+      0, 
+      18, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('73b582ab-fb37-47bf-a8df-3b0696d738f7', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      '0046c08a-02d8-4221-8ef3-5664b6820b7c', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('cc2d39d3-43d9-448c-9746-00c07bb50276', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      '0a47c79c-8435-457d-9d8d-389c1f780768', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('462b7b74-282f-4223-845a-e410d8fba92f', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      'a7ae210d-3751-4598-9458-882191214b2c', 
+      0, 
+      8, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('523334f4-5f52-4083-a021-044e13943cf3', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      '46b74937-eb06-4119-9abb-17221e73dc93', 
+      0, 
+      24, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('122f638c-6160-4eb2-8cf4-ba01ded91bdc', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      '52d4fe38-2b2d-41bf-932b-2761dc6639c9', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('a61292cd-6a46-4dd0-9fe3-e5628c0e12f9', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      '8cbf44c9-12d5-479e-9174-145c28810778', 
+      0, 
+      8, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('65fdf028-05e9-42c8-9746-c2b31549ed6c', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      '36a7f7b7-53b9-4913-9dc6-372c2d2668dc', 
+      0, 
+      10, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('78ea2a4f-fc31-4217-94a1-b6a115856bc3', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      '8b9258ba-dd8d-41fc-bc0f-2aa9e1113d08', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('32a91e5d-a692-4226-9a7a-ea1c06a57b0e', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      'cbbee67d-3565-4917-aff4-3741bb0cde37', 
+      0, 
+      22, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('7ea4cbc8-49e2-411a-93c7-0ba1a0337eab', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      'a095faa5-e77d-4fcc-8c76-524cc67b1b68', 
+      0, 
+      25, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('a203682e-4b30-48b5-b475-dcba8fbb5835', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      '9ccdaefc-a0de-4882-a058-6508b7b46a91', 
+      0, 
+      45, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('5c4e2d40-2864-48b0-940c-826eb8519031', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      'eb3336cb-887d-4239-a20a-4a491df5acea', 
+      0, 
+      14, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('c349a894-db45-4387-9650-4addb0691df5', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      '16a71b1a-c90e-440d-973b-a88c60ec9cf2', 
+      0, 
+      11, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('a7e1368a-33c6-4c33-b63a-1efbb8bcabe2', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 6'), 'ce8b3886-03b8-4922-98e1-b3e974f57082'), 
+      '09096d6a-ad7e-43b3-a456-de20f33d1fe6', 
+      0, 
+      18, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('f8dce797-6ccb-45d3-9879-c22339aef4fc', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      'f48cf38a-10ed-44d2-9422-dc0df82f572f', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('48458211-d261-4993-9405-d337711fc1ea', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      '6677c335-23d4-4681-b8c0-a099313e56eb', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('93191134-cf67-41ff-bde0-871c91414996', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      '71e6fd19-a499-48be-b1e2-d0dc6626cc27', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('27ec13c7-0744-4722-bb65-253686bf61f7', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      'a1c46ba3-b912-46b1-9162-ab268e738f00', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('8a147d91-0680-4c6f-964e-7f342c23286b', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      '7547ba73-a094-4355-ac54-54e3e1afca20', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('3a0dddad-40b5-478e-9dd9-eb0511eab632', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      '081ce98e-859a-424a-9d73-17eb89b16091', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('f808c963-5f86-4b46-b71e-0ee9b7fab47d', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      '6b83fa1b-55dc-4a0c-99c3-5c4753f43b80', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('8ebc49f9-34a4-4433-b787-534f0b11222d', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      'a04fd71c-f4a6-4ef8-8de9-448e917099d4', 
+      0, 
+      34, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('72427eb2-65a3-4387-942d-cfe0ee45426e', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      '63610cb9-1ba5-4b69-b3ed-60bae096222b', 
+      0, 
+      40, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('3f0e2560-c254-482c-ad11-3f1611231431', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      '92b97db6-0312-4877-a610-7fb9a7f42a5c', 
+      0, 
+      7, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('c49d5cc9-f554-4508-aa53-183f36432f4f', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      'befdf5d1-2b1a-4c68-9f4c-e0e9d9c7c38e', 
+      0, 
+      7, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('de50a16e-b62b-40c0-a5de-2ce5e4fbf2d1', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      '0ecb7dd9-00e9-4efe-ab0f-28500bbb32d2', 
+      0, 
+      8, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('6c19cf04-772c-4a38-8395-ace42b3f36e9', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      '02b449c0-9f57-4ea4-ae0d-03d93ec0a4f7', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('ab86db27-6a24-4011-b113-673c28ceacbb', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      '64c9449b-9eb2-4522-a241-29ee77afdfff', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('2e74e5f7-ece7-4296-b848-f493708aeb05', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      'fb2f6eeb-d17b-45aa-b369-7b3861f6eea4', 
+      0, 
+      28, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('1f04f96b-05f5-490b-935d-92b09ff24ea1', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      '6033ecc2-2b28-4e6a-8dff-f149d4804d5b', 
+      0, 
+      38, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('7fb4dc46-d80a-4901-bcdc-db85b012e058', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      '7d2a9798-a303-461e-8487-be1fe9d66672', 
+      0, 
+      18, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('710f122a-f9ce-4f8a-b1e7-f2d0fa974580', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      'b776cec8-ab31-48e7-9192-e7ce3a03a106', 
+      0, 
+      24, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('57418216-69ee-48bf-b15f-2f511598b6ce', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      '786ac8a5-6797-461e-8480-5e7f6bccdc59', 
+      0, 
+      7, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('cd10fd29-9fe9-403c-b86f-009e05452cc4', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      '380eb32b-e93d-4a94-a97e-4e1105559fe4', 
+      0, 
+      5, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('a530df3e-263b-4a5e-8e80-6bd5fe4b075d', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      'e3b460f3-7b85-46c4-9fb5-46a99f17128b', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('9402c743-eb7e-4641-a685-ca9e78d61f2f', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      'ab7b449e-1386-47d8-a46d-ada9f8415012', 
+      0, 
+      30, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('0991783b-b757-4c7e-a6d2-8c8e33517233', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      '2b0d382f-1fc5-4fb7-a833-07090409396a', 
+      0, 
+      19, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('33366743-e1b6-473d-aa90-53e9fca66de4', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      '09465f93-182f-4bdc-8130-02a19206d711', 
+      0, 
+      13, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('b184d395-a139-429d-8c97-12e50e946ad0', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      '0046c08a-02d8-4221-8ef3-5664b6820b7c', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('698f5343-55e0-44c9-aa5e-bb7b71fbaeee', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      '0a47c79c-8435-457d-9d8d-389c1f780768', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('449ae30f-87a8-4353-b9c5-a9d0dca993d0', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      'a7ae210d-3751-4598-9458-882191214b2c', 
+      0, 
+      10, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('47e0d153-f21d-4864-9509-7620a2a211e6', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      '46b74937-eb06-4119-9abb-17221e73dc93', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('d4173578-117d-4392-8f7a-916f9c31e234', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      '52d4fe38-2b2d-41bf-932b-2761dc6639c9', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('d11dbbbb-020f-4d6c-a2d1-d7901d3e3976', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      '8cbf44c9-12d5-479e-9174-145c28810778', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('43c1615d-335b-4812-b20c-c1803a761752', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      '36a7f7b7-53b9-4913-9dc6-372c2d2668dc', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('5d7bde17-18ad-4ea9-b781-e2b9c4e0cc97', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      '8b9258ba-dd8d-41fc-bc0f-2aa9e1113d08', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('18c7509c-5a5f-4658-9bf8-d57500b833d5', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      '5cacea9f-000a-4a2b-9449-da7976ec9a55', 
+      0, 
+      13, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('77e1398d-ebeb-41b8-b498-e9979588e12f', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      'a1c0afae-aa17-4ddf-b752-17b0d1403f30', 
+      0, 
+      10, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('ac94472c-cb7f-442c-8dd4-c76aa1415dbb', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      'e5e80b55-289d-46a7-b2bd-a3b1e7a4b8ae', 
+      2, 
+      15, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('6da72aa0-4143-4724-93e2-b387ff718217', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      'cee6a9db-3ef6-40ec-a39d-2dc0f5226116', 
+      2, 
+      10, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('afa5d630-2dd8-409a-b001-d17a630ec107', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      '64aaa512-b6b8-4b01-af5d-c3830c9f6ec4', 
+      1, 
+      19, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('982e96fe-2038-4ea3-9da3-2d5280842556', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      '3f7b47b9-0f5a-4fb0-98f5-38f5c442f764', 
+      1, 
+      20, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('18b49ed3-d8db-4800-8344-21ce8af3e369', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      '135cf50b-905c-4a56-8d09-8fa3f9937ad0', 
+      2, 
+      19, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('35620554-2e12-48d9-8e12-e5c5a638585c', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      '457024a9-9985-4aaa-bed4-e6f9167e4d16', 
+      1, 
+      16, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('91b149f9-cac9-4538-9429-987c13e62867', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      'cbbee67d-3565-4917-aff4-3741bb0cde37', 
+      0, 
+      8, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('8e5a1282-7ed0-45a8-bb41-4255c29d7472', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      'a095faa5-e77d-4fcc-8c76-524cc67b1b68', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('94a56997-41a5-48cc-b593-4d3cfc8c7816', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      '9ccdaefc-a0de-4882-a058-6508b7b46a91', 
+      0, 
+      20, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('d1a5b497-8f6b-4925-8c36-80341b093232', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      'eb3336cb-887d-4239-a20a-4a491df5acea', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('b825cd7a-9f90-4e73-b6c4-157b5610c66a', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      '16a71b1a-c90e-440d-973b-a88c60ec9cf2', 
+      0, 
+      9, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('f73856c6-2cdc-4839-947d-c709e23bbc42', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Vlaggenwinkel'), 'c410a3da-a83a-430a-9aa9-7c13a26f7345'), 
+      '09096d6a-ad7e-43b3-a456-de20f33d1fe6', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('0bf9bb43-ae06-4271-9044-e2f012b08964', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      '5cacea9f-000a-4a2b-9449-da7976ec9a55', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('9786ba5e-f6b2-4e96-a81a-37b08bc73913', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      'a1c0afae-aa17-4ddf-b752-17b0d1403f30', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('20bde547-6dfe-4c66-8c5e-d38137bc4178', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      'e5e80b55-289d-46a7-b2bd-a3b1e7a4b8ae', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('99c9eedf-4683-439e-ac16-56b17918e8af', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      'cee6a9db-3ef6-40ec-a39d-2dc0f5226116', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('6c3c80a9-48cc-4aa5-b5bb-f5c8fec086dd', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      '64aaa512-b6b8-4b01-af5d-c3830c9f6ec4', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('f3b2af66-7e2d-4135-ba38-8f8f26d73b9b', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      '3f7b47b9-0f5a-4fb0-98f5-38f5c442f764', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('cc6e9f40-239a-458f-9bb6-4a31fc092abb', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      '135cf50b-905c-4a56-8d09-8fa3f9937ad0', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('9cd26e8d-0aa8-444c-95ab-f61ebafb6478', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      '457024a9-9985-4aaa-bed4-e6f9167e4d16', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('48091ed4-21d0-4788-ad60-9ca2b685db35', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      'f48cf38a-10ed-44d2-9422-dc0df82f572f', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('209d0156-6974-4e97-ad33-5f9bc09c0285', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      '6677c335-23d4-4681-b8c0-a099313e56eb', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('9b42cce9-dec9-4c3a-8036-a27dbbb0b290', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      '426730a7-c37b-4e8e-9dcc-307df00b8fa0', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('235ce01c-0b11-462c-9e4b-65ecff7e38b7', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      'a1c46ba3-b912-46b1-9162-ab268e738f00', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('d92db59e-2da7-4510-9ba5-a827af236fd2', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      '7547ba73-a094-4355-ac54-54e3e1afca20', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('4b82b5b0-3764-4fcb-abe5-5d68cc0f865e', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      '081ce98e-859a-424a-9d73-17eb89b16091', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('9d98940d-7bd8-428e-8b32-f228d956900f', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      '6b83fa1b-55dc-4a0c-99c3-5c4753f43b80', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('ef960f25-47c6-4c83-839a-1f4128321e09', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      'a04fd71c-f4a6-4ef8-8de9-448e917099d4', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('736a10ff-fdfe-47f1-9d10-c7e33f013557', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      '63610cb9-1ba5-4b69-b3ed-60bae096222b', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('9e774a66-8485-48f9-a80f-23888cc1df43', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      '92b97db6-0312-4877-a610-7fb9a7f42a5c', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('a914c055-2c03-4735-838c-b139c95f6b90', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      'befdf5d1-2b1a-4c68-9f4c-e0e9d9c7c38e', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('d6e8a64a-1f7e-45d9-9170-1e7f58a7b4cf', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      '0ecb7dd9-00e9-4efe-ab0f-28500bbb32d2', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('f10bccd8-df5e-490b-bc89-9a710f095712', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      '02b449c0-9f57-4ea4-ae0d-03d93ec0a4f7', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('21b6c27b-0325-448e-86c7-cee9b67be7b9', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      '64c9449b-9eb2-4522-a241-29ee77afdfff', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('42e6ae7f-321e-4388-b5a3-a08debc9e4c1', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      'fb2f6eeb-d17b-45aa-b369-7b3861f6eea4', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('cd107534-bafd-48e0-86f9-360eff1bcf7a', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      '6033ecc2-2b28-4e6a-8dff-f149d4804d5b', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('068c3ba0-ae99-41bb-9332-12efec51b637', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      '7d2a9798-a303-461e-8487-be1fe9d66672', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('8bff8191-15b2-47eb-b942-4d59ab1c4f6c', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      'b776cec8-ab31-48e7-9192-e7ce3a03a106', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('5d84aceb-9042-4dd6-ad43-aaf95af2d547', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      '786ac8a5-6797-461e-8480-5e7f6bccdc59', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('fa3453cd-9f62-4f9a-a0c3-46691368adf7', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      '380eb32b-e93d-4a94-a97e-4e1105559fe4', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('32668ab0-d1b0-4002-9524-86bf87645944', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      'e3b460f3-7b85-46c4-9fb5-46a99f17128b', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('a889dd73-504f-4650-842c-ae55940a5df3', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      'ab7b449e-1386-47d8-a46d-ada9f8415012', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('67c4f772-28ee-4b19-9bd6-9182ab7514f9', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      '2b0d382f-1fc5-4fb7-a833-07090409396a', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('9254c511-133e-485f-b739-3ed5a86f38ac', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      '09465f93-182f-4bdc-8130-02a19206d711', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('d860e0e6-dcd8-4f3d-8ea3-1a6e41fc4d6f', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      '0046c08a-02d8-4221-8ef3-5664b6820b7c', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('b12656c6-69bd-468a-880b-29192d15b3cd', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      '0a47c79c-8435-457d-9d8d-389c1f780768', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('bd485dfe-0e03-4c00-8f72-81be680b8d0b', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      'a7ae210d-3751-4598-9458-882191214b2c', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('b110de20-80d1-4881-a350-b856faf9e3b5', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      '46b74937-eb06-4119-9abb-17221e73dc93', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('835fc65c-e6f9-4114-b82a-924db45299a7', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      '52d4fe38-2b2d-41bf-932b-2761dc6639c9', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('66e4e702-0941-4fe3-a18c-a3c80fb3524c', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      '8cbf44c9-12d5-479e-9174-145c28810778', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('a6d141c0-d37d-43f3-91cb-28e98d15847d', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      '36a7f7b7-53b9-4913-9dc6-372c2d2668dc', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('998930d2-584c-49ef-b0c8-7f0c9bab42c2', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      '8b9258ba-dd8d-41fc-bc0f-2aa9e1113d08', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('e9873c60-ceac-4160-8399-12ee34419f87', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      'cbbee67d-3565-4917-aff4-3741bb0cde37', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('6df1311f-26eb-489c-bae4-81a29df2a206', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      'a095faa5-e77d-4fcc-8c76-524cc67b1b68', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('e6ef4447-ac84-4a33-b93a-e8d3227d7b9e', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      '9ccdaefc-a0de-4882-a058-6508b7b46a91', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('9cd2949a-88bd-4eb3-ba0a-8399a104a33f', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      'eb3336cb-887d-4239-a20a-4a491df5acea', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('0e321caa-de29-4607-8d1a-14d72526a1a6', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      '16a71b1a-c90e-440d-973b-a88c60ec9cf2', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('7c59d876-abdb-408c-b1af-f153728b60b3', 
+      COALESCE((SELECT id FROM shops WHERE name = 'Damrak 4'), '3b9f0f1d-bca1-449e-9e3e-97ea70956d40'), 
+      '09096d6a-ad7e-43b3-a456-de20f33d1fe6', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('8a26a284-a2c3-4717-8255-f3d2a96a60d2', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      '5cacea9f-000a-4a2b-9449-da7976ec9a55', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('9306808b-f8c7-44c7-87c4-45648077f28a', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      'a1c0afae-aa17-4ddf-b752-17b0d1403f30', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('0c263ccd-2470-4273-9328-9c4c7717ef19', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      'e5e80b55-289d-46a7-b2bd-a3b1e7a4b8ae', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('3cf18031-ce39-426a-abe0-961c8ed0ec36', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      'cee6a9db-3ef6-40ec-a39d-2dc0f5226116', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('2809f576-f6df-4311-8974-7bf139c70f0b', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      '64aaa512-b6b8-4b01-af5d-c3830c9f6ec4', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('ae4fb3ca-1b4a-4782-8e86-1407a3453f4b', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      '3f7b47b9-0f5a-4fb0-98f5-38f5c442f764', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('01d47841-f226-4ca1-a8e4-29e9c92b3d50', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      '135cf50b-905c-4a56-8d09-8fa3f9937ad0', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('1806c1f9-31c8-4a07-a4e4-55e58a2f6341', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      '457024a9-9985-4aaa-bed4-e6f9167e4d16', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('eaaf9689-67e0-4069-9256-a3278f8992bc', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      'f48cf38a-10ed-44d2-9422-dc0df82f572f', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('15e741ce-39fb-4f90-b7a3-c50de459c9c7', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      '6677c335-23d4-4681-b8c0-a099313e56eb', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('ac63565b-c6e2-400a-91d7-30cc08f641f5', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      '426730a7-c37b-4e8e-9dcc-307df00b8fa0', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('b253db3a-bea6-4e95-9031-d70054810c55', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      'a1c46ba3-b912-46b1-9162-ab268e738f00', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('4c5a2223-c431-47a2-ba61-6dcb13f57fbe', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      '7547ba73-a094-4355-ac54-54e3e1afca20', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('26f9edbb-334e-4dd0-872a-bc90f171804f', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      '081ce98e-859a-424a-9d73-17eb89b16091', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('6866987c-5153-436c-874a-a72518e2aa27', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      '6b83fa1b-55dc-4a0c-99c3-5c4753f43b80', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('fbe2268b-fc69-456e-b591-bf7365ec042a', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      'a04fd71c-f4a6-4ef8-8de9-448e917099d4', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('134f780a-03b5-45fa-bae3-8b67d894b798', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      '63610cb9-1ba5-4b69-b3ed-60bae096222b', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('76946c43-1396-4e57-b3c6-5ce9c8ccaa70', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      '92b97db6-0312-4877-a610-7fb9a7f42a5c', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('6f7574c8-9b99-4c07-ae6c-2def70ff0413', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      'befdf5d1-2b1a-4c68-9f4c-e0e9d9c7c38e', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('745f4054-7608-4d8e-961f-2a4afe1d75d2', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      '0ecb7dd9-00e9-4efe-ab0f-28500bbb32d2', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('88e2ee5c-6040-4cfe-9b62-e92bf4750d45', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      '02b449c0-9f57-4ea4-ae0d-03d93ec0a4f7', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('733f372a-7960-4a49-b148-d8d8030f44d3', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      '64c9449b-9eb2-4522-a241-29ee77afdfff', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('09d54df9-bfde-481b-bf23-30206acb5a4f', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      'fb2f6eeb-d17b-45aa-b369-7b3861f6eea4', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('e9362bf5-7a42-4046-bc4d-80468626c2a3', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      '6033ecc2-2b28-4e6a-8dff-f149d4804d5b', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('fa6d4baa-2896-429c-b1a5-f5b5624ecef6', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      '7d2a9798-a303-461e-8487-be1fe9d66672', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('db284267-4767-40f3-ab24-f29fe8ffe58f', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      'b776cec8-ab31-48e7-9192-e7ce3a03a106', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('eb194780-cbca-4e99-b30d-ec9a9456b554', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      '786ac8a5-6797-461e-8480-5e7f6bccdc59', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('d48cde4d-4f48-4f60-a47c-8cf59c8f28c5', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      '380eb32b-e93d-4a94-a97e-4e1105559fe4', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('9fa517b4-c470-47a3-a54c-33e7a27a3276', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      'e3b460f3-7b85-46c4-9fb5-46a99f17128b', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('aa37b93f-ad5b-48bd-af0b-3d22e3f559d6', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      'ab7b449e-1386-47d8-a46d-ada9f8415012', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('eeecb677-bbc0-4916-876e-dd3e3c0a051e', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      '2b0d382f-1fc5-4fb7-a833-07090409396a', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('fa8808f0-d42e-4cc9-ab96-f256f46f6689', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      '09465f93-182f-4bdc-8130-02a19206d711', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('20a830a8-5abc-44a1-8fc7-70c9bc967148', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      '0046c08a-02d8-4221-8ef3-5664b6820b7c', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('db368bc0-1846-4645-820a-4697f5469802', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      '0a47c79c-8435-457d-9d8d-389c1f780768', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('630c8962-aca9-4b0e-a033-6c3a8b9bdb54', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      'a7ae210d-3751-4598-9458-882191214b2c', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('22d43b75-faa1-4eb5-bdc1-ce4c8eade25e', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      '46b74937-eb06-4119-9abb-17221e73dc93', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('cc8119b0-5ec6-411c-b4c4-8af3dc43604f', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      '52d4fe38-2b2d-41bf-932b-2761dc6639c9', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('65f304ad-5e7c-45a4-90ab-1854f8155379', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      '8cbf44c9-12d5-479e-9174-145c28810778', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('f667b856-de9a-4c03-a49b-f0df7caa0272', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      '36a7f7b7-53b9-4913-9dc6-372c2d2668dc', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('ccbe4d96-9181-4761-9a40-7e176d430da4', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      '8b9258ba-dd8d-41fc-bc0f-2aa9e1113d08', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('8f240b07-e8c2-478e-9212-8f5a0e0e3602', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      'cbbee67d-3565-4917-aff4-3741bb0cde37', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('f4b56f06-7b73-4852-9751-f89474cf0275', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      'a095faa5-e77d-4fcc-8c76-524cc67b1b68', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('cb35d93f-4690-4fda-8db3-d6d73cb2963c', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      '9ccdaefc-a0de-4882-a058-6508b7b46a91', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('7a42a235-ff96-4e55-b048-d8057eb7fa41', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      'eb3336cb-887d-4239-a20a-4a491df5acea', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('71c55a12-55a1-4d6e-a6a2-4b68a9352177', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      '16a71b1a-c90e-440d-973b-a88c60ec9cf2', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();
+INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('a89ec082-7bcf-4000-a8d7-e227ed56fe5c', 
+      COALESCE((SELECT id FROM shops WHERE name = 'VC'), '8054fcba-d23a-4764-bce9-8280648c8974'), 
+      '09096d6a-ad7e-43b3-a456-de20f33d1fe6', 
+      0, 
+      0, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();

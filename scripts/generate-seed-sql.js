@@ -186,12 +186,15 @@ sqlLines.push('-- Seed data generated from Excel file: Stock take October.xlsx')
 sqlLines.push('-- Generated on: ' + new Date().toISOString());
 sqlLines.push('');
 sqlLines.push('-- Insert Shops');
+sqlLines.push('-- Note: If shops already exist, delete them first or the shop_stock inserts will fail');
+sqlLines.push('-- DELETE FROM shop_stock; DELETE FROM shops; -- Uncomment to clear existing data');
 sqlLines.push('');
 
 const shopIds = new Map();
 shops.forEach(shopName => {
   const shopId = generateUUID();
   shopIds.set(shopName, shopId);
+  // Insert shop - if exists, keep existing ID (shop_stock will use COALESCE to find it)
   sqlLines.push(`INSERT INTO shops (id, name, created_at) VALUES ('${shopId}', '${shopName.replace(/'/g, "''")}', NOW()) ON CONFLICT (name) DO UPDATE SET name = EXCLUDED.name;`);
 });
 
@@ -209,9 +212,8 @@ itemsMap.forEach((item, itemKey) => {
   const category = (item.category || 'Uncategorized').replace(/'/g, "''");
   const mainCategory = item.main_category || 'floor';
   
-  // Note: items table doesn't have unique constraint, so we can't use ON CONFLICT
-  // If re-running, clear items first or manually handle duplicates
-  sqlLines.push(`INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('${itemId}', '${name}', '${category}', '${packaging}', '${mainCategory}', NOW());`);
+  // Use ON CONFLICT to allow re-running the seed without errors
+  sqlLines.push(`INSERT INTO items (id, name, category, packaging_unit_description, main_category, created_at) VALUES ('${itemId}', '${name}', '${category}', '${packaging}', '${mainCategory}', NOW()) ON CONFLICT (id) DO NOTHING;`);
   itemIndex++;
 });
 
@@ -219,13 +221,26 @@ sqlLines.push('');
 sqlLines.push('-- Insert Shop Stock');
 sqlLines.push('');
 
+sqlLines.push('-- Insert Shop Stock');
+sqlLines.push('');
+
 shopStockMap.forEach((stock, stockKey) => {
-  const shopId = shopIds.get(stock.shopName);
+  const newShopId = shopIds.get(stock.shopName);
   const itemId = itemIds.get(stock.itemKey);
   
-  if (shopId && itemId) {
+  if (newShopId && itemId) {
     const stockId = generateUUID();
-    sqlLines.push(`INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) VALUES ('${stockId}', '${shopId}', '${itemId}', ${stock.packaging_units}, ${stock.loose_pieces}, NOW(), NOW()) ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();`);
+    const escapedShopName = stock.shopName.replace(/'/g, "''");
+    // Use COALESCE to get existing shop ID if shop exists, otherwise use the new ID
+    sqlLines.push(`INSERT INTO shop_stock (id, shop_id, item_id, packaging_units, loose_pieces, created_at, updated_at) 
+    VALUES ('${stockId}', 
+      COALESCE((SELECT id FROM shops WHERE name = '${escapedShopName}'), '${newShopId}'), 
+      '${itemId}', 
+      ${stock.packaging_units}, 
+      ${stock.loose_pieces}, 
+      NOW(), 
+      NOW()) 
+    ON CONFLICT (shop_id, item_id) DO UPDATE SET packaging_units = EXCLUDED.packaging_units, loose_pieces = EXCLUDED.loose_pieces, updated_at = NOW();`);
   }
 });
 

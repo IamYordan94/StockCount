@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { getUserRole, getUserAssignedShops } from '@/lib/utils/roles'
 import Link from 'next/link'
-import { Store } from 'lucide-react'
+import { Store, Plus } from 'lucide-react'
 
 export default async function ShopsPage() {
   const supabase = await createClient()
@@ -18,13 +18,25 @@ export default async function ShopsPage() {
     // Admins see all shops
     const { data, error } = await supabase.from('shops').select('*').order('name')
     if (error) {
+      console.error('Error loading shops:', error)
       return (
-        <div className="text-red-600">
-          Error loading shops: {error.message}
+        <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+          <h3 className="text-red-800 font-semibold mb-2">Error loading shops</h3>
+          <p className="text-red-600 text-sm">{error.message}</p>
+          <p className="text-red-600 text-sm mt-2">Error code: {error.code}</p>
+          <p className="text-red-600 text-sm mt-2">Details: {error.details || 'No details'}</p>
+          <p className="text-red-600 text-sm mt-2">Hint: {error.hint || 'No hint'}</p>
+          <p className="text-gray-600 text-xs mt-4">
+            This might be an RLS (Row Level Security) issue. Check:
+            <br />1. Your user_roles entry exists and role = 'admin'
+            <br />2. RLS policies are correctly set up
+            <br />3. Visit <Link href="/dashboard/debug" className="text-blue-600 underline">/dashboard/debug</Link> to see your role status
+          </p>
         </div>
       )
     }
-    shops = data
+    shops = data || []
+    console.log('Shops loaded:', shops?.length || 0)
   } else {
     // Get assigned shops
     const assignedShopIds = await getUserAssignedShops(user.id)
@@ -53,6 +65,28 @@ export default async function ShopsPage() {
     <div>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold text-gray-900">Shops</h1>
+        {role === 'admin' && (
+          <Link
+            href="/dashboard/shops/new"
+            className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            <Plus className="h-5 w-5 mr-2" />
+            Create Shop
+          </Link>
+        )}
+      </div>
+
+      {/* Debug info */}
+      <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded text-xs">
+        <p><strong>Debug Info:</strong></p>
+        <p>Role: {role || 'null'}</p>
+        <p>Shops count: {shops?.length || 0}</p>
+        <p>User ID: {user.id.substring(0, 8)}...</p>
+        {role !== 'admin' && (
+          <p className="text-red-600 mt-2">
+            ⚠️ You are not detected as admin. Visit <Link href="/dashboard/debug" className="underline">/dashboard/debug</Link> to check your role.
+          </p>
+        )}
       </div>
 
       {shops && shops.length > 0 ? (
@@ -86,7 +120,9 @@ export default async function ShopsPage() {
           <Store className="mx-auto h-12 w-12 text-gray-400" />
           <h3 className="mt-2 text-sm font-medium text-gray-900">No shops</h3>
           <p className="mt-1 text-sm text-gray-500">
-            Import an Excel file to create shops.
+            {role === 'admin' 
+              ? 'Create your first shop to get started.'
+              : 'No shops assigned to you yet.'}
           </p>
         </div>
       )}

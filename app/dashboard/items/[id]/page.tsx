@@ -11,11 +11,33 @@ export default function EditItemPage() {
 
   const [name, setName] = useState('')
   const [category, setCategory] = useState('')
+  const [newCategory, setNewCategory] = useState('')
+  const [showNewCategory, setShowNewCategory] = useState(false)
+  const [categories, setCategories] = useState<string[]>([])
   const [packagingUnitDescription, setPackagingUnitDescription] = useState('')
   const [mainCategory, setMainCategory] = useState<'floor' | 'catering'>('floor')
   const [loading, setLoading] = useState(true)
+  const [loadingCategories, setLoadingCategories] = useState(true)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    fetchCategories()
+  }, [])
+
+  const fetchCategories = async () => {
+    try {
+      const response = await fetch('/api/categories')
+      if (response.ok) {
+        const data = await response.json()
+        setCategories(data.categories || [])
+      }
+    } catch (err) {
+      console.error('Failed to fetch categories:', err)
+    } finally {
+      setLoadingCategories(false)
+    }
+  }
 
   const fetchItem = useCallback(async () => {
     try {
@@ -24,7 +46,13 @@ export default function EditItemPage() {
       
       const data = await response.json()
       setName(data.name || '')
-      setCategory(data.category || '')
+      const itemCategory = data.category || ''
+      setCategory(itemCategory)
+      // If category doesn't exist in list, show new category input
+      if (itemCategory && !categories.includes(itemCategory)) {
+        setShowNewCategory(true)
+        setNewCategory(itemCategory)
+      }
       setPackagingUnitDescription(data.packaging_unit_description || '')
       setMainCategory(data.main_category || 'floor')
     } catch (err) {
@@ -32,7 +60,7 @@ export default function EditItemPage() {
     } finally {
       setLoading(false)
     }
-  }, [itemId])
+  }, [itemId, categories])
 
   useEffect(() => {
     fetchItem()
@@ -115,14 +143,52 @@ export default function EditItemPage() {
             <label htmlFor="category" className="block text-sm font-medium text-gray-700">
               Category
             </label>
-            <input
-              type="text"
-              id="category"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-              placeholder="e.g., IJSJES, DRANK, ETEN"
-            />
+            {loadingCategories ? (
+              <div className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-50">
+                Loading categories...
+              </div>
+            ) : (
+              <>
+                <select
+                  id="category"
+                  value={showNewCategory ? '__new__' : category}
+                  onChange={(e) => {
+                    if (e.target.value === '__new__') {
+                      setShowNewCategory(true)
+                      setCategory('')
+                    } else {
+                      setCategory(e.target.value)
+                      setShowNewCategory(false)
+                      setNewCategory('')
+                    }
+                  }}
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-base min-h-[44px]"
+                >
+                  <option value="">Select a category</option>
+                  {categories.map((cat) => (
+                    <option key={cat} value={cat}>
+                      {cat}
+                    </option>
+                  ))}
+                  <option value="__new__">+ Add New Category</option>
+                </select>
+                {showNewCategory && (
+                  <div className="mt-2">
+                    <input
+                      type="text"
+                      value={newCategory}
+                      onChange={(e) => {
+                        setNewCategory(e.target.value)
+                        setCategory(e.target.value)
+                      }}
+                      placeholder="Enter new category name"
+                      className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-base min-h-[44px]"
+                      autoFocus
+                    />
+                  </div>
+                )}
+              </>
+            )}
           </div>
 
           <div>

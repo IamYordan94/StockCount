@@ -7,7 +7,12 @@ export default async function ItemsPage() {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   
-  const isAdmin = user ? (await getUserRole(user.id)) === 'admin' : false
+  if (!user) {
+    return <div>Not logged in</div>
+  }
+  
+  const role = await getUserRole(user.id)
+  const isAdmin = role === 'admin'
 
   const { data: items, error } = await supabase
     .from('items')

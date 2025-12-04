@@ -39,7 +39,8 @@ export default function SidebarClient({ isAdmin }: SidebarClientProps) {
     ...(isAdmin ? [
       { name: 'Inventory', href: '/dashboard/inventory', icon: Archive },
       { name: 'Wastage', href: '/dashboard/wastage', icon: AlertTriangle },
-      { name: 'Users', href: '/dashboard/users', icon: Users }
+      { name: 'Users', href: '/dashboard/users', icon: Users },
+      { name: 'Debug', href: '/dashboard/debug', icon: User }
     ] : []),
     { name: 'Profile', href: '/dashboard/profile', icon: User },
   ]
@@ -81,6 +82,14 @@ export default function SidebarClient({ isAdmin }: SidebarClientProps) {
               <X className="h-5 w-5" />
             </button>
           </div>
+          {process.env.NODE_ENV === 'development' && (
+            <div className="mb-4 p-2 bg-gray-800 rounded text-xs">
+              <div className="text-gray-300">Admin Status:</div>
+              <div className={isAdmin ? 'text-green-400' : 'text-red-400'}>
+                {isAdmin ? '✓ Admin' : '✗ Not Admin'}
+              </div>
+            </div>
+          )}
           <nav className="space-y-1">
             {navigation.map((item) => {
               const isActive = pathname === item.href || pathname?.startsWith(item.href + '/')
