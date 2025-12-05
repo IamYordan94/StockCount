@@ -123,14 +123,19 @@ export default async function ShopsPage() {
           ))}
         </div>
       ) : (
-        <div className="text-center py-12">
+        <div className="text-center py-12 bg-white rounded-lg shadow">
           <Store className="mx-auto h-12 w-12 text-gray-400" />
-          <h3 className="mt-2 text-sm font-medium text-gray-900">No shops</h3>
+          <h3 className="mt-2 text-sm font-medium text-gray-900">No shops available</h3>
           <p className="mt-1 text-sm text-gray-500">
             {role === 'admin' 
               ? 'Create your first shop to get started.'
-              : 'No shops assigned to you yet.'}
+              : 'No shops have been assigned to you yet. Please contact your administrator to assign shops for the current stock count period.'}
           </p>
+          {role !== 'admin' && (
+            <p className="mt-2 text-xs text-gray-400">
+              Shops are assigned through Stock Count Periods by administrators.
+            </p>
+          )}
         </div>
       )}
     </div>

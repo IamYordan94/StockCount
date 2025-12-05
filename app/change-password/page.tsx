@@ -61,14 +61,29 @@ export default function ChangePasswordPage() {
         body: JSON.stringify({ newPassword }),
       })
 
-      const data = await response.json()
-
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to change password')
+        // Try to parse error response
+        let errorMessage = 'Failed to change password'
+        try {
+          const errorData = await response.json()
+          errorMessage = errorData.error || errorMessage
+        } catch {
+          // If response is not JSON, use status text
+          errorMessage = response.statusText || errorMessage
+        }
+        throw new Error(errorMessage)
       }
 
-      // Redirect to dashboard
-      router.push('/dashboard')
+      // Parse success response
+      const data = await response.json()
+      
+      if (data.success) {
+        // Redirect to dashboard
+        router.push('/dashboard')
+        router.refresh()
+      } else {
+        throw new Error(data.error || 'Failed to change password')
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to change password')
     } finally {
