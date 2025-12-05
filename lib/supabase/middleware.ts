@@ -58,8 +58,11 @@ export async function updateSession(request: NextRequest) {
   }
 
   // Check if user must change password
-  if (user && !request.nextUrl.pathname.startsWith('/login') && 
-      !request.nextUrl.pathname.startsWith('/change-password')) {
+  // Exclude API routes from this check (they need to work even when password change is required)
+  if (user && 
+      !request.nextUrl.pathname.startsWith('/login') && 
+      !request.nextUrl.pathname.startsWith('/change-password') &&
+      !request.nextUrl.pathname.startsWith('/api/')) {
     const { data: role, error: roleError } = await supabase
       .from('user_roles')
       .select('must_change_password')
