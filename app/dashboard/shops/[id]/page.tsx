@@ -72,8 +72,18 @@ export default async function ShopDetailPage({
 
   if (stockError) {
     return (
-      <div className="text-red-600">
-        Error loading stock: {stockError.message}
+      <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
+        <h3 className="text-red-800 font-semibold mb-2">Error loading stock</h3>
+        <p className="text-red-600 text-sm">{stockError.message}</p>
+        <p className="text-red-600 text-sm mt-2">Error code: {stockError.code}</p>
+        <p className="text-red-600 text-sm mt-2">Details: {stockError.details || 'No details'}</p>
+        <p className="text-red-600 text-sm mt-2">Hint: {stockError.hint || 'No hint'}</p>
+        <p className="text-gray-600 text-xs mt-4">
+          This might be an RLS (Row Level Security) issue. Make sure:
+          <br />1. You are assigned to this shop in an active stock count period
+          <br />2. The RLS policies for shop_stock allow you to view stock
+          <br />3. Visit <a href="/dashboard/debug" className="text-blue-600 underline">/dashboard/debug</a> to check your role and assignments
+        </p>
       </div>
     )
   }
