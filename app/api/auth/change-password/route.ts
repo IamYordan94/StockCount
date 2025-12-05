@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 
 export async function POST(request: NextRequest) {
   try {
@@ -27,10 +28,27 @@ export async function POST(request: NextRequest) {
     }
 
     // Clear must_change_password flag
-    await supabase
+    // Try with regular client first, fallback to admin client if RLS blocks it
+    const { error: updateRoleError } = await supabase
       .from('user_roles')
       .update({ must_change_password: false })
       .eq('id', user.id)
+
+    // If RLS blocks the update, use admin client
+    if (updateRoleError) {
+      console.warn('RLS blocked user_roles update, using admin client:', updateRoleError)
+      const adminClient = createAdminClient()
+      const { error: adminUpdateError } = await adminClient
+        .from('user_roles')
+        .update({ must_change_password: false })
+        .eq('id', user.id)
+
+      if (adminUpdateError) {
+        console.error('Failed to update must_change_password even with admin client:', adminUpdateError)
+        // Don't fail the password change - password was already updated
+        // Just log the error
+      }
+    }
 
     return NextResponse.json({ success: true })
   } catch (error) {
