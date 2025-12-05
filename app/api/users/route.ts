@@ -100,19 +100,22 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: createError.message }, { status: 400 })
     }
 
-    // Create user role using admin client to bypass RLS
+    // Update user role using UPSERT (the trigger may have already created it)
+    // Use admin client to bypass RLS
     const { error: roleError } = await adminClient
       .from('user_roles')
-      .insert({
+      .upsert({
         id: newUser.user.id,
         role,
         shop_id: shop_id || null,
         must_change_password: true,
         created_by: user.id,
+      }, {
+        onConflict: 'id'
       })
 
     if (roleError) {
-      console.error('Error creating user role:', roleError)
+      console.error('Error creating/updating user role:', roleError)
       // Rollback: delete the auth user if role creation fails
       await adminClient.auth.admin.deleteUser(newUser.user.id)
       return NextResponse.json({ 
