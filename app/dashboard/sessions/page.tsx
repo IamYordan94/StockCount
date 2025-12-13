@@ -108,7 +108,8 @@ export default function SessionsPage() {
         setSessions(data || [])
         // Fetch assignments for all sessions
         if (data && data.length > 0) {
-          await fetchSessionAssignments(data.map((s) => s.id))
+          const sessionsData = data as Array<{ id: string }>
+          await fetchSessionAssignments(sessionsData.map((s) => s.id))
         }
       }
     } catch (err: any) {
@@ -162,7 +163,7 @@ export default function SessionsPage() {
 
       if (response.ok) {
         const { users } = await response.json()
-        const userMap = new Map(users.map((u: User) => [u.id, u]))
+        const userMap = new Map<string, User>(users.map((u: User) => [u.id, u]))
 
         // Build assignments map
         const assignmentsMap = new Map<string, User[]>()
@@ -172,7 +173,10 @@ export default function SessionsPage() {
           }
           const user = userMap.get(a.user_id)
           if (user) {
-            assignmentsMap.get(a.session_id)?.push(user)
+            const sessionAssignments = assignmentsMap.get(a.session_id)
+            if (sessionAssignments) {
+              sessionAssignments.push(user)
+            }
           }
         })
 
@@ -201,8 +205,8 @@ export default function SessionsPage() {
 
     try {
       // Create session
-      const { data: newSession, error: sessionError } = await supabase
-        .from('stock_count_sessions')
+      const { data: newSession, error: sessionError } = await (supabase
+        .from('stock_count_sessions') as any)
         .insert({
           name: sessionName,
           status: 'active',
@@ -224,8 +228,8 @@ export default function SessionsPage() {
           user_id: userId,
         }))
 
-        const { error: assignError } = await supabase
-          .from('session_user_assignments')
+        const { error: assignError } = await (supabase
+          .from('session_user_assignments') as any)
           .insert(assignments)
 
         if (assignError) {
@@ -262,7 +266,8 @@ export default function SessionsPage() {
 
       if (checkError) throw checkError
 
-      if (sessionData?.status !== 'active') {
+      const session = sessionData as { status: string } | null
+      if (session?.status !== 'active') {
         toast.dismiss(toastId)
         toast.error('Session is already completed or archived.')
         setCompletingSession(null)
@@ -271,8 +276,8 @@ export default function SessionsPage() {
         return
       }
 
-      const { error } = await supabase
-        .from('stock_count_sessions')
+      const { error } = await (supabase
+        .from('stock_count_sessions') as any)
         .update({
           status: 'completed',
           completed_at: new Date().toISOString(),
@@ -400,7 +405,7 @@ export default function SessionsPage() {
 
       // Create a map: shop_id -> Set of item_ids
       const shopItemsMap = new Map<string, Set<string>>()
-      shopItems?.forEach((si) => {
+      ;(shopItems as Array<{ shop_id: string; item_id: string }> | null)?.forEach((si) => {
         if (!shopItemsMap.has(si.shop_id)) {
           shopItemsMap.set(si.shop_id, new Set())
         }
@@ -435,7 +440,7 @@ export default function SessionsPage() {
 
       // Create a map for quick lookup
       const countsMap = new Map()
-      counts?.forEach((count) => {
+      ;(counts as Array<{ shop_id: string; item_id: string; boxes: number; singles: number }> | null)?.forEach((count) => {
         const key = `${count.shop_id}-${count.item_id}`
         countsMap.set(key, { boxes: count.boxes, singles: count.singles })
       })
@@ -444,14 +449,14 @@ export default function SessionsPage() {
       const workbook = XLSX.utils.book_new()
 
       // Create a sheet for each shop
-      shops.forEach((shop) => {
+      ;(shops as Array<{ id: string; name: string }>).forEach((shop) => {
         // Filter items assigned to this shop
         const shopItemIds = shopItemsMap.get(shop.id) || new Set()
-        const shopItemsFiltered = items?.filter((item) => shopItemIds.has(item.id)) || []
+        const shopItemsFiltered = (items as Array<{ id: string; category_id: string }> | null)?.filter((item) => shopItemIds.has(item.id)) || []
 
         // Group items by category
         const itemsByCategory = new Map()
-        categories?.forEach((cat) => {
+        ;(categories as Array<{ id: string; name: string }> | null)?.forEach((cat) => {
           itemsByCategory.set(cat.id, {
             category: cat,
             items: shopItemsFiltered.filter((item) => item.category_id === cat.id),
@@ -461,7 +466,7 @@ export default function SessionsPage() {
         // Prepare sheet data
         const sheetData: any[] = []
 
-        categories?.forEach((cat) => {
+        ;(categories as Array<{ id: string; name: string }> | null)?.forEach((cat) => {
           const categoryData = itemsByCategory.get(cat.id)
           if (!categoryData || categoryData.items.length === 0) return
 

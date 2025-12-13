@@ -90,8 +90,8 @@ export default function ShopsPage() {
       let shopId: string
 
       if (editingShop) {
-        const { data, error } = await supabase
-          .from('shops')
+        const { data, error } = await (supabase
+          .from('shops') as any)
           .update({ name: shopName })
           .eq('id', editingShop.id)
           .select()
@@ -105,7 +105,7 @@ export default function ShopsPage() {
         toast.dismiss(toastId)
         toast.success('Shop updated successfully!')
       } else {
-        const { error } = await supabase.from('shops').insert({ name: shopName })
+        const { error } = await (supabase.from('shops') as any).insert({ name: shopName })
 
         if (error) {
           toast.dismiss(toastId)

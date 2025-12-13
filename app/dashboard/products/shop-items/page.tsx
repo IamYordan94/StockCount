@@ -118,7 +118,7 @@ export default function ShopItemsPage() {
   async function toggleItemAssignment(itemId: string) {
     if (!selectedShop) return
 
-    setTogglingItems((prev) => new Set([...prev, itemId]))
+    setTogglingItems((prev) => new Set([...Array.from(prev), itemId]))
     const isAssigned = assignedItems.has(itemId)
 
     try {
@@ -141,7 +141,7 @@ export default function ShopItemsPage() {
         })
         toast.success('Item removed from shop')
       } else {
-        const { error } = await supabase.from('shop_items').insert({
+        const { error } = await (supabase.from('shop_items') as any).insert({
           shop_id: selectedShop,
           item_id: itemId,
         })
@@ -151,7 +151,7 @@ export default function ShopItemsPage() {
           return
         }
 
-        setAssignedItems((prev) => new Set([...prev, itemId]))
+        setAssignedItems((prev) => new Set([...Array.from(prev), itemId]))
         toast.success('Item assigned to shop')
       }
     } finally {

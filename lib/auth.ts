@@ -18,7 +18,8 @@ export async function getUserRole(): Promise<'manager' | 'employee' | null> {
     .eq('user_id', user.id)
     .single()
 
-  return (data?.role as 'manager' | 'employee') || null
+  const roleData = data as { role: string } | null
+  return (roleData?.role as 'manager' | 'employee') || null
 }
 
 export async function isManager(): Promise<boolean> {

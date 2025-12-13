@@ -163,7 +163,7 @@ export default function ProductsPage() {
         toast.dismiss(toastId)
         toast.success('Item removed from shop')
       } else {
-        const { error } = await supabase.from('shop_items').insert({
+        const { error } = await (supabase.from('shop_items') as any).insert({
           shop_id: selectedShop,
           item_id: itemId,
         })
@@ -174,7 +174,7 @@ export default function ProductsPage() {
           return
         }
 
-        setShopItems((prev) => new Set([...prev, itemId]))
+        setShopItems((prev) => new Set([...Array.from(prev), itemId]))
         toast.dismiss(toastId)
         toast.success('Item added to shop')
       }
@@ -210,8 +210,8 @@ export default function ProductsPage() {
 
     try {
       if (editingItem) {
-        const { error } = await supabase
-          .from('items')
+        const { error } = await (supabase
+          .from('items') as any)
           .update({
             name: itemName,
             pack_size: itemPackSize,
@@ -227,7 +227,7 @@ export default function ProductsPage() {
         toast.dismiss(toastId)
         toast.success('Product updated successfully!')
       } else {
-        const { error } = await supabase.from('items').insert({
+        const { error } = await (supabase.from('items') as any).insert({
           name: itemName,
           pack_size: itemPackSize,
           category_id: itemCategoryId,
@@ -428,8 +428,8 @@ export default function ProductsPage() {
             categoryId = category.id
           } else {
             // Create category if it doesn't exist
-            const { data: newCategory, error: catError } = await supabase
-              .from('categories')
+            const { data: newCategory, error: catError } = await (supabase
+              .from('categories') as any)
               .insert({ name: row.category })
               .select()
               .single()
@@ -441,7 +441,7 @@ export default function ProductsPage() {
           }
         }
 
-        const { error } = await supabase.from('items').insert({
+        const { error } = await (supabase.from('items') as any).insert({
           name: row.name.trim(),
           pack_size: row.pack_size.trim() || '',
           category_id: categoryId || null,

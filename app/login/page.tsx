@@ -84,7 +84,7 @@ export default function LoginPage() {
         {/* Auth Card */}
         <div className="bg-white/80 backdrop-blur-md rounded-2xl shadow-strong border border-white/20 p-8">
           <Auth
-            supabaseClient={supabase}
+            supabaseClient={supabase as any}
             appearance={{ theme: customTheme }}
             providers={[]}
             onlyThirdPartyProviders={false}

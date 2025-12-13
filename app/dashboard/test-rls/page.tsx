@@ -47,8 +47,8 @@ export default function TestRLSPage() {
 
       // Test 4: Try to insert a shop
       const testShopName = `Test Shop ${Date.now()}`
-      const { data: insertData, error: insertError } = await supabase
-        .from('shops')
+      const { data: insertData, error: insertError } = await (supabase
+        .from('shops') as any)
         .insert({ name: testShopName })
         .select()
 
@@ -86,14 +86,15 @@ export default function TestRLSPage() {
 
       // Test 6: Try to insert an item (if categories exist)
       const { data: categories } = await supabase.from('categories').select('*').limit(1)
-      if (categories && categories.length > 0) {
+      const categoriesData = categories as Array<{ id: string }> | null
+      if (categoriesData && categoriesData.length > 0) {
         const testItemName = `Test Item ${Date.now()}`
-        const { data: itemInsertData, error: itemInsertError } = await supabase
-          .from('items')
+        const { data: itemInsertData, error: itemInsertError } = await (supabase
+          .from('items') as any)
           .insert({
             name: testItemName,
             pack_size: '1 per test',
-            category_id: categories[0].id,
+            category_id: categoriesData[0].id,
           })
           .select()
 
