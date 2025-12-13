@@ -73,9 +73,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setRole(null)
         setUserName(null)
       } else if (data) {
-        console.log('Role found:', data.role)
-        setRole((data.role as 'manager' | 'employee') || null)
-        setUserName(data.name || null)
+        // Type assertion to fix TypeScript inference issue with Supabase query
+        const roleData = data as { role: string; name: string | null } | null
+        if (roleData && roleData.role) {
+          console.log('Role found:', roleData.role)
+          setRole((roleData.role as 'manager' | 'employee') || null)
+          setUserName(roleData.name || null)
+        } else {
+          setRole(null)
+          setUserName(null)
+        }
       } else {
         console.log('No role data returned - role not set in database')
         setRole(null)
