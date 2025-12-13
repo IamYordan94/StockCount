@@ -84,8 +84,13 @@ export default function DashboardPage() {
         console.error('Role check error:', roleError)
         alert('Error checking role: ' + roleError.message + '\n\nCheck browser console (F12) for details.')
       } else if (roleData) {
-        alert(`Role found: ${roleData.role}. Refreshing page...`)
-        setTimeout(() => window.location.reload(), 500)
+        const role = (roleData as { role: string } | null)
+        if (role) {
+          alert(`Role found: ${role.role}. Refreshing page...`)
+          setTimeout(() => window.location.reload(), 500)
+        } else {
+          alert('No role found in database. Please run the SQL command shown above in Supabase SQL Editor.')
+        }
       } else {
         alert('No role found in database. Please run the SQL command shown above in Supabase SQL Editor.')
       }
