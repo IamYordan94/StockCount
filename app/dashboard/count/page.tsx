@@ -134,15 +134,20 @@ export default function CountPage() {
       }
 
       // Fetch user's assigned shops
+      if (!user?.id) {
+        setShops([])
+        return
+      }
+      
       const { data: assignments, error: assignmentsError } = await supabase
         .from('user_shop_assignments')
         .select('*, shops(*)')
-        .eq('user_id', user?.id)
+        .eq('user_id', user.id)
 
       if (assignmentsError) throw assignmentsError
 
       const userShops =
-        assignments?.map((a) => ({
+        (assignments as Array<{ shop_id: string; shops: { name: string } | null }> | null)?.map((a) => ({
           id: a.shop_id,
           name: (a.shops as any)?.name,
         })) || []
@@ -193,7 +198,7 @@ export default function CountPage() {
 
       if (shopItemsError) throw shopItemsError
 
-      const itemIds = shopItems?.map((si) => si.item_id) || []
+      const itemIds = (shopItems as Array<{ item_id: string }> | null)?.map((si) => si.item_id) || []
 
       // If no shop-specific items, show all items
       let itemsQuery = supabase
@@ -235,7 +240,7 @@ export default function CountPage() {
       if (error) throw error
 
       const countsMap: Record<string, StockCount> = {}
-      data?.forEach((count) => {
+      ;(data as Array<{ item_id: string; boxes: number; singles: number }> | null)?.forEach((count) => {
         countsMap[count.item_id] = {
           item_id: count.item_id,
           boxes: count.boxes || 0,
@@ -334,7 +339,8 @@ export default function CountPage() {
 
       if (sessionError) throw sessionError
 
-      if (sessionData?.status !== 'active') {
+      const session = sessionData as { status: string } | null
+      if (session?.status !== 'active') {
         toast.dismiss(toastId)
         toast.error('Cannot count for a completed session. Please select an active session.')
         setSaving(false)
@@ -392,7 +398,7 @@ export default function CountPage() {
       // This ensures atomic operation - no window where data can be lost
       const { error: upsertError } = await supabase
         .from('stock_counts')
-        .upsert(countsToSave, {
+        .upsert(countsToSave as any, {
           onConflict: 'session_id,shop_id,item_id',
           ignoreDuplicates: false,
         })
