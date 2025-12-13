@@ -139,7 +139,7 @@ export default function SessionsPage() {
 
       // Get user details for assigned users
       const userIds = new Set<string>()
-      data?.forEach((a: any) => {
+      ;(data as Array<{ session_id: string; user_id: string }> | null)?.forEach((a) => {
         if (a.user_id) userIds.add(a.user_id)
       })
 
@@ -166,7 +166,7 @@ export default function SessionsPage() {
 
         // Build assignments map
         const assignmentsMap = new Map<string, User[]>()
-        data?.forEach((a: any) => {
+        ;(data as Array<{ session_id: string; user_id: string }> | null)?.forEach((a) => {
           if (!assignmentsMap.has(a.session_id)) {
             assignmentsMap.set(a.session_id, [])
           }
